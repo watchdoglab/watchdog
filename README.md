@@ -37,9 +37,22 @@ malinois and akita are useful in almost every product.
 ```
 /plugin marketplace add salahu01/watchdog
 /plugin install malinois@watchdog
+/plugin install husky@watchdog
+/plugin install collie@watchdog
 /plugin install bloodhound@watchdog
-# …add any other dog by name
+/plugin install beagle@watchdog
+/plugin install rottweiler@watchdog
+/plugin install doberman@watchdog
+/plugin install shepherd@watchdog
+/plugin install dachshund@watchdog
+/plugin install akita@watchdog
+/plugin install pointer@watchdog
+/plugin install saintbernard@watchdog
+/plugin install shiba@watchdog
+/plugin install pyrenees@watchdog
 ```
+
+Or install only the dogs from your pack above.
 
 Then work as usual. Run an audit any time:
 
