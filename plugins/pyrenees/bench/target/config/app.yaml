@@ -15,5 +15,5 @@ database:
   storage_encrypted: true
   kms_key_id: alias/ledgerly-db
 payments:
-  provider_key: sk_live_FAKE0000000000000000000000
+  provider_key: FAKE-STRIPE-KEY-0001
   store_pan: true
