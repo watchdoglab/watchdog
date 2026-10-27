@@ -1,0 +1,12 @@
+{
+  "name": "doberman",
+  "version": "0.1.0",
+  "description": "Doberman \u2014 the auth dog. Guards the front door: login, OAuth/OIDC, sessions, password reset, MFA, JWTs and SSO.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "hooks": [
+    "./hooks/doberman-hooks.json"
+  ]
+}

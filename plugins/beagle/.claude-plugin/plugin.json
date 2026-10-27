@@ -1,0 +1,12 @@
+{
+  "name": "beagle",
+  "version": "0.1.0",
+  "description": "Beagle \u2014 the privacy dog. Sniffs out personal data flowing into logs, analytics, third-party SDKs and storage, and maps findings to GDPR and India's DPDP Act.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "hooks": [
+    "./hooks/beagle-hooks.json"
+  ]
+}

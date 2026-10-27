@@ -1,0 +1,12 @@
+{
+  "name": "dachshund",
+  "version": "0.1.0",
+  "description": "Dachshund \u2014 the database dog. Digs into schemas, migrations, row-level security, database roles and Firebase/Supabase rules.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "hooks": [
+    "./hooks/dachshund-hooks.json"
+  ]
+}

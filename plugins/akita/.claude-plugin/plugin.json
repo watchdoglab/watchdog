@@ -1,0 +1,12 @@
+{
+  "name": "akita",
+  "version": "0.1.0",
+  "description": "Akita \u2014 the secrets dog. Goes past finding keys: rotation, storage, .env handling, git history cleanup and pre-commit blocking.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "hooks": [
+    "./hooks/akita-hooks.json"
+  ]
+}
