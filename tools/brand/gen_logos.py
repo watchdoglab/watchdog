@@ -15,22 +15,34 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 # Malinois profile facing right, 1024 canvas. Tall erect ears, long tapered muzzle.
 HEAD = [
-    (300, 980), (286, 820), (292, 690), (318, 590),     # back of neck
-    (350, 500), (372, 430),                             # nape into rear ear base
-    (384, 300), (410, 180), (440, 118),                 # rear ear up to tip
-    (486, 200), (520, 290), (548, 372),                 # ear front edge down to skull
-    (580, 384), (640, 410), (690, 452),                 # forehead to stop
-    (760, 488), (830, 520), (884, 548),                 # bridge of muzzle
-    (912, 572), (918, 600), (900, 620),                 # nose
-    (860, 630), (800, 646), (746, 668),                 # upper lip
-    (700, 690), (650, 712),                             # jaw
-    (606, 760), (588, 840), (596, 980),                 # throat down to chest
+    (306, 980), (296, 860), (302, 740), (322, 640),     # back of neck
+    (350, 560), (376, 486),                             # nape
+    (390, 400), (402, 300), (420, 200), (444, 112),     # rear edge of ear to tip
+    (478, 186), (506, 262), (532, 330), (556, 376),     # front edge of ear
+    (604, 384), (646, 396), (680, 418),                 # forehead
+    (704, 448),                                         # stop
+    (762, 470), (822, 494), (872, 516), (902, 536),     # bridge of muzzle
+    (920, 558), (926, 584), (916, 604),                 # nose
+    (888, 616), (846, 624), (798, 634), (752, 648),     # upper lip
+    (716, 668), (682, 692), (652, 716),                 # jaw to jaw angle
+    (628, 752), (608, 804), (598, 884), (602, 980),     # throat to chest
 ]
-EYE = (668, 500)
+EYE = (676, 486)
 # far ear peeks out behind the skull; rendered darker for depth
-FAR_EAR = [(540, 380), (566, 250), (604, 150), (632, 236), (660, 330), (676, 420)]
-NOSE = "M884 552 Q922 566 918 600 Q910 622 884 618 Q872 590 884 552 Z"
-MOUTH = "M904 618 L790 640 L742 646 L722 662"
+FAR_EAR = [(566, 386), (588, 270), (620, 160), (648, 242), (674, 334), (690, 424)]
+NOSE = "M896 538 Q930 552 928 586 Q922 610 898 608 Q884 576 896 538 Z"
+MOUTH = "M914 608 L798 634 L750 646 L726 664"
+
+# Height bumps (x, y, height, radius) that sculpt the lit form.
+BUMPS = [
+    (650, 440, 46, 90),    # brow ridge over the eye
+    (640, 600, 40, 110),   # cheekbone / masseter
+    (800, 520, 30, 120),   # crest of the muzzle
+    (450, 260, 24, 80),    # cup of the ear
+    (420, 760, 36, 200),   # neck muscle
+]
+LIGHT = np.array([0.55, -0.62, 0.56])  # from upper-right front (y grows downward)
+LIGHT = LIGHT / np.linalg.norm(LIGHT)
 
 
 def densify(poly, step):
@@ -50,16 +62,18 @@ def inside(pt, poly):
     return hit
 
 
-def mesh(poly, seed, interior=150):
+def mesh(poly, seed, interior=260):
     rng = random.Random(seed)
-    pts = densify(poly, 70)
+    pts = densify(poly, 52)
     xs, ys = zip(*poly)
     added = 0
-    for _ in range(20000):  # bounded: stop once the shape is full
+    for _ in range(40000):  # bounded: stop once the shape is full
         if added == interior:
             break
         p = (rng.uniform(min(xs), max(xs)), rng.uniform(min(ys), max(ys)))
-        if inside(p, poly) and all(math.hypot(p[0] - q[0], p[1] - q[1]) > 38 for q in pts):
+        # finer facets on the face, coarser down the neck
+        gap = 26 if math.hypot(p[0] - EYE[0], p[1] - EYE[1]) < 220 else 40
+        if inside(p, poly) and all(math.hypot(p[0] - q[0], p[1] - q[1]) > gap for q in pts):
             pts.append(p)
             added += 1
     # anchor facets around the eye so the face reads
@@ -76,16 +90,38 @@ def mix(c0, c1, t):
     return "#%02x%02x%02x" % tuple(round(a[i] + (b[i] - a[i]) * t) for i in range(3))
 
 
-def facets(arr, tris, dark, light, seed):
+def heights(arr, poly, seed):
+    """Dome the shape away from its silhouette, add anatomical bumps, a little grain."""
     rng = random.Random(seed)
-    light_at = np.array([820.0, 260.0])  # key light upper-right, in front of the face
+    segs = list(zip(poly, poly[1:] + poly[:1]))
+    out = []
+    for x, y in arr:
+        d = min(_seg_dist(x, y, a, b) for a, b in segs)
+        h = 150 * (1 - (1 - min(d, 170) / 170) ** 2)
+        for bx, by, bh, br in BUMPS:
+            h += bh * math.exp(-((x - bx) ** 2 + (y - by) ** 2) / (2 * br * br))
+        out.append(h + rng.uniform(-9, 9))
+    return np.array(out)
+
+
+def _seg_dist(x, y, a, b):
+    (x0, y0), (x1, y1) = a, b
+    dx, dy = x1 - x0, y1 - y0
+    t = max(0, min(1, ((x - x0) * dx + (y - y0) * dy) / (dx * dx + dy * dy or 1)))
+    return math.hypot(x - x0 - t * dx, y - y0 - t * dy)
+
+
+def facets(arr, tris, dark, light, seed, poly):
+    h = heights(arr, poly, seed)
     out = []
     for t in tris:
-        p = arr[t]
-        c = p.mean(axis=0)
-        d = np.linalg.norm(c - light_at) / 900
-        shade = 1.05 - d + rng.uniform(-0.12, 0.12)
-        pts = " ".join("%.1f,%.1f" % (x, y) for x, y in p)
+        p = [np.array([arr[i][0], arr[i][1], h[i]]) for i in t]
+        n = np.cross(p[1] - p[0], p[2] - p[0])
+        n = n / (np.linalg.norm(n) or 1)
+        if n[2] < 0:
+            n = -n
+        shade = 0.16 + 0.95 * max(0.0, float(n @ LIGHT))
+        pts = " ".join("%.1f,%.1f" % (x, y) for x, y, _ in p)
         out.append('<polygon points="%s" fill="%s"/>' % (pts, mix(dark, light, shade)))
     return "\n".join(out)
 
@@ -111,9 +147,9 @@ def head_layer(dark, light, edge, seed, eye):
     return f"""
   <g clip-path="url(#lens)">
     <g transform="translate(-60 0)">
-      <g>{facets(*mesh(FAR_EAR, seed + 1, interior=8), dark, mix(dark, light, .55), seed + 1)}</g>
+      <g>{facets(*mesh(FAR_EAR, seed + 1, interior=10), dark, mix(dark, light, .55), seed + 1, FAR_EAR)}</g>
       <path d="{outline(FAR_EAR)}" fill="none" stroke="{edge}" stroke-opacity=".55" stroke-width="3" stroke-linejoin="round"/>
-      <g>{facets(arr, tris, dark, light, seed)}</g>
+      <g>{facets(arr, tris, dark, light, seed, HEAD)}</g>
       <path d="{edges(arr, tris)}" fill="none" stroke="{edge}" stroke-opacity=".5" stroke-width="1.6"/>
       <path d="{outline(HEAD)}" fill="none" stroke="{edge}" stroke-width="5" stroke-linejoin="round" filter="url(#glow)"/>
       <path d="{NOSE}" fill="{dark}" stroke="{edge}" stroke-width="4"/>
