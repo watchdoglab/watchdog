@@ -36,6 +36,8 @@ BRANDS = {
         title="WATCHDOG", title_color="#F4F8FC",
         tagline="SECURITY DOGS FOR YOUR CODE", tagline_color="#8A94A3",
         pill="14 DOGS  /  ONE PACK", pill_icon=None,
+        pack=["malinois", "husky", "collie", "bloodhound", "beagle", "rottweiler", "doberman",
+              "shepherd", "dachshund", "akita", "pointer", "saintbernard", "shiba", "pyrenees"],
     ),
     "malinois": dict(
         svg="plugins/malinois/assets/icon.svg", orbit=440, eye="ring", vignette="#062320",
@@ -236,8 +238,13 @@ def text_layer(brand, path, L):
                 "-geometry", "+511+277", "-composite"]
         text_x = 560
     cmd += ["-font", FONT, "-fill", "#5EEAD4", "-pointsize", "22", "-kerning", "5",
-            "-annotate", f"+{text_x}+304", brand["pill"], path]
-    run(*cmd)
+            "-annotate", f"+{text_x}+304", brand["pill"]]
+    # The whole pack as a row of small icons under the pill.
+    for i, dog in enumerate(brand.get("pack", [])):
+        icon = os.path.join(os.path.dirname(path), dog + ".png")
+        run("rsvg-convert", "-w", "46", "-h", "46", "-o", icon, os.path.join(ROOT, f"plugins/{dog}/assets/icon.svg"))
+        cmd += [icon, "-geometry", f"+{503 + i * 52}+338", "-composite"]
+    run(*cmd + [path])
 
 
 def render(name, L, out):
