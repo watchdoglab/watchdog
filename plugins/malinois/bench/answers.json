@@ -1,0 +1,162 @@
+{
+ "target": "target/",
+ "note": "Planted vulns. Match by file + issue; line +-3 counts. Decoys must NOT be reported.",
+ "vulns": [
+  {
+   "id": "V01",
+   "sev": "critical",
+   "file": "src/server.js",
+   "line": 32,
+   "cwe": "CWE-89",
+   "title": "SQL injection in /login (string-built query)"
+  },
+  {
+   "id": "V02",
+   "sev": "critical",
+   "file": "src/server.js",
+   "line": 67,
+   "cwe": "CWE-78",
+   "title": "Command injection in /export via req.body.dir"
+  },
+  {
+   "id": "V03",
+   "sev": "critical",
+   "file": "src/server.js",
+   "line": 78,
+   "cwe": "CWE-502",
+   "title": "Insecure deserialization: node-serialize unserialize on user input (RCE)"
+  },
+  {
+   "id": "V04",
+   "sev": "critical",
+   "file": "src/auth.js",
+   "line": 17,
+   "cwe": "CWE-347",
+   "title": "JWT verify accepts alg 'none'"
+  },
+  {
+   "id": "V05",
+   "sev": "high",
+   "file": "src/auth.js",
+   "line": 4,
+   "cwe": "CWE-798",
+   "title": "Hardcoded/weak JWT secret fallback 'secret' (and .env value)"
+  },
+  {
+   "id": "V06",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 23,
+   "cwe": "CWE-269",
+   "title": "Mass assignment: signup takes role from body (self-admin)"
+  },
+  {
+   "id": "V07",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 48,
+   "cwe": "CWE-639",
+   "title": "IDOR: GET /notes/:id not owner-scoped"
+  },
+  {
+   "id": "V08",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 82,
+   "cwe": "CWE-285",
+   "title": "Missing admin role check on DELETE /admin/users/:id"
+  },
+  {
+   "id": "V09",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 59,
+   "cwe": "CWE-22",
+   "title": "Path traversal in /files ?name="
+  },
+  {
+   "id": "V10",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 63,
+   "cwe": "CWE-918",
+   "title": "SSRF in /fetch ?url="
+  },
+  {
+   "id": "V11",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 73,
+   "cwe": "CWE-1321",
+   "title": "Prototype pollution via _.merge of request body (+ lodash 4.17.15 CVE)"
+  },
+  {
+   "id": "V12",
+   "sev": "high",
+   "file": "src/server.js",
+   "line": 40,
+   "cwe": "CWE-640",
+   "title": "Password reset token returned in response and from Math.random"
+  },
+  {
+   "id": "V13",
+   "sev": "medium",
+   "file": "src/server.js",
+   "line": 54,
+   "cwe": "CWE-79",
+   "title": "Reflected/stored XSS in /notes/:id/preview, unauthenticated"
+  },
+  {
+   "id": "V14",
+   "sev": "medium",
+   "file": "src/auth.js",
+   "line": 7,
+   "cwe": "CWE-916",
+   "title": "Unsalted MD5 password hashing"
+  },
+  {
+   "id": "V15",
+   "sev": "medium",
+   "file": "src/server.js",
+   "line": 14,
+   "cwe": "CWE-942",
+   "title": "CORS reflects any origin with credentials"
+  },
+  {
+   "id": "V16",
+   "sev": "low",
+   "file": "src/auth.js",
+   "line": 20,
+   "cwe": "CWE-209",
+   "title": "Stack trace leaked in 401 response"
+  },
+  {
+   "id": "V17",
+   "sev": "medium",
+   "file": ".env",
+   "line": 3,
+   "cwe": "CWE-312",
+   "title": "Live-looking Stripe key committed in .env (must be redacted in report)"
+  },
+  {
+   "id": "V18",
+   "sev": "medium",
+   "file": "package.json",
+   "line": 11,
+   "cwe": "CWE-1104",
+   "title": "Known-vulnerable deps: lodash 4.17.15, jsonwebtoken 8.5.1, express 4.17.1, node-serialize"
+  }
+ ],
+ "decoys": [
+  {
+   "file": "src/server.js",
+   "line": 44,
+   "why": "GET /notes is parameterized and owner-scoped"
+  },
+  {
+   "file": "src/server.js",
+   "line": 89,
+   "why": "/health exec has fixed command, no input"
+  }
+ ]
+}
