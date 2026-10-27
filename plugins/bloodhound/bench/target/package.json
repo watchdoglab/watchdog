@@ -1,0 +1,13 @@
+{
+  "name": "ledger-api",
+  "version": "1.4.0",
+  "private": true,
+  "main": "src/app.js",
+  "dependencies": {
+    "apollo-server-express": "3.13.0",
+    "cors": "2.8.5",
+    "express": "4.19.2",
+    "jsonwebtoken": "9.0.2",
+    "node-fetch": "2.7.0"
+  }
+}

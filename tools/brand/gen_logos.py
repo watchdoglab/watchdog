@@ -2,7 +2,7 @@
 
     python3 tools/brand/gen_logos.py
 
-Writes assets/logo.svg, plugins/{malinois,husky,collie}/assets/icon.svg.
+Writes assets/logo.svg, plugins/{malinois,husky,collie,bloodhound}/assets/icon.svg.
 """
 import math
 import os
@@ -94,6 +94,40 @@ COLLIE_BUMPS = [
     (430, 770, 38, 200),   # neck
 ]
 
+# Bloodhound profile facing right: low skull, long deep muzzle, hanging flews and dewlap.
+HOUND_HEAD = [
+    (330, 980), (332, 860), (356, 740), (390, 620), (430, 520),   # back of neck
+    (470, 440), (540, 400), (610, 404), (668, 420),               # long flat skull
+    (700, 448),                                                   # stop
+    (760, 462), (830, 476), (890, 492),                           # long muzzle
+    (914, 508), (924, 536), (912, 560),                           # nose
+    (904, 600), (896, 640),                                       # deep square muzzle
+    (880, 680), (850, 706), (810, 712), (770, 700),               # hanging flews
+    (740, 720), (712, 760), (690, 800),                           # dewlap
+    (672, 850), (660, 920), (660, 980),
+]
+# The long ear hangs in front of the neck, so it is drawn over the head.
+HOUND_EAR = [(520, 430), (566, 452), (594, 520), (604, 620), (592, 720), (562, 792),
+             (520, 812), (490, 782), (476, 700), (474, 600), (486, 500)]
+HOUND_FAR_EAR = [(590, 410), (630, 412), (650, 440), (640, 470), (610, 460)]
+HOUND_NOSE = "M904 504 Q930 516 926 544 Q920 564 902 560 Q892 532 904 504 Z"
+HOUND_MOUTH = "M906 600 Q888 652 852 690"
+HOUND_LINES = "M628 432 Q656 446 690 444 M612 452 Q640 474 676 470 M700 520 Q720 560 716 600"
+HOUND_BUMPS = [
+    (650, 450, 40, 90),    # brow
+    (700, 600, 46, 130),   # heavy cheek and flews
+    (800, 540, 34, 120),   # deep muzzle
+    (540, 640, 30, 90),    # ear fold
+    (450, 780, 36, 200),   # neck
+]
+
+
+def hound_mask(x, y):
+    """Black-and-tan: dark saddle down the back of the neck, tan face."""
+    if x < 420 + 0.15 * (y - 500) or (y < 425 and x < 640):
+        return -0.6
+    return 0.15
+
 
 def collie_mask(x, y):
     """Black coat with a white blaze up the muzzle, white face front and white chest."""
@@ -127,6 +161,8 @@ def husky_mask(x, y):
 BREEDS = {
     "watchdog": dict(head=HEAD, far_ear=FAR_EAR, nose=NOSE, mouth=MOUTH, bumps=BUMPS, mask=None),
     "malinois": dict(head=HEAD, far_ear=FAR_EAR, nose=NOSE, mouth=MOUTH, bumps=BUMPS, mask=malinois_mask),
+    "bloodhound": dict(head=HOUND_HEAD, far_ear=HOUND_FAR_EAR, near_ear=HOUND_EAR, lines=HOUND_LINES,
+                       nose=HOUND_NOSE, mouth=HOUND_MOUTH, bumps=HOUND_BUMPS, mask=hound_mask),
     "collie": dict(head=COLLIE_HEAD, far_ear=COLLIE_FAR_EAR, nose=COLLIE_NOSE, mouth=COLLIE_MOUTH, bumps=COLLIE_BUMPS, mask=collie_mask),
     "husky": dict(head=HUSKY_HEAD, far_ear=HUSKY_FAR_EAR, nose=HUSKY_NOSE, mouth=HUSKY_MOUTH, bumps=HUSKY_BUMPS, mask=husky_mask),
 }
@@ -248,9 +284,22 @@ def head_layer(dark, light, edge, seed, eye, breed):
       <path d="{outline(b["head"])}" fill="none" stroke="{edge}" stroke-width="5" stroke-linejoin="round" filter="url(#glow)"/>
       <path d="{b["nose"]}" fill="{dark}" stroke="{edge}" stroke-width="4"/>
       <path d="{b["mouth"]}" fill="none" stroke="{edge}" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+      {near_ear(b, dark, light, edge, seed)}
       {eye}
     </g>
   </g>"""
+
+
+def near_ear(b, dark, light, edge, seed):
+    """Optional ear drawn over the head (hanging ears), plus wrinkle lines."""
+    out = ""
+    if b.get("lines"):
+        out += f'<path d="{b["lines"]}" fill="none" stroke="{edge}" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/>'
+    if b.get("near_ear"):
+        ear = b["near_ear"]
+        out += f'<g>{facets(*mesh(ear, seed + 2, interior=40), dark, mix(dark, light, .6), seed + 2, ear, b["bumps"])}</g>'
+        out += f'<path d="{outline(ear)}" fill="none" stroke="{edge}" stroke-width="4" stroke-linejoin="round" filter="url(#glow)"/>'
+    return out
 
 
 DEFS = """
@@ -372,10 +421,32 @@ def collie():
 """
 
 
+
+def bloodhound():
+    """Amber dog inside a ring of scent-trail marks: the dog that follows every route."""
+    eye = (f'<path d="M{EYE[0]-26} {EYE[1]} Q{EYE[0]} {EYE[1]-14} {EYE[0]+26} {EYE[1]} '
+           f'Q{EYE[0]} {EYE[1]+12} {EYE[0]-26} {EYE[1]} Z" fill="#fff7ed" filter="url(#glow)"/>')
+    body = head_layer("#140a02", "#fbbf24", "#fde68a", 19, eye, "bloodhound")
+    trail = []
+    for i in range(24):
+        a = math.radians(i * 15 - 90)
+        r = 446 + (10 if i % 2 else -10)
+        trail.append(f'<circle cx="{512 + r * math.cos(a):.0f}" cy="{512 + r * math.sin(a):.0f}" r="{9 if i % 2 else 6}"/>')
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Bloodhound">
+{DEFS.format(bg0="#3a2206", extra="")}
+  <circle cx="512" cy="512" r="400" fill="#0a0501"/>
+{body}
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#f59e0b" stroke-width="6" filter="url(#glow)"/>
+  <g fill="#fbbf24" filter="url(#glow)">{''.join(trail)}</g>
+</svg>
+"""
+
+
 if __name__ == "__main__":
     for rel, svg in (("assets/logo.svg", watchdog()), ("plugins/malinois/assets/icon.svg", malinois()),
                      ("plugins/husky/assets/icon.svg", husky()),
-                     ("plugins/collie/assets/icon.svg", collie())):
+                     ("plugins/collie/assets/icon.svg", collie()),
+                     ("plugins/bloodhound/assets/icon.svg", bloodhound())):
         with open(os.path.join(ROOT, rel), "w") as f:
             f.write(svg)
         print("wrote", rel)

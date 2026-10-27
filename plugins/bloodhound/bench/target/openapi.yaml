@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Ledger API
+  version: 1.4.0
+servers:
+  - url: https://api.ledger.example/v1
+  - url: http://api.ledger.example/v1
+security:
+  - bearer: []
+paths:
+  /accounts/{id}:
+    get:
+      summary: Get an account
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Account" } } } }
+  /accounts/{id}/statements:
+    get:
+      summary: List statements for an account
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer } }
+      responses:
+        "200": { description: OK }
+  /transfers:
+    post:
+      summary: Move money between accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [from, to, amount]
+              properties:
+                from: { type: string }
+                to: { type: string }
+                amount: { type: number }
+      responses:
+        "201": { description: Created }
+  /users/me:
+    get:
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/User" } } } }
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200": { description: OK }
+  /webhooks:
+    post:
+      summary: Register a webhook for account events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: { type: string }
+      responses:
+        "201": { description: Created }
+  /reports/export:
+    get:
+      summary: Export all users for finance
+      security: []
+      responses:
+        "200": { description: CSV }
+  /health:
+    get:
+      security: []
+      responses:
+        "200": { description: OK }
+components:
+  securitySchemes:
+    bearer: { type: http, scheme: bearer, bearerFormat: JWT }
+    partnerKey: { type: apiKey, in: query, name: api_key }
+  schemas:
+    Account:
+      type: object
+      properties:
+        id: { type: string }
+        owner_id: { type: string }
+        balance: { type: number }
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        email: { type: string }
+        role: { type: string }
+        password_hash: { type: string }
+        ssn: { type: string }

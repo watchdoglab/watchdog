@@ -1,0 +1,28 @@
+{
+ "target": "target/",
+ "note": "Planted API issues. Match by file + issue; line +-3 counts (spec or handler line both count). Decoys must NOT be reported. No hint comments in the target this time.",
+ "vulns": [
+  {"id": "H01", "sev": "critical", "file": "src/middleware/auth.js", "line": 5, "title": "jwt.decode instead of verify: any forged token accepted (any sub, any role)"},
+  {"id": "H02", "sev": "critical", "file": "src/app.js", "line": 16, "title": "Admin router mounted before/without auth: /debug/users and DELETE /users/:id unauthenticated (function-level authz)"},
+  {"id": "H03", "sev": "critical", "file": "src/routes/accounts.js", "line": 14, "title": "BOLA: statements returned for any account id, no ownership check"},
+  {"id": "H04", "sev": "critical", "file": "src/app.js", "line": 19, "title": "Zombie /v0 mounts accounts router with no auth (unauthenticated statements/transfers; req.user crash)"},
+  {"id": "H05", "sev": "critical", "file": "src/routes/users.js", "line": 13, "title": "Mass assignment: PATCH /users/me Object.assign of body (role escalation); spec additionalProperties: true"},
+  {"id": "H06", "sev": "high", "file": "src/graphql.js", "line": 11, "title": "GraphQL has no auth context: user(id) returns any user and their accounts (BOLA)"},
+  {"id": "H07", "sev": "high", "file": "src/routes/admin.js", "line": 6, "title": "Unauthenticated export of all users incl. SSN (spec security: [])"},
+  {"id": "H08", "sev": "high", "file": "openapi.yaml", "line": 94, "title": "User response exposes password_hash and ssn (/users/me returns full record)"},
+  {"id": "H09", "sev": "high", "file": "src/routes/accounts.js", "line": 23, "title": "Transfer amount unbounded: negative amount pulls money from destination; no idempotency"},
+  {"id": "H10", "sev": "high", "file": "src/routes/users.js", "line": 19, "title": "SSRF: webhook URL fetched by server without validation"},
+  {"id": "H11", "sev": "high", "file": "src/app.js", "line": 11, "title": "CORS reflects any origin with credentials"},
+  {"id": "H12", "sev": "medium", "file": "src/app.js", "line": 21, "title": "GraphQL introspection on; no depth/complexity limit on cyclic User<->Account"},
+  {"id": "H13", "sev": "medium", "file": "src/routes/accounts.js", "line": 13, "title": "No max on limit (spec has no maximum): unbounded page size"},
+  {"id": "H14", "sev": "medium", "file": "openapi.yaml", "line": 80, "title": "Partner API key passed in query string"},
+  {"id": "H15", "sev": "medium", "file": "src/app.js", "line": 25, "title": "Error handler returns stack traces"},
+  {"id": "H16", "sev": "medium", "file": "src/routes/admin.js", "line": 11, "title": "Shadow endpoints not in spec: /debug/users, DELETE /users/:id"},
+  {"id": "H17", "sev": "low", "file": "openapi.yaml", "line": 7, "title": "Plain http:// server listed in spec"},
+  {"id": "H18", "sev": "low", "file": "src/app.js", "line": 1, "title": "No rate limiting anywhere (transfers, auth-bearing routes)"}
+ ],
+ "decoys": [
+  {"file": "src/routes/accounts.js", "line": 8, "why": "GET /v1/accounts/:id checks owner_id against caller (only unsafe via H01/H04, not on its own)"},
+  {"file": "src/app.js", "line": 14, "why": "/v1/health is intentionally public, returns no data"}
+ ]
+}

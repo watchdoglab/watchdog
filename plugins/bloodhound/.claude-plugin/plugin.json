@@ -1,0 +1,12 @@
+{
+  "name": "bloodhound",
+  "version": "0.1.0",
+  "description": "Bloodhound — the API dog. A security lens for REST and GraphQL APIs, plus on-demand audits that read the spec and the handlers together. Findings-first, static only.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "hooks": [
+    "./hooks/bloodhound-hooks.json"
+  ]
+}

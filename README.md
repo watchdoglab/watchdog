@@ -8,11 +8,12 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 
 | | Dog | Guards |
 |---|-----|--------|
-| <img src="plugins/malinois/assets/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
+| <img src="plugins/malinois/assets/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. Active tests are scope-gated. See [plugins/malinois](plugins/malinois/README.md). |
 | <img src="plugins/husky/assets/icon.gif" width="96" alt="Husky"> | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [plugins/husky](plugins/husky/README.md). |
 | <img src="plugins/collie/assets/icon.gif" width="96" alt="Collie"> | **collie** | AI — security lens for LLM apps and agents: prompt injection, agent tools, RAG, MCP, model-output handling. Static only. See [plugins/collie](plugins/collie/README.md). |
+| <img src="plugins/bloodhound/assets/icon.gif" width="96" alt="Bloodhound"> | **bloodhound** | API — security lens for REST and GraphQL: reads the OpenAPI spec and handlers together for BOLA, mass assignment, broken auth, SSRF and shadow routes. Static only. See [plugins/bloodhound](plugins/bloodhound/README.md). |
 
-More dogs later (api, secrets, deps).
+More dogs later (privacy, supply chain).
 
 ## Install
 
@@ -21,25 +22,9 @@ More dogs later (api, secrets, deps).
 /plugin install malinois@watchdog
 /plugin install husky@watchdog
 /plugin install collie@watchdog
+/plugin install bloodhound@watchdog
 ```
-
-## malinois — the VAPT dog
-
-<p align="center"><img src="plugins/malinois/assets/banner.gif" width="100%" alt="Malinois — VAPT by Watchdog"></p>
-
-A security-review lens that stays on all session, plus on-demand audits.
-
-**Commands**
-- `/vapt-code` — static audit of a source repo (SAST + dependency CVEs + secrets)
-- `/vapt-web` — assessment of a running web app (scope-gated)
-- `/vapt-apk` — static Android APK audit (OWASP MASVS)
-- `/vapt-ipa` — static iOS IPA audit (OWASP MASVS)
-- `/vapt-report` — merge the session's findings into one ranked report
-
-**Config** (`/plugin`): `authScope` (in-scope targets you're authorized to test), `reportDir`.
-
-Turn the lens off with `stop malinois`.
 
 ## ⚖️ Authorized use only
 
-malinois is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) requires written authorization and an in-scope target — the dog refuses otherwise. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.
+Every dog is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) (malinois `/vapt-web`) requires written authorization and an in-scope target — the dog refuses otherwise. husky, collie and bloodhound are static only. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.

@@ -22,6 +22,11 @@
       "name": "collie",
       "source": "./plugins/collie",
       "description": "Collie \u2014 the AI dog. Sniffs out prompt injection, over-powered agent tools, unsafe model output, RAG leaks and risky MCP config. Static review only."
+    },
+    {
+      "name": "bloodhound",
+      "source": "./plugins/bloodhound",
+      "description": "Bloodhound \u2014 the API dog. Reads OpenAPI/GraphQL specs and handlers together to sniff out BOLA, broken auth, mass assignment, SSRF and shadow routes. Static review only."
     }
   ]
 }

@@ -10,6 +10,8 @@ Writes:
   plugins/husky/assets/icon.gif        Husky icon (Dogs table)
   plugins/collie/assets/banner.gif     Collie banner
   plugins/collie/assets/icon.gif       Collie icon (Dogs table)
+  plugins/bloodhound/assets/banner.gif Bloodhound banner
+  plugins/bloodhound/assets/icon.gif   Bloodhound icon (Dogs table)
 
 Needs rsvg-convert and ImageMagick (magick) on PATH. Run gen_logos.py first:
 the art reuses the logo SVGs it writes.
@@ -38,6 +40,13 @@ BRANDS = {
         title="MALINOIS", title_color="#E6FFFB",
         tagline="VAPT  /  BY WATCHDOG", tagline_color="#4FB3A7",
         pill="CODE  /  WEB  /  APK  /  IPA", pill_icon=None,
+    ),
+    "bloodhound": dict(
+        svg="plugins/bloodhound/assets/icon.svg", orbit=446, eye="dot", vignette="#24160a",
+        title="BLOODHOUND", title_color="#FFFBEB",
+        title_size=84, title_kerning=8,  # ten letters: shrink to fit the banner
+        tagline="API  /  BY WATCHDOG", tagline_color="#D9A441",
+        pill="OPENAPI  /  GRAPHQL  /  REST", pill_icon=None,
     ),
     "collie": dict(
         svg="plugins/collie/assets/icon.svg", orbit=452, eye="dot", vignette="#160a2e",
@@ -147,7 +156,7 @@ def text_layer(brand, path, L):
     pill_w = 14 * len(brand["pill"]) + (84 if brand["pill_icon"] else 50)
     cmd = ["magick", "-size", f"{L.w}x{L.h}", "xc:none",
            "-fill", "#2a3340", "-draw", "rectangle 452,96 454,322",
-           "-font", FONT, "-fill", brand["title_color"], "-pointsize", "104", "-kerning", "18",
+           "-font", FONT, "-fill", brand["title_color"], "-pointsize", str(brand.get("title_size", 104)), "-kerning", str(brand.get("title_kerning", 18)),
            "-annotate", "+500+180", brand["title"],
            "-font", FONT, "-fill", brand["tagline_color"], "-pointsize", "28", "-kerning", "8",
            "-annotate", "+505+228", brand["tagline"],
@@ -195,3 +204,5 @@ if __name__ == "__main__":
     render("husky", ICON, "plugins/husky/assets/icon.gif")
     render("collie", BANNER, "plugins/collie/assets/banner.gif")
     render("collie", ICON, "plugins/collie/assets/icon.gif")
+    render("bloodhound", BANNER, "plugins/bloodhound/assets/banner.gif")
+    render("bloodhound", ICON, "plugins/bloodhound/assets/icon.gif")
