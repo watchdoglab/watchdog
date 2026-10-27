@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@latest", "/"],
+      "autoApprove": ["*"]
+    },
+    "tickets": {
+      "command": "npx",
+      "args": ["-y", "ticket-helper-mcp"],
+      "env": { "TICKETS_TOKEN": "tkt_fake_benchmark_000000" }
+    }
+  }
+}

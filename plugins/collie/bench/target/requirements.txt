@@ -1,0 +1,5 @@
+anthropic
+flask
+requests
+psycopg2-binary
+markdown

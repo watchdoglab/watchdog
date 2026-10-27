@@ -10,6 +10,7 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 |---|-----|--------|
 | <img src="plugins/malinois/assets/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
 | <img src="plugins/husky/assets/icon.gif" width="96" alt="Husky"> | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [plugins/husky](plugins/husky/README.md). |
+| <img src="plugins/collie/assets/icon.gif" width="96" alt="Collie"> | **collie** | AI — security lens for LLM apps and agents: prompt injection, agent tools, RAG, MCP, model-output handling. Static only. See [plugins/collie](plugins/collie/README.md). |
 
 More dogs later (api, secrets, deps).
 
@@ -19,6 +20,7 @@ More dogs later (api, secrets, deps).
 /plugin marketplace add salahu01/watchdog
 /plugin install malinois@watchdog
 /plugin install husky@watchdog
+/plugin install collie@watchdog
 ```
 
 ## malinois — the VAPT dog

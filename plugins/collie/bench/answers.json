@@ -1,0 +1,144 @@
+{
+ "target": "target/",
+ "note": "Planted AI/LLM security issues. Match by file + issue; line +-3 counts. Decoys must NOT be reported. diagnostics() was dropped as a decoy: the model supplies `confirmed`, so the confirmation gate is bypassable (a fair finding, Low).",
+ "vulns": [
+  {
+   "id": "A01",
+   "sev": "critical",
+   "file": "app/agent.py",
+   "line": 20,
+   "title": "Agent tool run_shell: shell=True on model-chosen command, no allowlist or confirmation"
+  },
+  {
+   "id": "A02",
+   "sev": "critical",
+   "file": "app/agent.py",
+   "line": 24,
+   "title": "fetch_url returns raw web content to model: indirect prompt injection (chains with run_shell)"
+  },
+  {
+   "id": "A03",
+   "sev": "critical",
+   "file": "app/agent.py",
+   "line": 60,
+   "title": "calculate tool evals model output (RCE)"
+  },
+  {
+   "id": "A04",
+   "sev": "critical",
+   "file": "mcp.json",
+   "line": 5,
+   "title": "Filesystem MCP server rooted at / with autoApprove *"
+  },
+  {
+   "id": "A05",
+   "sev": "high",
+   "file": "app/agent.py",
+   "line": 29,
+   "title": "SQL injection: model-supplied order_id in f-string query"
+  },
+  {
+   "id": "A06",
+   "sev": "high",
+   "file": "app/agent.py",
+   "line": 74,
+   "title": "User question concatenated into system prompt (direct prompt injection)"
+  },
+  {
+   "id": "A07",
+   "sev": "high",
+   "file": "app/agent.py",
+   "line": 15,
+   "title": "Secret (admin key, with hardcoded default) placed in system prompt"
+  },
+  {
+   "id": "A08",
+   "sev": "high",
+   "file": "app/rag.py",
+   "line": 13,
+   "title": "RAG search ignores tenant_id: cross-tenant data leak"
+  },
+  {
+   "id": "A09",
+   "sev": "high",
+   "file": "app/rag.py",
+   "line": 7,
+   "title": "Untrusted uploaded docs ingested and fed to model unfenced (stored indirect injection)"
+  },
+  {
+   "id": "A10",
+   "sev": "high",
+   "file": "templates/reply.html",
+   "line": 1,
+   "title": "Model Markdown rendered with |safe: XSS and image-URL data exfiltration"
+  },
+  {
+   "id": "A11",
+   "sev": "high",
+   "file": "app/agent.py",
+   "line": 82,
+   "title": "Tool dispatch by model-chosen name with **kwargs, no schema validation or per-tool authz"
+  },
+  {
+   "id": "A12",
+   "sev": "medium",
+   "file": "app/agent.py",
+   "line": 72,
+   "title": "Unbounded agent loop: no max iterations / cost cap"
+  },
+  {
+   "id": "A13",
+   "sev": "medium",
+   "file": "app/agent.py",
+   "line": 77,
+   "title": "Full prompts with customer data printed to logs (PII)"
+  },
+  {
+   "id": "A14",
+   "sev": "medium",
+   "file": "mcp.json",
+   "line": 10,
+   "title": "Unpinned third-party MCP package (and @latest on filesystem server)"
+  },
+  {
+   "id": "A15",
+   "sev": "medium",
+   "file": "mcp.json",
+   "line": 11,
+   "title": "Token hardcoded in MCP config"
+  },
+  {
+   "id": "A16",
+   "sev": "medium",
+   "file": ".env",
+   "line": 2,
+   "title": "API key and DB password committed in .env"
+  },
+  {
+   "id": "A17",
+   "sev": "medium",
+   "file": "app/web.py",
+   "line": 22,
+   "title": "Flask debug=True on 0.0.0.0 (Werkzeug console RCE)"
+  },
+  {
+   "id": "A18",
+   "sev": "low",
+   "file": "app/agent.py",
+   "line": 70,
+   "title": "user_id from request form trusted as identity; no auth on /ask"
+  }
+ ],
+ "decoys": [
+  {
+   "file": "app/agent.py",
+   "line": 46,
+   "why": "refund_status: parameterized query"
+  },
+  {
+   "file": "templates/summary.html",
+   "line": 1,
+   "why": "autoescaped plain text"
+  }
+ ]
+}

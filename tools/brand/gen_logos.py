@@ -2,7 +2,7 @@
 
     python3 tools/brand/gen_logos.py
 
-Writes assets/logo.svg, plugins/malinois/assets/icon.svg and plugins/husky/assets/icon.svg.
+Writes assets/logo.svg, plugins/{malinois,husky,collie}/assets/icon.svg.
 """
 import math
 import os
@@ -68,6 +68,41 @@ HUSKY_BUMPS = [
     (440, 760, 40, 210),   # thick neck
 ]
 
+# Border collie profile facing right: semi-erect ears with tipped-over tips, medium muzzle, soft ruff.
+COLLIE_HEAD = [
+    (304, 980), (290, 900), (306, 840), (292, 780), (318, 720),   # soft coat down the neck
+    (330, 650), (352, 580), (372, 510),                           # nape
+    (388, 440), (404, 360), (424, 290), (452, 236),               # rear edge of ear
+    (488, 214), (520, 240), (512, 262),                           # tipped-over ear tip
+    (536, 310), (566, 362),                                       # front edge of ear
+    (606, 380), (650, 398), (688, 424),                           # forehead
+    (710, 456),                                                   # stop
+    (764, 476), (818, 498), (860, 518),                           # bridge
+    (884, 536), (896, 560), (884, 584),                           # nose
+    (852, 598), (806, 610), (762, 624),                           # upper lip
+    (728, 648), (700, 676), (678, 706),                           # jaw
+    (690, 750), (660, 790), (676, 840), (644, 890), (650, 980),   # chest ruff
+]
+COLLIE_FAR_EAR = [(566, 372), (588, 300), (618, 252), (650, 262), (640, 280), (662, 344), (686, 410)]
+COLLIE_NOSE = "M872 536 Q902 544 900 568 Q894 588 874 586 Q862 560 872 536 Z"
+COLLIE_MOUTH = "M884 588 L806 610 L762 624 L734 644"
+COLLIE_BUMPS = [
+    (650, 446, 44, 90),    # brow
+    (640, 594, 40, 110),   # cheek
+    (790, 524, 28, 100),   # muzzle
+    (460, 300, 22, 70),    # ear
+    (430, 770, 38, 200),   # neck
+]
+
+
+def collie_mask(x, y):
+    """Black coat with a white blaze up the muzzle, white face front and white chest."""
+    if x > 740 or (x > 690 and y < 470 and abs(y - (450 - 0.4 * (x - 690))) < 26):
+        return 0.6                                  # white muzzle and blaze
+    if y > 700 and x > 520:
+        return 0.6                                  # white chest
+    return -0.55                                    # black coat
+
 
 def malinois_mask(x, y):
     """Black mask: dark muzzle, dark around the eye, dark ear tips."""
@@ -92,6 +127,7 @@ def husky_mask(x, y):
 BREEDS = {
     "watchdog": dict(head=HEAD, far_ear=FAR_EAR, nose=NOSE, mouth=MOUTH, bumps=BUMPS, mask=None),
     "malinois": dict(head=HEAD, far_ear=FAR_EAR, nose=NOSE, mouth=MOUTH, bumps=BUMPS, mask=malinois_mask),
+    "collie": dict(head=COLLIE_HEAD, far_ear=COLLIE_FAR_EAR, nose=COLLIE_NOSE, mouth=COLLIE_MOUTH, bumps=COLLIE_BUMPS, mask=collie_mask),
     "husky": dict(head=HUSKY_HEAD, far_ear=HUSKY_FAR_EAR, nose=HUSKY_NOSE, mouth=HUSKY_MOUTH, bumps=HUSKY_BUMPS, mask=husky_mask),
 }
 LIGHT = np.array([0.55, -0.62, 0.56])  # from upper-right front (y grows downward)
@@ -312,9 +348,34 @@ def husky():
 """
 
 
+
+def collie():
+    """Violet dog inside a ring of network nodes: the dog that herds the agents."""
+    eye = (f'<path d="M{EYE[0]-28} {EYE[1]+4} Q{EYE[0]} {EYE[1]-20} {EYE[0]+30} {EYE[1]-6} '
+           f'Q{EYE[0]+4} {EYE[1]+16} {EYE[0]-28} {EYE[1]+4} Z" fill="#f5f3ff" filter="url(#glow)"/>')
+    body = head_layer("#0b0518", "#c4b5fd", "#ddd6fe", 17, eye, "collie")
+    nodes, links = [], []
+    pts = [(512 + 452 * math.cos(math.radians(a - 90)), 512 + 452 * math.sin(math.radians(a - 90))) for a in range(0, 360, 45)]
+    for i, (x, y) in enumerate(pts):
+        nodes.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="13"/>')
+        nx, ny = pts[(i + 3) % len(pts)]
+        links.append(f'<path d="M{x:.0f} {y:.0f}L{nx:.0f} {ny:.0f}"/>')
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Collie">
+{DEFS.format(bg0="#24124a", extra="")}
+  <g stroke="#a78bfa" stroke-opacity=".12" stroke-width="2">{''.join(links)}</g>
+  <circle cx="512" cy="512" r="400" fill="#05020c"/>
+{body}
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#a78bfa" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="512" cy="512" r="452" fill="none" stroke="#a78bfa" stroke-opacity=".35" stroke-width="2"/>
+  <g fill="#c4b5fd" filter="url(#glow)">{''.join(nodes)}</g>
+</svg>
+"""
+
+
 if __name__ == "__main__":
     for rel, svg in (("assets/logo.svg", watchdog()), ("plugins/malinois/assets/icon.svg", malinois()),
-                     ("plugins/husky/assets/icon.svg", husky())):
+                     ("plugins/husky/assets/icon.svg", husky()),
+                     ("plugins/collie/assets/icon.svg", collie())):
         with open(os.path.join(ROOT, rel), "w") as f:
             f.write(svg)
         print("wrote", rel)

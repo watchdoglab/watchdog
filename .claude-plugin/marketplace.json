@@ -17,6 +17,11 @@
       "name": "husky",
       "source": "./plugins/husky",
       "description": "Husky \u2014 the cloud dog. Sniffs out misconfigurations in Terraform, Kubernetes, Dockerfiles and CI pipelines. Static review only."
+    },
+    {
+      "name": "collie",
+      "source": "./plugins/collie",
+      "description": "Collie \u2014 the AI dog. Sniffs out prompt injection, over-powered agent tools, unsafe model output, RAG leaks and risky MCP config. Static review only."
     }
   ]
 }
