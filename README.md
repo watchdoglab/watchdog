@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/watchdog-lockup.png" width="640" alt="Watchdog — security dogs for your code"></p>
+<p align="center"><img src="assets/banner.gif" width="100%" alt="Watchdog — security dogs for your code"></p>
 
 # Watchdog
 
