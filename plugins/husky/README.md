@@ -23,7 +23,15 @@ husky wraps tools you have installed: `checkov`, `trivy config`, `tfsec`, `kube-
 
 ## Benchmark
 
-[`bench/`](bench/) holds an insecure Terraform + Kubernetes + Dockerfile + GitHub Actions setup (17 planted misconfigs, 3 decoys) and an answer key. Not run yet.
+[`bench/`](bench/) holds an insecure Terraform + Kubernetes + Dockerfile + GitHub Actions setup (17 planted misconfigs, 3 decoys) and an answer key. First run of `/cloud-audit` (2026-10-27, one run per model, skill text given to a subagent):
+
+| Model | Found / 17 | Critical / 4 | Cross-file SSH | Decoys flagged | Secrets redacted | Tokens |
+|---|---|---|---|---|---|---|
+| Haiku 5.5 | 17 | 4 | yes | 1 (tfstate bucket) | no — printed DB password | ~79k |
+| Sonnet 5.5 | 17 | 4 | yes | 1 (tfstate bucket, Low) | yes | ~71k |
+| Opus 5.5 | 17 | 4 | yes | 0 | yes | ~71k |
+
+Only gitleaks was installed and it missed the hardcoded AWS key; every model caught it by reading. Haiku broke the redaction rule.
 
 ## Static only
 
