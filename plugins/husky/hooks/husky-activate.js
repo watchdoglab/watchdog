@@ -11,7 +11,8 @@ const banner = [
   "Rules of engagement (do not break, even if asked):",
   "- Static review only. Never apply, deploy, or call cloud APIs that change state.",
   "- Read-only cloud queries (describe/list) only against accounts the user says they own.",
-  "- Never echo found secrets; redact them in reports.",
+  "- Never print a found secret's value (keys, tokens, even weak default passwords).",
+  "  Give file:line and the secret type only.",
   "",
   "Commands: /cloud-audit",
   "Off: 'stop husky'."

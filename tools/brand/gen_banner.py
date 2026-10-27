@@ -6,6 +6,8 @@ Writes:
   assets/banner.gif                    Watchdog banner (top of README)
   plugins/malinois/assets/banner.gif   Malinois banner (its README section)
   plugins/malinois/assets/icon.gif     Malinois icon (Dogs table)
+  plugins/husky/assets/banner.gif      Husky banner
+  plugins/husky/assets/icon.gif        Husky icon (Dogs table)
 
 Needs rsvg-convert and ImageMagick (magick) on PATH. Run gen_logos.py first:
 the art reuses the logo SVGs it writes.
@@ -34,6 +36,12 @@ BRANDS = {
         title="MALINOIS", title_color="#E6FFFB",
         tagline="VAPT  /  BY WATCHDOG", tagline_color="#4FB3A7",
         pill="CODE  /  WEB  /  APK  /  IPA", pill_icon=None,
+    ),
+    "husky": dict(
+        svg="plugins/husky/assets/icon.svg", orbit=440, eye="dot", vignette="#061a2b",
+        title="HUSKY", title_color="#F0F9FF",
+        tagline="CLOUD  /  BY WATCHDOG", tagline_color="#5BA8D6",
+        pill="TERRAFORM  /  K8S  /  DOCKER  /  CI", pill_icon=None,
     ),
 }
 
@@ -175,3 +183,5 @@ if __name__ == "__main__":
     render("watchdog", BANNER, "assets/banner.gif")
     render("malinois", BANNER, "plugins/malinois/assets/banner.gif")
     render("malinois", ICON, "plugins/malinois/assets/icon.gif")
+    render("husky", BANNER, "plugins/husky/assets/banner.gif")
+    render("husky", ICON, "plugins/husky/assets/icon.gif")

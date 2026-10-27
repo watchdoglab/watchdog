@@ -2,7 +2,7 @@
 
     python3 tools/brand/gen_logos.py
 
-Writes assets/logo.svg and plugins/malinois/assets/icon.svg.
+Writes assets/logo.svg, plugins/malinois/assets/icon.svg and plugins/husky/assets/icon.svg.
 """
 import math
 import os
@@ -228,8 +228,35 @@ def malinois():
 """
 
 
+def husky():
+    """Ice-blue dog inside a snowflake ring: the dog that guards the cloud."""
+    eye = (f'<path d="M{EYE[0]-28} {EYE[1]+4} Q{EYE[0]} {EYE[1]-20} {EYE[0]+30} {EYE[1]-6} '
+           f'Q{EYE[0]+4} {EYE[1]+16} {EYE[0]-28} {EYE[1]+4} Z" fill="#e0f2fe" filter="url(#glow)"/>')
+    body = head_layer("#020a14", "#7dd3fc", "#bae6fd", 13, eye)
+    flakes = []
+    for a in range(0, 360, 60):
+        r = math.radians(a - 90)
+        x0, y0 = 512 + 404 * math.cos(r), 512 + 404 * math.sin(r)
+        x1, y1 = 512 + 470 * math.cos(r), 512 + 470 * math.sin(r)
+        xm, ym = 512 + 446 * math.cos(r), 512 + 446 * math.sin(r)
+        bx, by = 18 * math.cos(r + math.pi / 2), 18 * math.sin(r + math.pi / 2)
+        dx, dy = 16 * math.cos(r), 16 * math.sin(r)
+        flakes.append(f'<path d="M{x0:.0f} {y0:.0f}L{x1:.0f} {y1:.0f}'
+                      f'M{xm - bx - dx:.0f} {ym - by - dy:.0f}L{xm:.0f} {ym:.0f}L{xm + bx - dx:.0f} {ym + by - dy:.0f}"/>')
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Husky">
+{DEFS.format(bg0="#0b2a44", extra="")}
+  <circle cx="512" cy="512" r="400" fill="#01060c"/>
+{body}
+  <g stroke="#7dd3fc" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">{''.join(flakes)}</g>
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#7dd3fc" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="512" cy="512" r="440" fill="none" stroke="#7dd3fc" stroke-opacity=".3" stroke-width="2"/>
+</svg>
+"""
+
+
 if __name__ == "__main__":
-    for rel, svg in (("assets/logo.svg", watchdog()), ("plugins/malinois/assets/icon.svg", malinois())):
+    for rel, svg in (("assets/logo.svg", watchdog()), ("plugins/malinois/assets/icon.svg", malinois()),
+                     ("plugins/husky/assets/icon.svg", husky())):
         with open(os.path.join(ROOT, rel), "w") as f:
             f.write(svg)
         print("wrote", rel)

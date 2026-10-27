@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.gif" width="100%" alt="Husky — cloud by Watchdog"></p>
+
 # husky — the cloud dog
 
 A misconfiguration lens for infrastructure-as-code that stays on all session, plus an on-demand audit. Part of [Watchdog](../../README.md).
@@ -31,7 +33,7 @@ husky wraps tools you have installed: `checkov`, `trivy config`, `tfsec`, `kube-
 | Sonnet 5.5 | 17 | 4 | yes | 1 (tfstate bucket, Low) | yes | ~71k |
 | Opus 5.5 | 17 | 4 | yes | 0 | yes | ~71k |
 
-Only gitleaks was installed and it missed the hardcoded AWS key; every model caught it by reading. Haiku broke the redaction rule.
+Only gitleaks was installed and it missed the hardcoded AWS key; every model caught it by reading. Haiku broke the redaction rule (printed the DB password). After tightening the rule to "never print a value, even weak defaults", a Haiku rerun leaked nothing.
 
 ## Static only
 

@@ -9,7 +9,7 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 | | Dog | Guards |
 |---|-----|--------|
 | <img src="plugins/malinois/assets/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
-| | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [plugins/husky](plugins/husky/README.md). |
+| <img src="plugins/husky/assets/icon.gif" width="96" alt="Husky"> | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [plugins/husky](plugins/husky/README.md). |
 
 More dogs later (api, secrets, deps).
 

@@ -13,7 +13,7 @@ As you touch infra code, watch what it exposes and who it trusts. For each risky
 ## What to look for (in order)
 1. **Public exposure** — buckets/blobs public, security groups `0.0.0.0/0` on admin ports (22, 3389, DB ports), public DB instances, LoadBalancer services with no auth.
 2. **IAM** — `Action: "*"` / `Resource: "*"`, `iam:PassRole` broad, assumable roles with `Principal: "*"`, long-lived access keys, cluster-admin bindings for workloads.
-3. **Secrets** — credentials in tfvars, manifests, Dockerfile `ENV`/`ARG`, CI env, state files committed. Redact in any output.
+3. **Secrets** — credentials in tfvars, manifests, Dockerfile `ENV`/`ARG`, CI env, state files committed. Never print a secret's value — not keys, tokens, passwords (even weak or default ones), or connection strings. Name the file:line and the kind of secret only, e.g. `password default (redacted)`. Writing a value and labelling it redacted is a leak.
 4. **Workload hardening** — `privileged: true`, `hostNetwork`/`hostPID`, `hostPath` mounts, running as root, no resource limits, `allowPrivilegeEscalation`, `:latest` images.
 5. **Encryption & logging** — storage/DB/volumes unencrypted, TLS off, audit/flow logs disabled, no versioning on state buckets.
 6. **CI/CD supply chain** — `pull_request_target` checking out PR code, unpinned third-party actions, `permissions: write-all`, secrets exposed to forks, `curl | sh`.
