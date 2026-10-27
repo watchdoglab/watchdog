@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Saint Bernard">
+
 # saintbernard — the incident response dog
 
 The incident-response dog. Comes to the rescue after something went wrong: reads logs, builds a timeline, finds blast radius and writes containment steps. Part of [Watchdog](../../README.md).

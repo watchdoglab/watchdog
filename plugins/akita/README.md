@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Akita">
+
 # akita — the secrets dog
 
 The secrets dog. Goes past finding keys: rotation, storage, .env handling, git history cleanup and pre-commit blocking. Part of [Watchdog](../../README.md).

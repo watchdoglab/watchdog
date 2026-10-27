@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Doberman">
+
 # doberman — the auth dog
 
 The auth dog. Guards the front door: login, OAuth/OIDC, sessions, password reset, MFA, JWTs and SSO. Part of [Watchdog](../../README.md).

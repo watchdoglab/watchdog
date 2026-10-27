@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Pointer">
+
 # pointer — the frontend dog
 
 The frontend dog. Points at browser-side risk in React, Vue, Angular and plain JS: XSS sinks, CSP, postMessage and token storage. Part of [Watchdog](../../README.md).

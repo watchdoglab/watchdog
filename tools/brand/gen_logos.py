@@ -205,6 +205,167 @@ BREEDS = {
     "beagle": dict(head=BEAGLE_HEAD, far_ear=BEAGLE_FAR_EAR, near_ear=BEAGLE_EAR,
                    nose=BEAGLE_NOSE, mouth=BEAGLE_MOUTH, bumps=BEAGLE_BUMPS, mask=beagle_mask),
 }
+# The ten dogs below share one icon template (ringed()); each adds a head, coat mask and ring motif.
+ROTT_HEAD = [(250, 980), (262, 860), (290, 740), (330, 630), (380, 540), (440, 470), (510, 410), (590, 372),
+             (660, 368), (712, 392), (736, 424), (716, 446), (780, 460), (840, 478), (880, 500), (898, 524),
+             (902, 556), (884, 580), (840, 596), (800, 614), (770, 640), (746, 684), (730, 740), (722, 820),
+             (724, 900), (730, 980)]
+ROTT_EAR = [(556, 404), (616, 386), (662, 420), (640, 492), (596, 516), (560, 468)]  # folded forward
+ROTT_FAR_EAR = [(600, 380), (630, 358), (664, 370), (650, 400), (620, 404)]
+ROTT_NOSE = "M872 510 Q904 518 902 548 Q896 568 876 566 Q864 538 872 510 Z"
+ROTT_MOUTH = "M880 576 L820 600 L780 616 L756 640"
+ROTT_BUMPS = [(668, 400, 46, 96), (690, 590, 50, 120), (830, 520, 30, 90), (600, 450, 24, 70), (420, 780, 44, 230)]
+
+DOBE_HEAD = [(300, 980), (310, 860), (336, 740), (376, 630), (424, 540), (470, 470), (500, 400), (520, 300),
+             (540, 190), (566, 110), (600, 180), (634, 290), (662, 380), (704, 432), (740, 452), (820, 476),
+             (890, 500), (930, 520), (940, 544), (928, 566), (900, 578), (840, 594), (786, 610), (752, 632),
+             (726, 668), (708, 724), (698, 800), (700, 890), (706, 980)]
+DOBE_FAR_EAR = [(560, 350), (590, 240), (620, 140), (644, 240), (664, 330), (680, 400)]
+DOBE_NOSE = "M904 512 Q938 522 938 548 Q932 570 908 568 Q894 540 904 512 Z"
+DOBE_MOUTH = "M912 576 L840 596 L790 612 L758 634"
+DOBE_BUMPS = [(668, 430, 34, 80), (680, 590, 34, 100), (840, 520, 28, 110), (560, 260, 24, 80), (440, 780, 34, 200)]
+
+SHEP_HEAD = [(230, 980), (236, 860), (262, 740), (304, 630), (360, 540), (420, 470), (462, 400), (478, 300),
+             (496, 180), (520, 110), (560, 190), (600, 290), (630, 370), (670, 410), (712, 436), (780, 460),
+             (850, 480), (904, 500), (926, 524), (922, 556), (898, 572), (840, 590), (786, 610), (750, 636),
+             (726, 680), (712, 740), (730, 790), (708, 840), (744, 900), (724, 940), (740, 980)]
+SHEP_FAR_EAR = [(556, 360), (580, 250), (612, 160), (640, 250), (664, 330), (684, 400)]
+SHEP_NOSE = "M896 500 Q928 510 926 538 Q920 560 898 558 Q884 528 896 500 Z"
+SHEP_MOUTH = "M904 566 L834 590 L784 610 L752 634"
+SHEP_BUMPS = [(660, 420, 40, 90), (690, 590, 40, 110), (830, 510, 32, 120), (520, 240, 22, 80), (400, 790, 46, 230)]
+
+DACH_HEAD = [(240, 980), (260, 880), (300, 790), (350, 710), (410, 630), (470, 560), (530, 480), (590, 430),
+             (650, 416), (700, 430), (712, 452), (780, 476), (850, 500), (910, 520), (940, 540), (944, 566),
+             (922, 582), (860, 600), (800, 616), (760, 640), (728, 676), (704, 730), (692, 800), (694, 880),
+             (700, 980)]
+DACH_EAR = [(560, 460), (612, 440), (660, 470), (672, 560), (668, 660), (640, 740), (590, 760), (548, 700),
+            (530, 600), (534, 510)]
+DACH_FAR_EAR = [(600, 430), (630, 410), (660, 424), (650, 446), (620, 450)]
+DACH_NOSE = "M914 520 Q946 530 944 558 Q938 580 916 578 Q902 548 914 520 Z"
+DACH_MOUTH = "M920 584 L850 604 L796 620 L762 644"
+DACH_BUMPS = [(640, 440, 44, 90), (690, 600, 34, 100), (850, 530, 30, 120), (600, 600, 24, 90), (420, 780, 36, 200)]
+
+AKITA_HEAD = [(220, 980), (226, 860), (252, 740), (300, 630), (360, 540), (420, 470), (476, 420), (520, 360),
+              (556, 300), (600, 280), (640, 340), (680, 400), (720, 428), (722, 448), (780, 466), (840, 484),
+              (880, 504), (896, 528), (892, 556), (872, 572), (820, 590), (780, 606), (752, 632), (730, 680),
+              (716, 740), (724, 800), (706, 850), (740, 910), (730, 980)]
+AKITA_FAR_EAR = [(500, 400), (520, 330), (546, 290), (572, 330), (590, 380)]
+AKITA_NOSE = "M866 504 Q896 512 894 538 Q888 558 868 556 Q856 530 866 504 Z"
+AKITA_MOUTH = "M876 566 L816 588 L776 604 L750 628"
+AKITA_BUMPS = [(660, 420, 46, 100), (680, 600, 50, 130), (820, 520, 30, 90), (580, 320, 24, 60), (400, 780, 52, 240)]
+
+POINTER_HEAD = [(280, 980), (294, 870), (320, 770), (356, 680), (400, 600), (450, 530), (500, 470), (550, 420),
+                (610, 392), (670, 392), (714, 420), (720, 442), (790, 452), (860, 460), (920, 466), (950, 478),
+                (956, 504), (940, 524), (880, 546), (820, 566), (776, 592), (740, 630), (716, 690), (704, 760),
+                (702, 860), (706, 980)]
+POINTER_EAR = [(540, 450), (590, 430), (636, 460), (652, 550), (650, 660), (626, 740), (580, 760), (546, 700),
+               (530, 600), (528, 510)]
+POINTER_FAR_EAR = [(600, 400), (632, 384), (662, 394), (650, 418), (620, 420)]
+POINTER_NOSE = "M922 462 Q956 470 956 498 Q950 520 928 518 Q914 490 922 462 Z"
+POINTER_MOUTH = "M930 522 L840 552 L790 576 L760 604"
+POINTER_BUMPS = [(650, 420, 36, 80), (680, 580, 30, 100), (850, 490, 26, 120), (590, 600, 22, 90), (430, 780, 34, 200)]
+
+SAINT_HEAD = [(200, 980), (206, 860), (232, 740), (276, 630), (334, 540), (400, 460), (470, 400), (550, 356),
+              (630, 346), (700, 372), (742, 410), (730, 440), (790, 456), (860, 476), (904, 496), (920, 524),
+              (916, 556), (900, 580), (902, 620), (890, 660), (860, 690), (820, 700), (780, 690), (756, 720),
+              (736, 770), (720, 840), (718, 910), (724, 980)]
+SAINT_EAR = [(500, 420), (560, 400), (612, 430), (630, 510), (620, 600), (586, 660), (536, 660), (500, 600),
+             (488, 510)]
+SAINT_FAR_EAR = [(580, 360), (612, 340), (646, 350), (640, 376), (606, 380)]
+SAINT_NOSE = "M880 494 Q914 504 914 534 Q908 556 886 554 Q872 524 880 494 Z"
+SAINT_MOUTH = "M900 580 Q880 640 840 690"
+SAINT_LINES = "M630 410 Q664 398 704 412 M640 432 Q670 424 700 434"
+SAINT_BUMPS = [(660, 400, 52, 100), (720, 620, 54, 140), (830, 520, 34, 110), (560, 520, 26, 90), (400, 780, 52, 250)]
+
+SHIBA_HEAD = [(250, 980), (258, 860), (286, 740), (330, 630), (390, 540), (450, 470), (500, 410), (530, 330),
+              (556, 250), (586, 200), (616, 260), (644, 340), (680, 400), (716, 432), (720, 448), (790, 468),
+              (850, 490), (890, 512), (902, 536), (890, 558), (850, 572), (800, 590), (760, 610), (730, 640),
+              (700, 660), (720, 700), (700, 740), (704, 820), (712, 900), (716, 980)]
+SHIBA_FAR_EAR = [(540, 380), (566, 300), (592, 250), (612, 310), (632, 380)]
+SHIBA_NOSE = "M868 512 Q896 518 896 540 Q890 560 870 558 Q858 534 868 512 Z"
+SHIBA_MOUTH = "M876 562 L816 584 L776 600 L750 624"
+SHIBA_BUMPS = [(660, 420, 40, 90), (700, 620, 44, 110), (820, 520, 28, 90), (570, 300, 20, 60), (420, 780, 40, 220)]
+
+PYR_HEAD = [(200, 980), (206, 860), (230, 740), (270, 640), (320, 560), (380, 490), (450, 430), (530, 390),
+            (610, 376), (680, 392), (724, 420), (730, 444), (790, 460), (850, 480), (890, 502), (904, 530),
+            (896, 560), (870, 578), (820, 592), (780, 610), (750, 640), (730, 690), (712, 740), (730, 790),
+            (706, 840), (728, 900), (716, 980)]
+PYR_EAR = [(540, 430), (600, 412), (640, 450), (626, 530), (590, 580), (554, 540), (536, 480)]
+PYR_FAR_EAR = [(590, 390), (620, 376), (652, 384), (640, 408), (610, 410)]
+PYR_NOSE = "M866 500 Q898 508 898 536 Q892 558 870 556 Q856 528 866 500 Z"
+PYR_MOUTH = "M878 572 L816 594 L774 612 L748 636"
+PYR_BUMPS = [(660, 410, 44, 100), (690, 600, 44, 120), (820, 520, 28, 100), (580, 490, 20, 70), (380, 790, 56, 260)]
+
+
+def rott_mask(x, y):
+    """Black with tan brow spot, cheeks and muzzle."""
+    if ((x - 694) / 26) ** 2 + ((y - 436) / 16) ** 2 < 1 or (x > 800 and y > 520) or (680 < x < 800 and 560 < y < 660):
+        return 0.15
+    return -0.75
+
+
+def dobe_mask(x, y):
+    """Black with rust muzzle and brow spot."""
+    if ((x - 704) / 26) ** 2 + ((y - 440) / 14) ** 2 < 1 or (x > 770 and y > 540):
+        return 0.12
+    return -0.75
+
+
+def shep_mask(x, y):
+    """Black saddle and muzzle mask, tan cheeks and neck."""
+    if x < 330 + 0.15 * (y - 500) or x > 770 or y < 330:
+        return -0.7
+    return 0.15
+
+
+def dach_mask(x, y):
+    """Uniform red-brown, a shade darker behind the skull."""
+    return -0.2 if x < 520 else 0
+
+
+def urajiro_mask(x, y):
+    """Akita/Shiba urajiro: white muzzle, cheeks and throat; darker top."""
+    if (x > 740 and y > 500) or (y > 620 and x > 600):
+        return 0.5
+    return -0.3
+
+
+def pointer_mask(x, y):
+    """Liver head patch, white muzzle and neck."""
+    if x < 770 and y < 620:
+        return -0.5
+    return 0.45
+
+
+def saint_mask(x, y):
+    """Red patches over ears and eyes; white blaze, muzzle and chest."""
+    if x > 770 or y > 720 or (700 < x < 760 and y < 450):
+        return 0.55
+    return -0.35
+
+
+BREEDS.update({
+    "rottweiler": dict(head=ROTT_HEAD, far_ear=ROTT_FAR_EAR, near_ear=ROTT_EAR, nose=ROTT_NOSE, mouth=ROTT_MOUTH,
+                       bumps=ROTT_BUMPS, mask=rott_mask),
+    "doberman": dict(head=DOBE_HEAD, far_ear=DOBE_FAR_EAR, nose=DOBE_NOSE, mouth=DOBE_MOUTH, bumps=DOBE_BUMPS,
+                     mask=dobe_mask),
+    "shepherd": dict(head=SHEP_HEAD, far_ear=SHEP_FAR_EAR, nose=SHEP_NOSE, mouth=SHEP_MOUTH, bumps=SHEP_BUMPS,
+                     mask=shep_mask),
+    "dachshund": dict(head=DACH_HEAD, far_ear=DACH_FAR_EAR, near_ear=DACH_EAR, nose=DACH_NOSE, mouth=DACH_MOUTH,
+                      bumps=DACH_BUMPS, mask=dach_mask),
+    "akita": dict(head=AKITA_HEAD, far_ear=AKITA_FAR_EAR, nose=AKITA_NOSE, mouth=AKITA_MOUTH, bumps=AKITA_BUMPS,
+                  mask=urajiro_mask),
+    "pointer": dict(head=POINTER_HEAD, far_ear=POINTER_FAR_EAR, near_ear=POINTER_EAR, nose=POINTER_NOSE,
+                    mouth=POINTER_MOUTH, bumps=POINTER_BUMPS, mask=pointer_mask),
+    "saintbernard": dict(head=SAINT_HEAD, far_ear=SAINT_FAR_EAR, near_ear=SAINT_EAR, lines=SAINT_LINES,
+                         nose=SAINT_NOSE, mouth=SAINT_MOUTH, bumps=SAINT_BUMPS, mask=saint_mask),
+    "shiba": dict(head=SHIBA_HEAD, far_ear=SHIBA_FAR_EAR, nose=SHIBA_NOSE, mouth=SHIBA_MOUTH, bumps=SHIBA_BUMPS,
+                  mask=urajiro_mask),
+    "pyrenees": dict(head=PYR_HEAD, far_ear=PYR_FAR_EAR, near_ear=PYR_EAR, nose=PYR_NOSE, mouth=PYR_MOUTH,
+                     bumps=PYR_BUMPS, mask=lambda x, y: 0.35),
+})
+
+
 LIGHT = np.array([0.55, -0.62, 0.56])  # from upper-right front (y grows downward)
 LIGHT = LIGHT / np.linalg.norm(LIGHT)
 
@@ -506,6 +667,86 @@ def beagle():
 """
 
 
+def ringed(breed, label, dark, light, edge, ring, bg0, inner, seed, mark, count, offset=0):
+    """Shared icon for the newer dogs: breed head in a lens, `count` copies of `mark` round the ring."""
+    eye = (f'<path d="M{EYE[0]-26} {EYE[1]} Q{EYE[0]} {EYE[1]-16} {EYE[0]+26} {EYE[1]} '
+           f'Q{EYE[0]} {EYE[1]+12} {EYE[0]-26} {EYE[1]} Z" fill="{edge}" filter="url(#glow)"/>')
+    body = head_layer(dark, light, edge, seed, eye, breed)
+    marks = []
+    for i in range(count):
+        a = i * 360 / count - 90 + offset
+        r = math.radians(a)
+        marks.append(f'<g transform="translate({512 + 452 * math.cos(r):.1f} {512 + 452 * math.sin(r):.1f}) '
+                     f'rotate({a + 90:.0f})">{mark}</g>')
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="{label}">
+{DEFS.format(bg0=bg0, extra="")}
+  <circle cx="512" cy="512" r="400" fill="{inner}"/>
+{body}
+  <circle cx="512" cy="512" r="400" fill="none" stroke="{ring}" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="512" cy="512" r="452" fill="none" stroke="{ring}" stroke-opacity=".3" stroke-width="2"/>
+  <g fill="none" stroke="{ring}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">{''.join(marks)}</g>
+</svg>
+"""
+
+
+KEY = '<circle cx="0" cy="-10" r="9"/><path d="M0 -1V20M0 12H8M0 18H6"/>'
+
+
+def rottweiler():
+    """Bronze dog in a ring of chain links: the dog that guards the supply chain."""
+    return ringed("rottweiler", "Rottweiler", "#050505", "#a8a29e", "#e7e5e4", "#b45309", "#2a1606", "#050403", 29,
+                  '<rect x="-20" y="-10" width="40" height="20" rx="10"/>', 10)
+
+
+def doberman():
+    """Red dog in a ring of keys: the dog that guards the login."""
+    return ringed("doberman", "Doberman", "#050308", "#f87171", "#fecaca", "#dc2626", "#3a0a0a", "#060203", 31, KEY, 8)
+
+
+def shepherd():
+    """Green dog in a ring of phones: the dog that guards mobile apps."""
+    return ringed("shepherd", "Shepherd", "#04070a", "#86efac", "#bbf7d0", "#22c55e", "#06301a", "#020604", 37,
+                  '<rect x="-11" y="-18" width="22" height="36" rx="5"/><path d="M-4 12H4"/>', 6)
+
+
+def dachshund():
+    """Rose dog in a ring of database cylinders: the dog that digs into databases."""
+    return ringed("dachshund", "Dachshund", "#0d0604", "#fb7185", "#fecdd3", "#e11d48", "#3a0814", "#070203", 41,
+                  '<ellipse cx="0" cy="-12" rx="14" ry="5"/><path d="M-14 -12V12A14 5 0 0 0 14 12V-12M-14 0A14 5 0 0 0 14 0"/>', 8)
+
+
+def akita():
+    """Blue dog in a ring of keys: the dog that guards secrets."""
+    return ringed("akita", "Akita", "#060a0f", "#93c5fd", "#dbeafe", "#3b82f6", "#0b1e40", "#02040a", 43, KEY, 6)
+
+
+def pointer():
+    """Yellow dog in a crosshair: the dog that points at frontend bugs."""
+    return ringed("pointer", "Pointer", "#0a0a0a", "#fde047", "#fef9c3", "#eab308", "#332a04", "#050401", 47,
+                  '<path d="M0 -30V30"/><circle cx="0" cy="0" r="8"/>', 4, offset=45)
+
+
+def saintbernard():
+    """Red dog in a ring of crosses: the dog that comes when there is an incident."""
+    return ringed("saintbernard", "Saint Bernard", "#110505", "#fca5a5", "#fee2e2", "#ef4444", "#3a0a0a", "#070202", 53,
+                  '<path d="M0 -14V14M-14 0H14" stroke-width="8"/>', 8)
+
+
+def shiba():
+    """Orange dog in a ring of hexagon blocks: the dog that audits smart contracts."""
+    return ringed("shiba", "Shiba", "#0c0602", "#fdba74", "#ffedd5", "#f97316", "#3a1a04", "#070301", 59,
+                  '<path d="M0 -15L13 -7.5V7.5L0 15L-13 7.5V-7.5Z"/>', 8)
+
+
+def pyrenees():
+    """White dog in a ring of checkmarks: the dog that maps compliance."""
+    return ringed("pyrenees", "Pyrenees", "#0a0c10", "#e2e8f0", "#f8fafc", "#94a3b8", "#1e2533", "#030405", 61,
+                  '<path d="M-12 0L-3 10L13 -10" stroke-width="7"/>', 8)
+
+
+NEW_DOGS = ("rottweiler", "doberman", "shepherd", "dachshund", "akita", "pointer", "saintbernard", "shiba", "pyrenees")
+
+
 if __name__ == "__main__":
     for rel, svg in (("assets/logo.svg", watchdog()), ("plugins/malinois/assets/icon.svg", malinois()),
                      ("plugins/husky/assets/icon.svg", husky()),
@@ -514,4 +755,8 @@ if __name__ == "__main__":
                      ("plugins/beagle/assets/icon.svg", beagle())):
         with open(os.path.join(ROOT, rel), "w") as f:
             f.write(svg)
-        print("wrote", rel)
+    for dog in NEW_DOGS:
+        os.makedirs(os.path.join(ROOT, "plugins", dog, "assets"), exist_ok=True)
+        with open(os.path.join(ROOT, "plugins", dog, "assets", "icon.svg"), "w") as f:
+            f.write(globals()[dog]())
+        print("wrote", dog)

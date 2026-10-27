@@ -81,15 +81,15 @@ Turn a dog's lens off with `stop <dog>`.
 | <img src="plugins/collie/assets/icon.gif" width="96" alt="Collie"> | **collie** | AI — security lens for LLM apps and agents: prompt injection, agent tools, RAG, MCP, model-output handling. Static only. See [plugins/collie](plugins/collie/README.md). |
 | <img src="plugins/bloodhound/assets/icon.gif" width="96" alt="Bloodhound"> | **bloodhound** | API — security lens for REST and GraphQL: reads the OpenAPI spec and handlers together for BOLA, mass assignment, broken auth, SSRF and shadow routes. Static only. See [plugins/bloodhound](plugins/bloodhound/README.md). |
 | <img src="plugins/beagle/assets/icon.gif" width="96" alt="Beagle"> | **beagle** | Privacy — Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping. New, no benchmark yet. See [plugins/beagle](plugins/beagle/README.md). |
-| | **rottweiler** | Supply chain — Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences. New, no benchmark yet. See [plugins/rottweiler](plugins/rottweiler/README.md). |
-| | **doberman** | Auth & identity — Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO. New, no benchmark yet. See [plugins/doberman](plugins/doberman/README.md). |
-| | **shepherd** | Mobile deep dive — Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges. New, no benchmark yet. See [plugins/shepherd](plugins/shepherd/README.md). |
-| | **dachshund** | Database — Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption. New, no benchmark yet. See [plugins/dachshund](plugins/dachshund/README.md). |
-| | **akita** | Secrets lifecycle — Find, rotate and properly store secrets; git history; pre-commit blocking. New, no benchmark yet. See [plugins/akita](plugins/akita/README.md). |
-| | **pointer** | Frontend — XSS sinks, CSP, postMessage, token storage, third-party scripts. New, no benchmark yet. See [plugins/pointer](plugins/pointer/README.md). |
-| | **saintbernard** | Incident response — Read logs after a breach: timeline, blast radius, containment steps. New, no benchmark yet. See [plugins/saintbernard](plugins/saintbernard/README.md). |
-| | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. New, no benchmark yet. See [plugins/shiba](plugins/shiba/README.md). |
-| | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. New, no benchmark yet. See [plugins/pyrenees](plugins/pyrenees/README.md). |
+| <img src="plugins/rottweiler/assets/icon.gif" width="96" alt="Rottweiler"> | **rottweiler** | Supply chain — Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences. New, no benchmark yet. See [plugins/rottweiler](plugins/rottweiler/README.md). |
+| <img src="plugins/doberman/assets/icon.gif" width="96" alt="Doberman"> | **doberman** | Auth & identity — Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO. New, no benchmark yet. See [plugins/doberman](plugins/doberman/README.md). |
+| <img src="plugins/shepherd/assets/icon.gif" width="96" alt="Shepherd"> | **shepherd** | Mobile deep dive — Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges. New, no benchmark yet. See [plugins/shepherd](plugins/shepherd/README.md). |
+| <img src="plugins/dachshund/assets/icon.gif" width="96" alt="Dachshund"> | **dachshund** | Database — Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption. New, no benchmark yet. See [plugins/dachshund](plugins/dachshund/README.md). |
+| <img src="plugins/akita/assets/icon.gif" width="96" alt="Akita"> | **akita** | Secrets lifecycle — Find, rotate and properly store secrets; git history; pre-commit blocking. New, no benchmark yet. See [plugins/akita](plugins/akita/README.md). |
+| <img src="plugins/pointer/assets/icon.gif" width="96" alt="Pointer"> | **pointer** | Frontend — XSS sinks, CSP, postMessage, token storage, third-party scripts. New, no benchmark yet. See [plugins/pointer](plugins/pointer/README.md). |
+| <img src="plugins/saintbernard/assets/icon.gif" width="96" alt="Saint Bernard"> | **saintbernard** | Incident response — Read logs after a breach: timeline, blast radius, containment steps. New, no benchmark yet. See [plugins/saintbernard](plugins/saintbernard/README.md). |
+| <img src="plugins/shiba/assets/icon.gif" width="96" alt="Shiba"> | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. New, no benchmark yet. See [plugins/shiba](plugins/shiba/README.md). |
+| <img src="plugins/pyrenees/assets/icon.gif" width="96" alt="Pyrenees"> | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. New, no benchmark yet. See [plugins/pyrenees](plugins/pyrenees/README.md). |
 
 ## Does it work?
 

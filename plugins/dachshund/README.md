@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Dachshund">
+
 # dachshund — the database dog
 
 The database dog. Digs into schemas, migrations, row-level security, database roles and Firebase/Supabase rules. Part of [Watchdog](../../README.md).

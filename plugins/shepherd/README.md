@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Shepherd">
+
 # shepherd — the mobile dog
 
 The mobile dog. A deep dive on Android, iOS, Flutter and React Native apps: storage, pinning, deep links, WebViews and native bridges. Part of [Watchdog](../../README.md).

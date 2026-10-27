@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Rottweiler">
+
 # rottweiler — the supply chain dog
 
 The supply-chain dog. Guards what you pull in: lockfiles, package names, install scripts, pinning, SBOMs, release signing and licences. Part of [Watchdog](../../README.md).

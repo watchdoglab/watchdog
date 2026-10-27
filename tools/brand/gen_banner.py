@@ -62,6 +62,66 @@ BRANDS = {
         tagline="PRIVACY  /  BY WATCHDOG", tagline_color="#E0955F",
         pill="PII  /  LOGS  /  CONSENT", pill_icon=None,
     ),
+    "rottweiler": dict(
+        svg="plugins/rottweiler/assets/icon.svg", orbit=452, eye="dot", vignette="#1c1006",
+        title="ROTTWEILER", title_color="#E7E5E4",
+        title_size=84, title_kerning=8,
+        tagline="SUPPLY CHAIN  /  BY WATCHDOG", tagline_color="#B98A5E",
+        pill="LOCKFILES  /  SBOM  /  DEPS", pill_icon=None,
+    ),
+    "doberman": dict(
+        svg="plugins/doberman/assets/icon.svg", orbit=452, eye="dot", vignette="#2a0808",
+        title="DOBERMAN", title_color="#FEF2F2",
+        title_size=84, title_kerning=8,
+        tagline="AUTH  /  BY WATCHDOG", tagline_color="#E07A7A",
+        pill="LOGIN  /  OAUTH  /  MFA", pill_icon=None,
+    ),
+    "shepherd": dict(
+        svg="plugins/shepherd/assets/icon.svg", orbit=452, eye="dot", vignette="#06200f",
+        title="SHEPHERD", title_color="#F0FDF4",
+        title_size=84, title_kerning=8,
+        tagline="MOBILE  /  BY WATCHDOG", tagline_color="#5FC489",
+        pill="ANDROID  /  IOS  /  FLUTTER", pill_icon=None,
+    ),
+    "dachshund": dict(
+        svg="plugins/dachshund/assets/icon.svg", orbit=452, eye="dot", vignette="#2a0610",
+        title="DACHSHUND", title_color="#FFF1F2",
+        title_size=84, title_kerning=8,
+        tagline="DATABASE  /  BY WATCHDOG", tagline_color="#E86A84",
+        pill="SQL  /  RLS  /  FIREBASE", pill_icon=None,
+    ),
+    "akita": dict(
+        svg="plugins/akita/assets/icon.svg", orbit=452, eye="dot", vignette="#08142e",
+        title="AKITA", title_color="#EFF6FF",
+        tagline="SECRETS  /  BY WATCHDOG", tagline_color="#6A9EE8",
+        pill="FIND  /  ROTATE  /  BLOCK", pill_icon=None,
+    ),
+    "pointer": dict(
+        svg="plugins/pointer/assets/icon.svg", orbit=452, eye="dot", vignette="#241e04",
+        title="POINTER", title_color="#FEFCE8",
+        tagline="FRONTEND  /  BY WATCHDOG", tagline_color="#D9B93E",
+        pill="XSS  /  CSP  /  DOM", pill_icon=None,
+    ),
+    "saintbernard": dict(
+        svg="plugins/saintbernard/assets/icon.svg", orbit=452, eye="dot", vignette="#2a0808",
+        title="SAINT BERNARD", title_color="#FEF2F2",
+        title_size=84, title_kerning=8,
+        tagline="INCIDENT RESPONSE  /  BY WATCHDOG", tagline_color="#E07A7A",
+        pill="TIMELINE  /  BLAST RADIUS", pill_icon=None,
+    ),
+    "shiba": dict(
+        svg="plugins/shiba/assets/icon.svg", orbit=452, eye="dot", vignette="#2a1304",
+        title="SHIBA", title_color="#FFF7ED",
+        tagline="WEB3  /  BY WATCHDOG", tagline_color="#E8955A",
+        pill="SOLIDITY  /  DEFI  /  AUDIT", pill_icon=None,
+    ),
+    "pyrenees": dict(
+        svg="plugins/pyrenees/assets/icon.svg", orbit=452, eye="dot", vignette="#141a24",
+        title="PYRENEES", title_color="#F8FAFC",
+        title_size=84, title_kerning=8,
+        tagline="COMPLIANCE  /  BY WATCHDOG", tagline_color="#A3B1C6",
+        pill="SOC 2  /  ISO 27001  /  PCI", pill_icon=None,
+    ),
     "husky": dict(
         svg="plugins/husky/assets/icon.svg", orbit=440, eye="dot", vignette="#061a2b",
         title="HUSKY", title_color="#F0F9FF",
@@ -216,3 +276,21 @@ if __name__ == "__main__":
     render("bloodhound", ICON, "plugins/bloodhound/assets/icon.gif")
     render("beagle", BANNER, "plugins/beagle/assets/banner.gif")
     render("beagle", ICON, "plugins/beagle/assets/icon.gif")
+    render("rottweiler", BANNER, "plugins/rottweiler/assets/banner.gif")
+    render("rottweiler", ICON, "plugins/rottweiler/assets/icon.gif")
+    render("doberman", BANNER, "plugins/doberman/assets/banner.gif")
+    render("doberman", ICON, "plugins/doberman/assets/icon.gif")
+    render("shepherd", BANNER, "plugins/shepherd/assets/banner.gif")
+    render("shepherd", ICON, "plugins/shepherd/assets/icon.gif")
+    render("dachshund", BANNER, "plugins/dachshund/assets/banner.gif")
+    render("dachshund", ICON, "plugins/dachshund/assets/icon.gif")
+    render("akita", BANNER, "plugins/akita/assets/banner.gif")
+    render("akita", ICON, "plugins/akita/assets/icon.gif")
+    render("pointer", BANNER, "plugins/pointer/assets/banner.gif")
+    render("pointer", ICON, "plugins/pointer/assets/icon.gif")
+    render("saintbernard", BANNER, "plugins/saintbernard/assets/banner.gif")
+    render("saintbernard", ICON, "plugins/saintbernard/assets/icon.gif")
+    render("shiba", BANNER, "plugins/shiba/assets/banner.gif")
+    render("shiba", ICON, "plugins/shiba/assets/icon.gif")
+    render("pyrenees", BANNER, "plugins/pyrenees/assets/banner.gif")
+    render("pyrenees", ICON, "plugins/pyrenees/assets/icon.gif")

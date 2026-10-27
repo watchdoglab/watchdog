@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Shiba">
+
 # shiba — the web3 dog
 
 The Web3 dog. Audits smart contracts in Solidity and Rust: reentrancy, access control, oracle manipulation, arithmetic and upgrade proxies. Part of [Watchdog](../../README.md).

@@ -1,3 +1,5 @@
+<img src="assets/banner.gif" width="100%" alt="Pyrenees">
+
 # pyrenees — the compliance dog
 
 The compliance dog. Maps findings from every Watchdog dog to SOC 2, ISO 27001, PCI DSS and OWASP ASVS, and lists the evidence an auditor will ask for. Part of [Watchdog](../../README.md).
