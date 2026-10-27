@@ -12,6 +12,8 @@ Writes:
   plugins/collie/assets/icon.gif       Collie icon (Dogs table)
   plugins/bloodhound/assets/banner.gif Bloodhound banner
   plugins/bloodhound/assets/icon.gif   Bloodhound icon (Dogs table)
+  plugins/beagle/assets/banner.gif     Beagle banner
+  plugins/beagle/assets/icon.gif       Beagle icon (Dogs table)
 
 Needs rsvg-convert and ImageMagick (magick) on PATH. Run gen_logos.py first:
 the art reuses the logo SVGs it writes.
@@ -53,6 +55,12 @@ BRANDS = {
         title="COLLIE", title_color="#F5F3FF",
         tagline="AI  /  BY WATCHDOG", tagline_color="#9F8AE0",
         pill="PROMPTS  /  AGENTS  /  RAG  /  MCP", pill_icon=None,
+    ),
+    "beagle": dict(
+        svg="plugins/beagle/assets/icon.svg", orbit=452, eye="dot", vignette="#2b1706",
+        title="BEAGLE", title_color="#FFF7ED",
+        tagline="PRIVACY  /  BY WATCHDOG", tagline_color="#E0955F",
+        pill="PII  /  LOGS  /  CONSENT", pill_icon=None,
     ),
     "husky": dict(
         svg="plugins/husky/assets/icon.svg", orbit=440, eye="dot", vignette="#061a2b",
@@ -206,3 +214,5 @@ if __name__ == "__main__":
     render("collie", ICON, "plugins/collie/assets/icon.gif")
     render("bloodhound", BANNER, "plugins/bloodhound/assets/banner.gif")
     render("bloodhound", ICON, "plugins/bloodhound/assets/icon.gif")
+    render("beagle", BANNER, "plugins/beagle/assets/banner.gif")
+    render("beagle", ICON, "plugins/beagle/assets/icon.gif")

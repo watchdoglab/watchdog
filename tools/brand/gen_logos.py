@@ -96,8 +96,8 @@ COLLIE_BUMPS = [
 
 # Bloodhound profile facing right: low skull, long deep muzzle, hanging flews and dewlap.
 HOUND_HEAD = [
-    (330, 980), (332, 860), (356, 740), (390, 620), (430, 520),   # back of neck
-    (470, 440), (540, 400), (610, 404), (668, 420),               # long flat skull
+    (296, 980), (300, 856), (324, 736), (360, 616), (404, 516),   # thick back of neck
+    (450, 440), (520, 400), (596, 386), (662, 396),               # long flat skull
     (700, 448),                                                   # stop
     (760, 462), (830, 476), (890, 492),                           # long muzzle
     (914, 508), (924, 536), (912, 560),                           # nose
@@ -107,24 +107,61 @@ HOUND_HEAD = [
     (672, 850), (660, 920), (660, 980),
 ]
 # The long ear hangs in front of the neck, so it is drawn over the head.
-HOUND_EAR = [(520, 430), (566, 452), (594, 520), (604, 620), (592, 720), (562, 792),
-             (520, 812), (490, 782), (476, 700), (474, 600), (486, 500)]
-HOUND_FAR_EAR = [(590, 410), (630, 412), (650, 440), (640, 470), (610, 460)]
+HOUND_EAR = [(500, 424), (552, 412), (598, 442), (622, 528), (628, 636), (612, 744),
+             (578, 836), (528, 864), (484, 812), (458, 690), (450, 552), (468, 468)]
+HOUND_FAR_EAR = [(580, 400), (614, 372), (646, 384), (650, 412), (612, 416)]
 HOUND_NOSE = "M904 504 Q930 516 926 544 Q920 564 902 560 Q892 532 904 504 Z"
 HOUND_MOUTH = "M906 600 Q888 652 852 690"
-HOUND_LINES = "M628 432 Q656 446 690 444 M612 452 Q640 474 676 470 M700 520 Q720 560 716 600"
+HOUND_LINES = "M624 418 Q652 430 686 426 M608 438 Q636 458 672 452 M700 520 Q720 560 716 600"
 HOUND_BUMPS = [
-    (650, 450, 40, 90),    # brow
+    (652, 428, 40, 90),    # brow
     (700, 600, 46, 130),   # heavy cheek and flews
     (800, 540, 34, 120),   # deep muzzle
     (540, 640, 30, 90),    # ear fold
-    (450, 780, 36, 200),   # neck
+    (420, 780, 38, 208),   # neck
 ]
+
+
+# Beagle profile facing right: rounded skull, medium square muzzle, long low-set hanging ear.
+BEAGLE_HEAD = [
+    (280, 980), (292, 876), (314, 780), (346, 690), (388, 610), (436, 540),   # back of neck
+    (476, 484),                                                               # nape
+    (510, 436), (548, 394), (602, 366), (658, 358), (708, 370), (738, 398),   # broad, gently rounded skull
+    (746, 420),                                                               # brow
+    (712, 444),                                                               # stop
+    (770, 462), (834, 484), (888, 508),                                       # straight bridge
+    (914, 528), (926, 558), (910, 584),                                       # square nose
+    (874, 598), (822, 614), (772, 630),                                       # upper lip
+    (734, 658), (706, 694),                                                   # short jaw
+    (694, 742), (686, 806), (694, 880), (702, 936), (704, 980),               # clean throat
+]
+# The broad ear hangs low over the cheek and neck, so it is drawn over the head.
+BEAGLE_EAR = [(516, 448), (566, 418), (620, 446), (652, 528), (666, 640), (650, 760),
+              (608, 872), (540, 894), (486, 830), (458, 690), (452, 546), (472, 476)]
+BEAGLE_FAR_EAR = [(582, 372), (604, 338), (644, 334), (664, 360), (632, 378), (604, 380)]
+BEAGLE_NOSE = "M900 526 Q934 538 930 566 Q924 590 900 586 Q888 556 900 526 Z"
+BEAGLE_MOUTH = "M908 588 L822 614 L772 630 L744 656"
+BEAGLE_BUMPS = [
+    (662, 404, 44, 92),    # brow
+    (676, 580, 46, 108),   # full cheek under the eye
+    (838, 510, 34, 112),   # muzzle crest
+    (556, 660, 26, 96),    # ear fold
+    (416, 790, 40, 215),   # neck
+]
+
+
+def beagle_mask(x, y):
+    """Tricolour: black saddle down the back of the neck, tan head, white muzzle and throat."""
+    if x > 830 or (y > 700 and x > 650):
+        return 0.42                                 # white muzzle and throat
+    if x < 470 + 0.21 * (y - 500):
+        return -0.7                                 # black saddle over the shoulder
+    return 0.1                                      # tan head and neck
 
 
 def hound_mask(x, y):
     """Black-and-tan: dark saddle down the back of the neck, tan face."""
-    if x < 420 + 0.15 * (y - 500) or (y < 425 and x < 640):
+    if x < 402 + 0.17 * (y - 500) or (y < 425 and x < 640):
         return -0.6
     return 0.15
 
@@ -165,6 +202,8 @@ BREEDS = {
                        nose=HOUND_NOSE, mouth=HOUND_MOUTH, bumps=HOUND_BUMPS, mask=hound_mask),
     "collie": dict(head=COLLIE_HEAD, far_ear=COLLIE_FAR_EAR, nose=COLLIE_NOSE, mouth=COLLIE_MOUTH, bumps=COLLIE_BUMPS, mask=collie_mask),
     "husky": dict(head=HUSKY_HEAD, far_ear=HUSKY_FAR_EAR, nose=HUSKY_NOSE, mouth=HUSKY_MOUTH, bumps=HUSKY_BUMPS, mask=husky_mask),
+    "beagle": dict(head=BEAGLE_HEAD, far_ear=BEAGLE_FAR_EAR, near_ear=BEAGLE_EAR,
+                   nose=BEAGLE_NOSE, mouth=BEAGLE_MOUTH, bumps=BEAGLE_BUMPS, mask=beagle_mask),
 }
 LIGHT = np.array([0.55, -0.62, 0.56])  # from upper-right front (y grows downward)
 LIGHT = LIGHT / np.linalg.norm(LIGHT)
@@ -442,11 +481,37 @@ def bloodhound():
 """
 
 
+def beagle():
+    """Warm tan dog inside a ring of padlocks: the dog that sniffs out personal data."""
+    eye = (f'<path d="M{EYE[0]-26} {EYE[1]} Q{EYE[0]} {EYE[1]-16} {EYE[0]+26} {EYE[1]} '
+           f'Q{EYE[0]} {EYE[1]+12} {EYE[0]-26} {EYE[1]} Z" fill="#fffbeb" filter="url(#glow)"/>')
+    body = head_layer("#0f0a05", "#f5d0a9", "#fde8cf", 23, eye, "beagle")
+    locks = []
+    for i in range(12):
+        a = i * 30 - 90
+        r = math.radians(a)
+        x, y = 512 + 452 * math.cos(r), 512 + 452 * math.sin(r)
+        locks.append(f'<g transform="translate({x:.1f} {y:.1f}) rotate({a + 90})">'
+                     f'<path d="M-7 -3V-9A7 7 0 0 1 7 -9V-3" fill="none" stroke="#fb923c" stroke-width="4"/>'
+                     f'<rect x="-12" y="-3" width="24" height="18" rx="6" fill="#fb923c"/>'
+                     f'<circle cx="0" cy="6" r="2.6" fill="#0f0a05"/></g>')
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Beagle">
+{DEFS.format(bg0="#3a1e08", extra="")}
+  <circle cx="512" cy="512" r="400" fill="#0c0703"/>
+{body}
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#fb923c" stroke-width="6" filter="url(#glow)"/>
+  <circle cx="512" cy="512" r="452" fill="none" stroke="#fb923c" stroke-opacity=".3" stroke-width="2"/>
+  <g filter="url(#glow)">{''.join(locks)}</g>
+</svg>
+"""
+
+
 if __name__ == "__main__":
     for rel, svg in (("assets/logo.svg", watchdog()), ("plugins/malinois/assets/icon.svg", malinois()),
                      ("plugins/husky/assets/icon.svg", husky()),
                      ("plugins/collie/assets/icon.svg", collie()),
-                     ("plugins/bloodhound/assets/icon.svg", bloodhound())):
+                     ("plugins/bloodhound/assets/icon.svg", bloodhound()),
+                     ("plugins/beagle/assets/icon.svg", beagle())):
         with open(os.path.join(ROOT, rel), "w") as f:
             f.write(svg)
         print("wrote", rel)

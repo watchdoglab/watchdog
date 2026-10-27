@@ -1,8 +1,10 @@
+<p align="center"><img src="assets/banner.gif" width="100%" alt="Beagle — Privacy by Watchdog"></p>
+
 # beagle — the privacy dog
 
 The privacy dog. Sniffs out personal data flowing into logs, analytics, third-party SDKs and storage, and maps findings to GDPR and India's DPDP Act. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0, new.** No benchmark yet.
 
 ## Install
 
