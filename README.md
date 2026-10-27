@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.svg" width="180" alt="Watchdog"></p>
+<p align="center"><img src="assets/watchdog-lockup.png" width="640" alt="Watchdog — security dogs for your code"></p>
 
 # Watchdog
 
@@ -20,6 +20,8 @@ More dogs later (api, cloud, secrets, deps).
 ```
 
 ## malinois — the VAPT dog
+
+<p><img src="plugins/malinois/assets/malinois-lockup.png" width="480" alt="Malinois — VAPT by Watchdog"></p>
 
 A security-review lens that stays on all session, plus on-demand audits.
 
