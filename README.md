@@ -1,4 +1,6 @@
-# 🐕 Watchdog
+<p align="center"><img src="assets/logo.png" width="180" alt="Watchdog"></p>
+
+# Watchdog
 
 A pack of security dogs for Claude Code. Each dog guards one surface. Install the marketplace, add the dogs you need.
 
