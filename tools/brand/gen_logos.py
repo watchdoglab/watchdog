@@ -41,6 +41,59 @@ BUMPS = [
     (450, 260, 24, 80),    # cup of the ear
     (420, 760, 36, 200),   # neck muscle
 ]
+# Husky profile facing right: thick triangular ears, domed skull, shorter muzzle, fur ruff.
+HUSKY_HEAD = [
+    (300, 980), (280, 900), (300, 860), (276, 800), (306, 760),   # ruff down the back of neck
+    (290, 700), (326, 660), (318, 600), (352, 560),
+    (372, 500), (384, 430),                                       # nape
+    (396, 360), (420, 270), (452, 180), (468, 150),               # rear edge of ear to tip
+    (500, 210), (530, 280), (560, 340),                           # front edge of ear
+    (600, 362), (648, 380), (690, 410),                           # domed forehead
+    (714, 450),                                                   # stop
+    (770, 470), (830, 494), (870, 516),                           # bridge of muzzle
+    (890, 532), (902, 556), (892, 580),                           # nose
+    (862, 592), (820, 602), (772, 616),                           # upper lip
+    (740, 640), (712, 664), (690, 690),                           # jaw
+    (700, 730), (668, 760), (684, 800), (648, 830),               # ruff under the throat
+    (664, 880), (628, 920), (640, 980),
+]
+HUSKY_FAR_EAR = [(560, 360), (584, 260), (606, 190), (632, 260), (660, 340), (684, 400)]
+HUSKY_NOSE = "M880 532 Q910 540 906 566 Q900 586 880 584 Q868 558 880 532 Z"
+HUSKY_MOUTH = "M892 584 L820 602 L770 616 L742 636"
+HUSKY_BUMPS = [
+    (650, 440, 46, 90),    # brow
+    (650, 590, 44, 120),   # full cheek
+    (800, 530, 26, 90),    # short muzzle
+    (450, 260, 24, 70),    # ear
+    (440, 760, 40, 210),   # thick neck
+]
+
+
+def malinois_mask(x, y):
+    """Black mask: dark muzzle, dark around the eye, dark ear tips."""
+    if x > 730 or ((x - EYE[0]) / 80) ** 2 + ((y - EYE[1]) / 56) ** 2 < 1:
+        return -0.85                                # black muzzle and eye mask
+    if y < 260:
+        return -0.7                                 # dark ear tips
+    if x > 660 and y > 560:
+        return -0.45                                # mask fades down the jaw
+    return 0.12                                     # fawn coat a touch brighter
+
+
+def husky_mask(x, y):
+    """Dark cap over skull, ears and back of neck; white brow spot, face, cheeks and throat."""
+    if ((x - 700) / 34) ** 2 + ((y - 432) / 22) ** 2 < 1:
+        return 0.6                                  # brow spot
+    if y < 470 - 0.05 * (x - EYE[0]) and x < 820 or x < 350 + 0.1 * (y - 500):
+        return -0.6                                 # cap and saddle
+    return 0.45                                     # white face and ruff
+
+
+BREEDS = {
+    "watchdog": dict(head=HEAD, far_ear=FAR_EAR, nose=NOSE, mouth=MOUTH, bumps=BUMPS, mask=None),
+    "malinois": dict(head=HEAD, far_ear=FAR_EAR, nose=NOSE, mouth=MOUTH, bumps=BUMPS, mask=malinois_mask),
+    "husky": dict(head=HUSKY_HEAD, far_ear=HUSKY_FAR_EAR, nose=HUSKY_NOSE, mouth=HUSKY_MOUTH, bumps=HUSKY_BUMPS, mask=husky_mask),
+}
 LIGHT = np.array([0.55, -0.62, 0.56])  # from upper-right front (y grows downward)
 LIGHT = LIGHT / np.linalg.norm(LIGHT)
 
@@ -90,7 +143,7 @@ def mix(c0, c1, t):
     return "#%02x%02x%02x" % tuple(round(a[i] + (b[i] - a[i]) * t) for i in range(3))
 
 
-def heights(arr, poly, seed):
+def heights(arr, poly, seed, bumps=BUMPS):
     """Dome the shape away from its silhouette, add anatomical bumps, a little grain."""
     rng = random.Random(seed)
     segs = list(zip(poly, poly[1:] + poly[:1]))
@@ -98,7 +151,7 @@ def heights(arr, poly, seed):
     for x, y in arr:
         d = min(_seg_dist(x, y, a, b) for a, b in segs)
         h = 150 * (1 - (1 - min(d, 170) / 170) ** 2)
-        for bx, by, bh, br in BUMPS:
+        for bx, by, bh, br in bumps:
             h += bh * math.exp(-((x - bx) ** 2 + (y - by) ** 2) / (2 * br * br))
         out.append(h + rng.uniform(-9, 9))
     return np.array(out)
@@ -111,8 +164,8 @@ def _seg_dist(x, y, a, b):
     return math.hypot(x - x0 - t * dx, y - y0 - t * dy)
 
 
-def facets(arr, tris, dark, light, seed, poly):
-    h = heights(arr, poly, seed)
+def facets(arr, tris, dark, light, seed, poly, bumps=BUMPS, mask=None):
+    h = heights(arr, poly, seed, bumps)
     out = []
     for t in tris:
         p = [np.array([arr[i][0], arr[i][1], h[i]]) for i in t]
@@ -122,7 +175,11 @@ def facets(arr, tris, dark, light, seed, poly):
             n = -n
         shade = 0.16 + 0.95 * max(0.0, float(n @ LIGHT))
         pts = " ".join("%.1f,%.1f" % (x, y) for x, y, _ in p)
-        out.append('<polygon points="%s" fill="%s"/>' % (pts, mix(dark, light, shade)))
+        fill = mix(dark, light, shade)
+        m = mask(*np.mean([q[:2] for q in p], axis=0)) if mask else 0
+        if m:
+            fill = mix(fill, dark if m < 0 else "#ffffff", abs(m))
+        out.append('<polygon points="%s" fill="%s"/>' % (pts, fill))
     return "\n".join(out)
 
 
@@ -142,18 +199,19 @@ def outline(poly):
     return "M" + " L".join("%d %d" % p for p in poly) + " Z"
 
 
-def head_layer(dark, light, edge, seed, eye):
-    arr, tris = mesh(HEAD, seed)
+def head_layer(dark, light, edge, seed, eye, breed):
+    b = BREEDS[breed]
+    arr, tris = mesh(b["head"], seed)
     return f"""
   <g clip-path="url(#lens)">
     <g transform="translate(-60 0)">
-      <g>{facets(*mesh(FAR_EAR, seed + 1, interior=10), dark, mix(dark, light, .55), seed + 1, FAR_EAR)}</g>
-      <path d="{outline(FAR_EAR)}" fill="none" stroke="{edge}" stroke-opacity=".55" stroke-width="3" stroke-linejoin="round"/>
-      <g>{facets(arr, tris, dark, light, seed, HEAD)}</g>
+      <g>{facets(*mesh(b["far_ear"], seed + 1, interior=10), dark, mix(dark, light, .55), seed + 1, b["far_ear"], b["bumps"], b["mask"])}</g>
+      <path d="{outline(b["far_ear"])}" fill="none" stroke="{edge}" stroke-opacity=".55" stroke-width="3" stroke-linejoin="round"/>
+      <g>{facets(arr, tris, dark, light, seed, b["head"], b["bumps"], b["mask"])}</g>
       <path d="{edges(arr, tris)}" fill="none" stroke="{edge}" stroke-opacity=".5" stroke-width="1.6"/>
-      <path d="{outline(HEAD)}" fill="none" stroke="{edge}" stroke-width="5" stroke-linejoin="round" filter="url(#glow)"/>
-      <path d="{NOSE}" fill="{dark}" stroke="{edge}" stroke-width="4"/>
-      <path d="{MOUTH}" fill="none" stroke="{edge}" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+      <path d="{outline(b["head"])}" fill="none" stroke="{edge}" stroke-width="5" stroke-linejoin="round" filter="url(#glow)"/>
+      <path d="{b["nose"]}" fill="{dark}" stroke="{edge}" stroke-width="4"/>
+      <path d="{b["mouth"]}" fill="none" stroke="{edge}" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
       {eye}
     </g>
   </g>"""
@@ -186,7 +244,7 @@ def watchdog():
                      f'stroke-width="{7 if i % 5 == 0 else 3}"/>')
     eye = (f'<path d="M{EYE[0]-28} {EYE[1]+4} Q{EYE[0]} {EYE[1]-20} {EYE[0]+30} {EYE[1]-6} '
            f'Q{EYE[0]+4} {EYE[1]+16} {EYE[0]-28} {EYE[1]+4} Z" fill="#fff" filter="url(#glow)"/>')
-    body = head_layer("#05080e", "#d6e4f5", "#eef5ff", 7, eye)
+    body = head_layer("#05080e", "#d6e4f5", "#eef5ff", 7, eye, "watchdog")
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Watchdog">
 {DEFS.format(bg0="#1a2230", extra="")}
   <circle cx="512" cy="512" r="400" fill="#020304"/>
@@ -210,7 +268,7 @@ def malinois():
         <path d="M{EYE[0]} {EYE[1]-44}V{EYE[1]-30}M{EYE[0]} {EYE[1]+30}V{EYE[1]+44}M{EYE[0]-44} {EYE[1]}H{EYE[0]-30}M{EYE[0]+30} {EYE[1]}H{EYE[0]+44}" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
         <circle cx="{EYE[0]}" cy="{EYE[1]}" r="7" fill="#fff"/>
       </g>"""
-    body = head_layer("#010d0c", "#5eead4", "#99f6e4", 11, eye)
+    body = head_layer("#010d0c", "#5eead4", "#99f6e4", 11, eye, "malinois")
     cross = []
     for a in (0, 90, 180, 270):
         r = math.radians(a)
@@ -232,7 +290,7 @@ def husky():
     """Ice-blue dog inside a snowflake ring: the dog that guards the cloud."""
     eye = (f'<path d="M{EYE[0]-28} {EYE[1]+4} Q{EYE[0]} {EYE[1]-20} {EYE[0]+30} {EYE[1]-6} '
            f'Q{EYE[0]+4} {EYE[1]+16} {EYE[0]-28} {EYE[1]+4} Z" fill="#e0f2fe" filter="url(#glow)"/>')
-    body = head_layer("#020a14", "#7dd3fc", "#bae6fd", 13, eye)
+    body = head_layer("#020a14", "#7dd3fc", "#bae6fd", 13, eye, "husky")
     flakes = []
     for a in range(0, 360, 60):
         r = math.radians(a - 90)
