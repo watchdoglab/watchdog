@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="512" height="512" role="img" aria-label="Malinois">
+  <defs>
+    <filter id="g" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="#000"/>
+  <g filter="url(#g)" fill="none" stroke="#2DD4BF" stroke-width="30" stroke-linejoin="round" stroke-linecap="round">
+    <!-- geometric Malinois profile: tall upright ear, long snout -->
+    <path d="M300 880 L270 600 L330 360 L390 140 L480 370 L590 400 L870 545 L880 600 L820 625 L640 650 L540 780 L560 880"/>
+    <!-- scope-reticle eye -->
+    <circle cx="610" cy="520" r="38"/>
+    <path d="M610 450 L610 482"/>
+    <path d="M610 558 L610 590"/>
+    <path d="M540 520 L572 520"/>
+    <path d="M648 520 L680 520"/>
+  </g>
+  <circle cx="610" cy="520" r="10" fill="#FFF" filter="url(#g)"/>
+</svg>

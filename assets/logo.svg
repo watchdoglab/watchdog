@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="512" height="512" role="img" aria-label="Watchdog">
+  <defs>
+    <filter id="g" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="#000"/>
+  <g filter="url(#g)" fill="none" stroke="#FFF" stroke-width="30" stroke-linejoin="round" stroke-linecap="round">
+    <!-- shield-shaped head with pointed ears -->
+    <path d="M512 850 C392 795 290 700 290 560 L290 190 L425 335 L599 335 L734 190 L734 560 C734 700 632 795 512 850 Z"/>
+    <!-- watchful eyes -->
+    <path d="M385 480 L455 505"/>
+    <path d="M639 480 L569 505"/>
+  </g>
+  <!-- keyhole muzzle -->
+  <g filter="url(#g)" fill="#FFF">
+    <circle cx="512" cy="610" r="42"/>
+    <path d="M488 630 L536 630 L556 735 L468 735 Z"/>
+  </g>
+</svg>

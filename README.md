@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.png" width="180" alt="Watchdog"></p>
+<p align="center"><img src="assets/logo.svg" width="180" alt="Watchdog"></p>
 
 # Watchdog
 
@@ -6,9 +6,9 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 
 ## Dogs
 
-| Dog | Guards |
-|-----|--------|
-| **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
+| | Dog | Guards |
+|---|-----|--------|
+| <img src="plugins/malinois/assets/icon.svg" width="48" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
 
 More dogs later (api, cloud, secrets, deps).
 
