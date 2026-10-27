@@ -2,9 +2,64 @@
 
 # Watchdog
 
-A pack of security dogs for Claude Code. Each dog guards one surface. Install the marketplace, add the dogs you need.
+**Security review that runs while you build, inside Claude Code.**
 
-## Dogs
+You ship features fast. Security review usually comes late, costs a lot, or never happens. Watchdog is a pack of security "dogs": Claude Code plugins that each guard one part of your product. Install the dogs that match what you're building, and they watch every change you make and audit the whole repo on demand.
+
+## What it does for you
+
+- **Catches security bugs while you code, not after launch.** Each dog's lens stays on all session. When you or Claude write a login handler, a SQL query, a Terraform file or an agent tool, the dog flags the risk on the spot: the line, why it's exploitable, and the smallest fix.
+- **Gives you a full audit in one command.** `/vapt-code`, `/api-audit`, `/cloud-audit`, `/ai-audit` and the others review the whole repo and return a ranked report: Critical → Low, each with `file:line`, a concrete exploit and a fix.
+- **Speaks plain English.** Every finding says what it is, how someone would abuse it, how to fix it, and what happens if you don't. It's useful to a junior dev or a client, not just a security expert.
+- **Is honest about its limits.** Every report ends with **Not checked**, so you know what still needs a human.
+- **Never leaks what it finds.** Secrets are reported by location and type only; the value is never printed.
+- **Uses the tools you already have.** Dogs run installed scanners (semgrep, gitleaks, trivy, checkov, osv-scanner, …) and read the code those scanners can't understand.
+
+## Pick your pack
+
+You don't need all 14. Install the dogs that match what you're building:
+
+| You're building… | Install |
+|---|---|
+| Web app + API (SaaS) | malinois, bloodhound, doberman, pointer, dachshund, akita, rottweiler |
+| Mobile app (Flutter / React Native) + backend | shepherd, bloodhound, doberman, dachshund, akita |
+| AI product, chatbot or agent | collie, bloodhound, beagle, akita |
+| Cloud- or infra-heavy system | husky, akita, rottweiler |
+| Marketplace with payments | malinois, bloodhound, doberman, dachshund, shepherd, beagle |
+| Web3 / DeFi | shiba, pointer, akita |
+| Getting ready for a client audit or security questionnaire | add **pyrenees** to your pack |
+| Something already went wrong | **saintbernard** |
+
+malinois and akita are useful in almost every product.
+
+## Install
+
+```
+/plugin marketplace add salahu01/watchdog
+/plugin install malinois@watchdog
+/plugin install bloodhound@watchdog
+# …add any other dog by name
+```
+
+Then work as usual. Run an audit any time:
+
+```
+/vapt-code        # whole-repo security audit
+/api-audit        # REST / GraphQL: spec + handlers together
+/ai-audit         # LLM apps and agents
+/cloud-audit      # Terraform, Kubernetes, Docker, CI
+```
+
+Turn a dog's lens off with `stop <dog>`.
+
+## How it fits your workflow
+
+1. **While coding:** dogs flag risky code inline as it's written.
+2. **Before a PR or release:** run the audit command for your stack and fix the Criticals and Highs.
+3. **Before a client handover:** `/vapt-report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
+4. **After an incident:** saintbernard reads the logs and gives you a timeline, blast radius and containment steps.
+
+## The pack
 
 | | Dog | Guards |
 |---|-----|--------|
@@ -23,17 +78,19 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 | | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. New, no benchmark yet. See [plugins/shiba](plugins/shiba/README.md). |
 | | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. New, no benchmark yet. See [plugins/pyrenees](plugins/pyrenees/README.md). |
 
-## Install
+## Does it work?
 
-```
-/plugin marketplace add salahu01/watchdog
-/plugin install malinois@watchdog
-/plugin install husky@watchdog
-/plugin install collie@watchdog
-/plugin install bloodhound@watchdog
-# …or any other dog by name, e.g.
-/plugin install beagle@watchdog
-```
+The four benchmarked dogs (malinois, husky, collie, bloodhound) were each run on a deliberately vulnerable project with an answer key, using Haiku, Sonnet and Opus. Every model found every planted issue (17–18 per bench), with almost no false alarms. Details and token costs are in each dog's README and `bench/` folder.
+
+Those benches are small. Real codebases are harder, and the 10 newer dogs are not benchmarked yet.
+
+## What Watchdog is not
+
+- **Not a replacement for tests, code review or QA.** The dogs look for security issues, not whether your feature works.
+- **Not a full pen test.** Most dogs read code; they don't attack your running system. Get a human pen test before launching anything that handles payments or personal data.
+- **Not a business-logic oracle.** "Can a user claim the same refund twice?" needs someone who knows how your product should behave.
+
+Use Watchdog to catch the common, high-impact mistakes early and cheaply, and keep the rest of your process.
 
 ## ⚖️ Authorized use only
 
