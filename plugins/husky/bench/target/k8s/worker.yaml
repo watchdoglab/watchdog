@@ -1,0 +1,28 @@
+# Safe: hardened worker (decoy)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: notes-worker }
+  template:
+    metadata:
+      labels: { app: notes-worker }
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: worker
+          image: notes/worker@sha256:3f1c9a0d2b7e4c5a6f8e9d0c1b2a3f4e5d6c7b8a9f0e1d2c3b4a5f6e7d8c9b0a
+          securityContext:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities: { drop: ["ALL"] }
+          resources:
+            limits: { cpu: "500m", memory: "256Mi" }
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef: { name: notes-secrets, key: jwt }

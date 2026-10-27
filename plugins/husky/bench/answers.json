@@ -1,0 +1,28 @@
+{
+ "target": "target/",
+ "note": "Planted misconfigs. Match by file + issue; line +-3 counts. Decoys must NOT be reported.",
+ "vulns": [
+  {"id": "C01", "sev": "critical", "file": "terraform/main.tf", "line": 75, "title": "IAM policy Action * Resource * on app role"},
+  {"id": "C02", "sev": "critical", "file": ".github/workflows/ci.yml", "line": 12, "title": "pull_request_target checks out PR head with secrets + write-all token (pwn request)"},
+  {"id": "C03", "sev": "critical", "file": "k8s/deployment.yaml", "line": 41, "title": "Workload service account bound to cluster-admin"},
+  {"id": "C04", "sev": "critical", "file": "k8s/deployment.yaml", "line": 28, "title": "docker.sock hostPath mount (node takeover)"},
+  {"id": "C05", "sev": "high", "file": "terraform/main.tf", "line": 3, "title": "Hardcoded AWS access/secret key in provider block"},
+  {"id": "C06", "sev": "high", "file": "terraform/main.tf", "line": 23, "title": "Uploads bucket public: policy Principal * and public access block off"},
+  {"id": "C07", "sev": "high", "file": "terraform/variables.tf", "line": 2, "title": "SSH open to world via admin_cidr default 0.0.0.0/0 (cross-file)"},
+  {"id": "C08", "sev": "high", "file": "terraform/main.tf", "line": 66, "title": "RDS publicly_accessible = true"},
+  {"id": "C09", "sev": "high", "file": "terraform/variables.tf", "line": 6, "title": "Weak hardcoded DB password default"},
+  {"id": "C10", "sev": "high", "file": "k8s/deployment.yaml", "line": 19, "title": "Privileged container + hostNetwork"},
+  {"id": "C11", "sev": "high", "file": "Dockerfile", "line": 6, "title": "NPM token via ARG/written to .npmrc baked into image layer"},
+  {"id": "C12", "sev": "medium", "file": "terraform/main.tf", "line": 67, "title": "RDS storage not encrypted (and skip_final_snapshot)"},
+  {"id": "C13", "sev": "medium", "file": "k8s/deployment.yaml", "line": 22, "title": "Plaintext secret in manifest env value"},
+  {"id": "C14", "sev": "medium", "file": ".github/workflows/ci.yml", "line": 13, "title": "Third-party action pinned to @main, not SHA"},
+  {"id": "C15", "sev": "medium", "file": "Dockerfile", "line": 7, "title": "curl | sh during build"},
+  {"id": "C16", "sev": "low", "file": "Dockerfile", "line": 9, "title": "Container runs as root (no USER); :latest base; COPY . . pulls in secrets"},
+  {"id": "C17", "sev": "low", "file": "k8s/deployment.yaml", "line": 17, "title": ":latest image, no resource limits, no securityContext hardening"}
+ ],
+ "decoys": [
+  {"file": "terraform/main.tf", "line": 28, "why": "tfstate bucket is private, versioned, KMS-encrypted"},
+  {"file": "terraform/main.tf", "line": 50, "why": "443 open to world is intended for a public API"},
+  {"file": "k8s/worker.yaml", "line": 1, "why": "hardened worker: digest-pinned, non-root, read-only fs, secretKeyRef"}
+ ]
+}

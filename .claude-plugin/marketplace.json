@@ -12,6 +12,11 @@
       "name": "malinois",
       "source": "./plugins/malinois",
       "description": "Malinois \u2014 the VAPT dog. Sniffs out vulnerabilities in source code, web apps, APKs and IPAs, then writes the report. Authorized testing only."
+    },
+    {
+      "name": "husky",
+      "source": "./plugins/husky",
+      "description": "Husky \u2014 the cloud dog. Sniffs out misconfigurations in Terraform, Kubernetes, Dockerfiles and CI pipelines. Static review only."
     }
   ]
 }
