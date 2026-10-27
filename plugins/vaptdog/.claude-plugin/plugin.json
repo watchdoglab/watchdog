@@ -1,0 +1,24 @@
+{
+  "name": "vaptdog",
+  "version": "0.1.0",
+  "description": "VAPT dog. A vulnerability-assessment lens for any change, plus on-demand audits of code, web, APK and IPA. Findings-first, scope-gated, authorized testing only.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "hooks": ["./hooks/vaptdog-hooks.json"],
+  "userConfig": {
+    "authScope": {
+      "type": "string",
+      "title": "Authorized scope",
+      "description": "In-scope targets you have written permission to test (hosts, packages, bundle ids). The dog refuses active testing outside this.",
+      "default": ""
+    },
+    "reportDir": {
+      "type": "string",
+      "title": "Report directory",
+      "description": "Where /vapt-report writes findings.",
+      "default": "./vaptdog-reports"
+    }
+  }
+}

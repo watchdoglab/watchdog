@@ -1,0 +1,17 @@
+{
+  "name": "watchdog",
+  "owner": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "metadata": {
+    "description": "Watchdog: a pack of security dogs for Claude Code. Each dog guards one surface."
+  },
+  "plugins": [
+    {
+      "name": "vaptdog",
+      "source": "./plugins/vaptdog",
+      "description": "VAPT dog. Sniffs out vulnerabilities in source code, web apps, APKs and IPAs, then writes the report. Authorized testing only."
+    }
+  ]
+}

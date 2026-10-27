@@ -1,0 +1,5 @@
+vaptdog-reports/
+*.apk
+*.ipa
+out/
+.DS_Store
