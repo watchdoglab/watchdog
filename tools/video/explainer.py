@@ -240,11 +240,11 @@ def scene_pack(img, t, s, e):
     for i, (name, area, _, _) in enumerate(DOGS[:12]):
         r, c = divmod(i, cols)
         x = W / 2 + (c - 1) * cell
-        y = H * .32 + r * 330
+        y = H * .26 + r * 300
         a = fade(t, s + .4 + i * .09, e, fin=.4)
         paste_scaled(img, get_icon(SLUG[name], 400), x, y + (1 - ease_out((p - .4 - i * .09) / .4)) * 40, .5 * (.85 + .15 * a), alpha=a)
         text(img, (x, y + 130), area if area in ("AI", "API", "VAPT") else area.title(), sf(34, "Semibold"), INK, a)
-    text(img, (W / 2, H * .94), "+ Web3 and Compliance", sf(34, "Medium"), GREY, fade(t, s + 1.6, e))
+    text(img, (W / 2, H * .835), "+ Web3 and Compliance", sf(34, "Medium"), GREY, fade(t, s + 1.6, e))
 
 
 def scene_tested(img, t, s, e):
