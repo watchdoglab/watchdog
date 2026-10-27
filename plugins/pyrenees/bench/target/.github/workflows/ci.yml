@@ -1,0 +1,25 @@
+name: ci
+on:
+  push:
+    branches: [main]
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: github/codeql-action/init@5f532563584d71fdef14ee64d17bafb34f751ce5
+      - uses: github/codeql-action/analyze@5f532563584d71fdef14ee64d17bafb34f751ce5
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - run: npm ci
+      - run: npm audit --audit-level=high
+        continue-on-error: true
+      - run: npm test
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - run: ./scripts/deploy.sh production

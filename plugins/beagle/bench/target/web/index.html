@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>FitLife</title>
+  <script src="https://cdn.example.invalid/mixpanel.min.js"></script>
+  <script>
+    mixpanel.init('FAKE-mixpanel-token-0000');
+    mixpanel.track('page_view', { url: location.href });
+  </script>
+  <script src="https://connect.example.invalid/fbevents.js"></script>
+  <script>
+    fbq('init', 'FAKE-pixel-0000');
+    fbq('track', 'PageView');
+  </script>
+</head>
+<body>
+  <div id="consent"><button id="accept">Accept cookies</button></div>
+  <form id="signup">
+    <input name="email"><input name="phone"><input name="aadhaar"><button>Join</button>
+  </form>
+  <script>
+    document.getElementById('signup').onsubmit = async e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const res = await fetch('/users/signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      fbq('track', 'Lead', { em: data.email, ph: data.phone });
+      localStorage.setItem('profile', JSON.stringify(data));
+    };
+  </script>
+</body>
+</html>

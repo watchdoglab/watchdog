@@ -80,22 +80,41 @@ Turn a dog's lens off with `stop <dog>`.
 | <img src="plugins/husky/assets/icon.gif" width="96" alt="Husky"> | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [plugins/husky](plugins/husky/README.md). |
 | <img src="plugins/collie/assets/icon.gif" width="96" alt="Collie"> | **collie** | AI — security lens for LLM apps and agents: prompt injection, agent tools, RAG, MCP, model-output handling. Static only. See [plugins/collie](plugins/collie/README.md). |
 | <img src="plugins/bloodhound/assets/icon.gif" width="96" alt="Bloodhound"> | **bloodhound** | API — security lens for REST and GraphQL: reads the OpenAPI spec and handlers together for BOLA, mass assignment, broken auth, SSRF and shadow routes. Static only. See [plugins/bloodhound](plugins/bloodhound/README.md). |
-| <img src="plugins/beagle/assets/icon.gif" width="96" alt="Beagle"> | **beagle** | Privacy — Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping. New, no benchmark yet. See [plugins/beagle](plugins/beagle/README.md). |
-| <img src="plugins/rottweiler/assets/icon.gif" width="96" alt="Rottweiler"> | **rottweiler** | Supply chain — Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences. New, no benchmark yet. See [plugins/rottweiler](plugins/rottweiler/README.md). |
-| <img src="plugins/doberman/assets/icon.gif" width="96" alt="Doberman"> | **doberman** | Auth & identity — Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO. New, no benchmark yet. See [plugins/doberman](plugins/doberman/README.md). |
-| <img src="plugins/shepherd/assets/icon.gif" width="96" alt="Shepherd"> | **shepherd** | Mobile deep dive — Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges. New, no benchmark yet. See [plugins/shepherd](plugins/shepherd/README.md). |
-| <img src="plugins/dachshund/assets/icon.gif" width="96" alt="Dachshund"> | **dachshund** | Database — Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption. New, no benchmark yet. See [plugins/dachshund](plugins/dachshund/README.md). |
-| <img src="plugins/akita/assets/icon.gif" width="96" alt="Akita"> | **akita** | Secrets lifecycle — Find, rotate and properly store secrets; git history; pre-commit blocking. New, no benchmark yet. See [plugins/akita](plugins/akita/README.md). |
-| <img src="plugins/pointer/assets/icon.gif" width="96" alt="Pointer"> | **pointer** | Frontend — XSS sinks, CSP, postMessage, token storage, third-party scripts. New, no benchmark yet. See [plugins/pointer](plugins/pointer/README.md). |
-| <img src="plugins/saintbernard/assets/icon.gif" width="96" alt="Saint Bernard"> | **saintbernard** | Incident response — Read logs after a breach: timeline, blast radius, containment steps. New, no benchmark yet. See [plugins/saintbernard](plugins/saintbernard/README.md). |
-| <img src="plugins/shiba/assets/icon.gif" width="96" alt="Shiba"> | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. New, no benchmark yet. See [plugins/shiba](plugins/shiba/README.md). |
-| <img src="plugins/pyrenees/assets/icon.gif" width="96" alt="Pyrenees"> | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. New, no benchmark yet. See [plugins/pyrenees](plugins/pyrenees/README.md). |
+| <img src="plugins/beagle/assets/icon.gif" width="96" alt="Beagle"> | **beagle** | Privacy — Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping. See [plugins/beagle](plugins/beagle/README.md). |
+| <img src="plugins/rottweiler/assets/icon.gif" width="96" alt="Rottweiler"> | **rottweiler** | Supply chain — Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences. See [plugins/rottweiler](plugins/rottweiler/README.md). |
+| <img src="plugins/doberman/assets/icon.gif" width="96" alt="Doberman"> | **doberman** | Auth & identity — Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO. See [plugins/doberman](plugins/doberman/README.md). |
+| <img src="plugins/shepherd/assets/icon.gif" width="96" alt="Shepherd"> | **shepherd** | Mobile deep dive — Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges. See [plugins/shepherd](plugins/shepherd/README.md). |
+| <img src="plugins/dachshund/assets/icon.gif" width="96" alt="Dachshund"> | **dachshund** | Database — Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption. See [plugins/dachshund](plugins/dachshund/README.md). |
+| <img src="plugins/akita/assets/icon.gif" width="96" alt="Akita"> | **akita** | Secrets lifecycle — Find, rotate and properly store secrets; git history; pre-commit blocking. See [plugins/akita](plugins/akita/README.md). |
+| <img src="plugins/pointer/assets/icon.gif" width="96" alt="Pointer"> | **pointer** | Frontend — XSS sinks, CSP, postMessage, token storage, third-party scripts. See [plugins/pointer](plugins/pointer/README.md). |
+| <img src="plugins/saintbernard/assets/icon.gif" width="96" alt="Saint Bernard"> | **saintbernard** | Incident response — Read logs after a breach: timeline, blast radius, containment steps. See [plugins/saintbernard](plugins/saintbernard/README.md). |
+| <img src="plugins/shiba/assets/icon.gif" width="96" alt="Shiba"> | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. See [plugins/shiba](plugins/shiba/README.md). |
+| <img src="plugins/pyrenees/assets/icon.gif" width="96" alt="Pyrenees"> | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. See [plugins/pyrenees](plugins/pyrenees/README.md). |
 
 ## Does it work?
 
-The four benchmarked dogs (malinois, husky, collie, bloodhound) were each run on a deliberately vulnerable project with an answer key, using Haiku, Sonnet and Opus. Every model found every planted issue (17–18 per bench), with almost no false alarms. Details and token costs are in each dog's README and `bench/` folder.
+All 14 dogs have a bench: a small, deliberately vulnerable project with planted issues, decoys and an answer key. Each was run once per model (Haiku 5.5, Sonnet 5.5, Opus 5.5) on a copy of the target without the key.
 
-Those benches are small. Real codebases are harder, and the 10 newer dogs are not benchmarked yet.
+| Dog | Planted | Haiku | Sonnet | Opus | Criticals missed (any model) |
+|---|---|---|---|---|---|
+| malinois | 18 | 18 | 18 | 18 | none |
+| husky | 17 | 17 | 17 | 17 | none |
+| collie | 18 | 18 | 18 | 18 | none |
+| bloodhound | 18 | 18 | 18 | 18 | none |
+| beagle | 18 | 17 | 18 | 18 | none |
+| rottweiler | 17 | 17 | 15 | 17 | Sonnet: dependency confusion |
+| doberman | 18 | 18 | 18 | 18 | none |
+| shepherd | 18 | 18 | 18 | 18 | none |
+| dachshund | 18 | 17 | 17 | 18 | Haiku, Sonnet: one each |
+| akita | 18 | 18 | 17 | 17 | none |
+| pointer | 18 | 18 | 18 | 18 | none |
+| saintbernard | 17 facts | 16 | 16 | 17 | none |
+| shiba | 18 | 16 | 17 | 17 | none |
+| pyrenees | 18 gaps | 17 | 18 | 16 | none |
+
+Opus was the most precise (fewest decoys flagged); Haiku reported the most extras. Decoys, cross-file traces and redaction results are in each dog's README and `bench/` folder.
+
+These benches are small and written alongside the dogs, so treat the scores as a smoke test, not proof. Real codebases are harder.
 
 ## What Watchdog is not
 

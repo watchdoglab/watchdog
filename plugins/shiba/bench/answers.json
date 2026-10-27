@@ -1,0 +1,29 @@
+{
+ "target": "target/",
+ "note": "Planted vulnerabilities. Match by file + issue; line +-3 counts. Decoys must NOT be reported.",
+ "vulns": [
+  {"id": "W01", "sev": "critical", "file": "src/Token.sol", "line": 18, "title": "mint() has no access control: anyone mints unlimited tokens"},
+  {"id": "W02", "sev": "critical", "file": "src/Vault.sol", "line": 56, "title": "withdraw() makes an external call to msg.sender before updating shares (reentrancy, drain)"},
+  {"id": "W03", "sev": "critical", "file": "src/Oracle.sol", "line": 29, "title": "getPrice() uses single-pool spot reserves; Vault.borrow() trusts it, so a flash loan inflates collateral and drains the vault (cross-contract)"},
+  {"id": "W04", "sev": "critical", "file": "src/VaultProxy.sol", "line": 13, "title": "upgradeTo() has no access check: anyone swaps the implementation"},
+  {"id": "W05", "sev": "critical", "file": "src/VaultProxy.sol", "line": 5, "title": "Proxy implementation sits in slot 0, same slot as Vault.owner: initialize() via delegatecall overwrites the implementation (storage collision, cross-contract)"},
+  {"id": "W06", "sev": "high", "file": "src/Vault.sol", "line": 27, "title": "initialize() has no initializer guard: anyone can call it again and take ownership"},
+  {"id": "W07", "sev": "high", "file": "src/Vault.sol", "line": 64, "title": "emergencyWithdraw() authenticates with tx.origin (phishing)"},
+  {"id": "W08", "sev": "high", "file": "src/Vault.sol", "line": 45, "title": "Shares priced from token.balanceOf(this): first-depositor inflation / donation attack"},
+  {"id": "W09", "sev": "high", "file": "src/Vault.sol", "line": 71, "title": "borrow() mixes 8-decimal ETH/USD feed with 18-decimal amounts (decimals mismatch)"},
+  {"id": "W10", "sev": "high", "file": "src/Token.sol", "line": 44, "title": "transferFrom() subtracts balance in unchecked block: underflow mints balance"},
+  {"id": "W11", "sev": "high", "file": "script/Deploy.s.sol", "line": 16, "title": "Deployer private key hardcoded in the deploy script"},
+  {"id": "W12", "sev": "medium", "file": "src/Vault.sol", "line": 55, "title": "withdraw() rounds assets up, in the withdrawer's favour (drains dust, breaks share price)"},
+  {"id": "W13", "sev": "medium", "file": "src/Vault.sol", "line": 84, "title": "distributeRewards() loops an unbounded depositors array (gas DoS)"},
+  {"id": "W14", "sev": "medium", "file": "src/Vault.sol", "line": 47, "title": "deposit() ignores the bool returned by transferFrom (shares minted when transfer returns false)"},
+  {"id": "W15", "sev": "medium", "file": "src/Oracle.sol", "line": 34, "title": "getEthUsd() ignores updatedAt/answer sign: stale or negative feed accepted"},
+  {"id": "W16", "sev": "medium", "file": "src/Vault.sol", "line": 36, "title": "setFee() has no upper bound on feeBps"},
+  {"id": "W17", "sev": "medium", "file": "script/Deploy.s.sol", "line": 23, "title": "Implementation Vault deployed but never initialized: anyone can claim it"},
+  {"id": "W18", "sev": "low", "file": "src/Vault.sol", "line": 2, "title": "Floating pragma ^0.8.0 while other contracts pin 0.8.20"}
+ ],
+ "decoys": [
+  {"file": "src/Vault.sol", "line": 89, "why": "claimRewards zeroes balance before transfer (CEI), nonReentrant, checks transfer return"},
+  {"file": "src/Token.sol", "line": 23, "why": "burn checks balance and uses checked arithmetic"},
+  {"file": "src/Oracle.sol", "line": 23, "why": "setPair is correctly owner-gated"}
+ ]
+}

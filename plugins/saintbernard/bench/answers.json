@@ -1,0 +1,28 @@
+{
+ "target": "target/",
+ "note": "Planted facts. Match by file + event; line +-3 counts. Decoys must NOT be reported as attacker activity.",
+ "vulns": [
+  {"id": "I01", "sev": "critical", "file": "git/git-log.txt", "line": 7, "title": "Commit a91c3f2 pushes .env.production with deploy IAM key and session signing key to public repo (root cause)"},
+  {"id": "I02", "sev": "medium", "file": "git/git-log.txt", "line": 16, "title": "Follow-up 'remove env file' commit deletes file but key stays in history and is never rotated"},
+  {"id": "I03", "sev": "critical", "file": "cloudtrail/events.json", "line": 2, "title": "First malicious event: svc-deploy key GetCallerIdentity from 203.0.113.77 at 2026-03-12T02:14:09Z"},
+  {"id": "I04", "sev": "medium", "file": "cloudtrail/events.json", "line": 3, "title": "Recon: ListBuckets then ListUsers with stolen key"},
+  {"id": "I05", "sev": "high", "file": "cloudtrail/events.json", "line": 5, "title": "SendSSHPublicKey pushes attacker key to bastion via EC2 Instance Connect"},
+  {"id": "I06", "sev": "high", "file": "logs/auth.log", "line": 5, "title": "sshd accepted publickey for ubuntu from 203.0.113.77 right after SendSSHPublicKey (cross-file: CloudTrail + auth.log)"},
+  {"id": "I07", "sev": "high", "file": "logs/auth.log", "line": 7, "title": "Host privilege escalation: ubuntu sudo to root shell"},
+  {"id": "I08", "sev": "critical", "file": "cloudtrail/events.json", "line": 6, "title": "Cloud privilege escalation: AdministratorAccess attached to svc-deploy"},
+  {"id": "I09", "sev": "high", "file": "logs/nginx-access.log", "line": 9, "title": "203.0.113.77 reaches /admin/ with 200 using python-requests"},
+  {"id": "I10", "sev": "high", "file": "logs/app.log", "line": 5, "title": "Forged session accepted for m.okafor (admin, no MFA, no login event); account only linkable to attacker IP via rid=r-9f30 in nginx (cross-file)"},
+  {"id": "I11", "sev": "high", "file": "logs/nginx-access.log", "line": 12, "title": "POST /admin/api/export/customers returns 48 MB to 203.0.113.77"},
+  {"id": "I12", "sev": "critical", "file": "logs/app.log", "line": 8, "title": "Data exfiltrated: 48,210 customer rows incl name, email, phone, address, dob"},
+  {"id": "I13", "sev": "high", "file": "cloudtrail/events.json", "line": 7, "title": "GetObject of customers-full-20260312.csv from acme-prod-exports by svc-deploy from attacker IP"},
+  {"id": "I14", "sev": "critical", "file": "cloudtrail/events.json", "line": 10, "title": "Persistence: CreateAccessKey for new IAM user svc-backup-sync (created at line 9)"},
+  {"id": "I15", "sev": "high", "file": "logs/auth.log", "line": 9, "title": "Persistence: local user sysupd created on bastion, attacker key appended to authorized_keys (line 10)"},
+  {"id": "I16", "sev": "high", "file": "cloudtrail/events.json", "line": 11, "title": "Defense evasion: StopLogging on acme-main-trail"},
+  {"id": "I17", "sev": "low", "file": "logs/nginx-access.log", "line": 15, "title": "Last observed activity 03:20:55Z; attacker still active (sysupd login at auth.log:13)"}
+ ],
+ "decoys": [
+  {"file": "logs/nginx-access.log", "line": 3, "why": "Nikto scan from 198.51.100.10 is the approved pentest window (SEC-118 in INCIDENT.md)"},
+  {"file": "cloudtrail/events.json", "line": 8, "why": "backup-cron GetObject from 10.0.4.5 at 03:00 is the known nightly backup"},
+  {"file": "logs/auth.log", "line": 1, "why": "ssh password failures from 198.51.100.200 are internet noise, never succeeded"}
+ ]
+}

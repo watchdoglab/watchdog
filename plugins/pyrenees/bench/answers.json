@@ -1,0 +1,149 @@
+{
+ "target": "target/",
+ "note": "Planted compliance gaps and mappings. Match by file + control IDs; line +-3 counts. C02 and C03 only show by combining two files. Decoys are satisfied controls and must NOT be reported as gaps.",
+ "vulns": [
+  {
+   "id": "C01",
+   "sev": "critical",
+   "file": "db/schema.sql",
+   "line": 9,
+   "title": "PCI DSS 3.3.1/3.5.1, ISO A.8.24, SOC 2 CC6.7: PAN and CVV stored in plaintext columns"
+  },
+  {
+   "id": "C02",
+   "sev": "critical",
+   "file": "compliance/access-review.csv",
+   "line": 6,
+   "title": "SOC 2 CC6.2/CC6.3, ISO A.5.18, PCI DSS 8.2.5: terminated admin still active, only review dated 2024-03 (no quarterly review evidence; contradicts SECURITY.md:7 24h removal)"
+  },
+  {
+   "id": "C03",
+   "sev": "critical",
+   "file": "config/logging.yaml",
+   "line": 12,
+   "title": "SOC 2 CC7.2, ISO A.8.15, PCI DSS 10.5.1: auth logs retained 30 days, not the 1 year SECURITY.md:12 claims"
+  },
+  {
+   "id": "C04",
+   "sev": "critical",
+   "file": "scripts/backup.sh",
+   "line": 5,
+   "title": "PCI DSS 3.5.1, ISO A.8.13/A.8.24, SOC 2 CC6.7: cardholder-data backup copied to S3 unencrypted"
+  },
+  {
+   "id": "C05",
+   "sev": "high",
+   "file": "config/app.yaml",
+   "line": 18,
+   "title": "PCI DSS 8.6.2, ISO A.5.17, SOC 2 CC6.1, ASVS V2.10.4: live payment key hardcoded in config"
+  },
+  {
+   "id": "C06",
+   "sev": "high",
+   "file": "config/app.yaml",
+   "line": 11,
+   "title": "PCI DSS 8.4.2, ISO A.8.5, SOC 2 CC6.1, ASVS V2.8: no MFA for admin"
+  },
+  {
+   "id": "C07",
+   "sev": "high",
+   "file": "config/app.yaml",
+   "line": 10,
+   "title": "PCI DSS 8.3.6, ISO A.5.17, ASVS V2.1.1: password minimum length 6"
+  },
+  {
+   "id": "C08",
+   "sev": "high",
+   "file": "config/app.yaml",
+   "line": 4,
+   "title": "PCI DSS 4.2.1, ISO A.8.24, SOC 2 CC6.7, ASVS V9.1: TLS 1.0 allowed"
+  },
+  {
+   "id": "C09",
+   "sev": "high",
+   "file": ".github/workflows/ci.yml",
+   "line": 25,
+   "title": "SOC 2 CC8.1, ISO A.8.32, PCI DSS 6.5.1: production deploy with no approval or change record"
+  },
+  {
+   "id": "C10",
+   "sev": "high",
+   "file": "SECURITY.md",
+   "line": 22,
+   "title": "SOC 2 CC7.3/CC7.4, ISO A.5.24, PCI DSS 12.10.1: no incident response plan or breach process"
+  },
+  {
+   "id": "C11",
+   "sev": "medium",
+   "file": "SECURITY.md",
+   "line": 16,
+   "title": "SOC 2 A1.3, ISO A.8.13, PCI DSS 12.10.2: no backup restore-test evidence despite 'tested regularly'"
+  },
+  {
+   "id": "C12",
+   "sev": "medium",
+   "file": ".github/workflows/ci.yml",
+   "line": 17,
+   "title": "SOC 2 CC7.1, ISO A.8.8, PCI DSS 6.3.3, ASVS V14.2.1: dependency audit failures ignored"
+  },
+  {
+   "id": "C13",
+   "sev": "medium",
+   "file": "src/server.js",
+   "line": 5,
+   "title": "PCI DSS 3.3.1, ISO A.8.15, ASVS V7.1.1: request body (card data) written to logs"
+  },
+  {
+   "id": "C14",
+   "sev": "medium",
+   "file": "config/app.yaml",
+   "line": 8,
+   "title": "PCI DSS 8.2.8, SOC 2 CC6.1, ASVS V3.3.2: no idle session timeout"
+  },
+  {
+   "id": "C15",
+   "sev": "medium",
+   "file": "SECURITY.md",
+   "line": 20,
+   "title": "SOC 2 CC1.4, ISO A.6.3, PCI DSS 12.6.1: no security training records"
+  },
+  {
+   "id": "C16",
+   "sev": "low",
+   "file": "compliance/access-review.csv",
+   "line": 7,
+   "title": "PCI DSS 8.2.2, ISO A.5.16, SOC 2 CC6.1: shared admin account"
+  },
+  {
+   "id": "C17",
+   "sev": "low",
+   "file": "db/schema.sql",
+   "line": 1,
+   "title": "ISO A.5.33/A.8.10, SOC 2 C1.2, PCI DSS 3.2.1: no data retention or deletion policy"
+  },
+  {
+   "id": "C18",
+   "sev": "low",
+   "file": "SECURITY.md",
+   "line": 24,
+   "title": "PCI DSS 11.3/11.4.1, SOC 2 CC4.1, ISO A.8.29: no pen test or vulnerability scan evidence"
+  }
+ ],
+ "decoys": [
+  {
+   "file": "config/app.yaml",
+   "line": 15,
+   "why": "DB storage encrypted with KMS key: satisfies PCI 3.5.1 / ISO A.8.24 for the database"
+  },
+  {
+   "file": "config/logging.yaml",
+   "line": 13,
+   "why": "admin audit sink has object lock and 400-day retention: satisfies SOC 2 CC7.2 / PCI 10.5.1 for admin actions"
+  },
+  {
+   "file": ".github/workflows/ci.yml",
+   "line": 6,
+   "why": "CodeQL SAST with SHA-pinned actions: satisfies SOC 2 CC7.1 / ASVS V1.14 for code scanning"
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+version: 1
+sinks:
+  app:
+    path: /var/log/ledgerly/app.log
+    level: info
+    log_request_body: true
+    retention_days: 30
+  auth:
+    path: /var/log/ledgerly/auth.log
+    level: info
+    events: [login, logout, role_change]
+    retention_days: 30
+  admin_audit:
+    path: s3://ledgerly-audit-logs/admin/
+    object_lock: compliance
+    retention_days: 400

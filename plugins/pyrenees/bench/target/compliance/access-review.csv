@@ -1,0 +1,7 @@
+user,role,status,last_review,reviewer
+alice@ledgerly.example,admin,active,2024-03-11,cto
+bob@ledgerly.example,engineer,active,2024-03-11,cto
+carol@ledgerly.example,support,active,2024-03-11,cto
+dave@ledgerly.example,engineer,active,2024-03-11,cto
+erin@ledgerly.example,admin,terminated 2024-09-02 but still active,2024-03-11,cto
+shared-admin@ledgerly.example,admin,active,2024-03-11,cto

@@ -1,0 +1,5 @@
+--extra-index-url https://pypi.acme-internal.example/simple
+flask>=2.0
+reqeusts==2.31.0
+gunicorn==21.2.0
+acme-reports==0.4.1

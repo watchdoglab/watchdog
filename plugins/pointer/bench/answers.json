@@ -1,0 +1,29 @@
+{
+ "target": "target/",
+ "note": "Planted frontend vulns. Match by file + issue; line +-3 counts. Decoys must NOT be reported.",
+ "vulns": [
+  {"id": "P01", "sev": "critical", "file": "src/components/Comment.jsx", "line": 5, "title": "Stored XSS: comment.body from API rendered via dangerouslySetInnerHTML unsanitised"},
+  {"id": "P02", "sev": "critical", "file": "src/components/Banner.jsx", "line": 5, "title": "Reflected DOM XSS: ?welcome= read in lib/params.js flows to dangerouslySetInnerHTML (cross-file)"},
+  {"id": "P03", "sev": "critical", "file": "src/lib/bridge.js", "line": 5, "title": "postMessage listener with no origin check writes e.data.html to innerHTML"},
+  {"id": "P04", "sev": "critical", "file": "src/api.js", "line": 2, "title": "Hardcoded admin API key shipped in the browser bundle"},
+  {"id": "P05", "sev": "high", "file": "src/components/Post.jsx", "line": 5, "title": "Markdown from marked.parse rendered via dangerouslySetInnerHTML without sanitising"},
+  {"id": "P06", "sev": "high", "file": "src/components/Filter.jsx", "line": 5, "title": "eval() of user-typed filter expression"},
+  {"id": "P07", "sev": "high", "file": "src/lib/auth.js", "line": 6, "title": "Auth token stored in localStorage (readable by any XSS)"},
+  {"id": "P08", "sev": "high", "file": "src/components/Profile.jsx", "line": 4, "title": "javascript: URL XSS: href from user.website unvalidated"},
+  {"id": "P09", "sev": "high", "file": "src/lib/auth.js", "line": 8, "title": "Open redirect: post-login location.href from ?next= (via lib/params.js)"},
+  {"id": "P10", "sev": "high", "file": "src/lib/bridge.js", "line": 15, "title": "Session token sent via postMessage with targetOrigin '*'"},
+  {"id": "P11", "sev": "high", "file": "src/components/Tooltip.jsx", "line": 5, "title": "Direct innerHTML of data-derived text in effect (DOM XSS)"},
+  {"id": "P12", "sev": "high", "file": "index.html", "line": 5, "title": "CSP allows 'unsafe-inline' and 'unsafe-eval', img/connect-src wildcards, no frame-ancestors/object-src"},
+  {"id": "P13", "sev": "high", "file": "vite.config.js", "line": 7, "title": "Sentry auth token and DB admin URL (line 8) injected into client bundle via define"},
+  {"id": "P14", "sev": "medium", "file": "index.html", "line": 7, "title": "Third-party CDN script on @latest with no SRI integrity or crossorigin"},
+  {"id": "P15", "sev": "medium", "file": "src/components/Profile.jsx", "line": 6, "title": "iframe with user-controlled src and no sandbox"},
+  {"id": "P16", "sev": "medium", "file": "src/lib/auth.js", "line": 7, "title": "Session cookie set from JS without Secure/SameSite (and not HttpOnly)"},
+  {"id": "P17", "sev": "low", "file": "src/components/Profile.jsx", "line": 5, "title": "target=_blank without rel=noopener noreferrer"},
+  {"id": "P18", "sev": "low", "file": "src/lib/auth.js", "line": 16, "title": "Auth token written to console.log"}
+ ],
+ "decoys": [
+  {"file": "src/components/Notice.jsx", "line": 9, "why": "user input passed through DOMPurify.sanitize before dangerouslySetInnerHTML"},
+  {"file": "src/components/Notice.jsx", "line": 10, "why": "dangerouslySetInnerHTML of a hardcoded constant, no user data"},
+  {"file": "src/lib/bridge.js", "line": 9, "why": "message listener checks e.origin against an exact allowed origin"}
+ ]
+}

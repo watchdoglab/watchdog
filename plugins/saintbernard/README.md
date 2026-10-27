@@ -4,7 +4,7 @@
 
 The incident-response dog. Comes to the rescue after something went wrong: reads logs, builds a timeline, finds blast radius and writes containment steps. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -33,6 +33,20 @@ The always-on lens watches incidents, breaches, suspicious logs, alerts, comprom
 ## Tools it wraps
 
 `jq`, `rg`, `chainsaw`/`sigma` rules, cloud audit-log CLIs (read-only). Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds an evidence folder (nginx, app, auth logs, CloudTrail-style events, git log, ticket) with one planted intrusion as 17 facts, 3 decoys and an answer key.
+
+First run of `/incident-triage` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Facts / 17 | Critical / 5 | First compromise right | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 16 | 5 | yes | 1 (partial) | none |
+| Sonnet 5.5 | 16 | 5 | partial | 1 (partial) | none |
+| Opus 5.5 | 17 | 5 | yes | 0 | key ID printed |
+
+All three got the timeline order and blast radius (48,210 customer rows). Sonnet called the leaking commit the first compromise, not the key's first use. Opus printed the leaked key ID, so the redaction rule needs to cover key IDs too.
 
 ## Rules
 

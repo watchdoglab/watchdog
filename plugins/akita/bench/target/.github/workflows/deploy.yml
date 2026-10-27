@@ -1,0 +1,28 @@
+name: deploy
+on:
+  push:
+    branches: [main]
+env:
+  AWS_ACCESS_KEY_ID: FAKE-AWS-ACCESS-ID-0001
+  AWS_SECRET_ACCESS_KEY: FAKE-AWS-SECRET-0001
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build --build-arg STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} -t invoice-api .
+      - name: Deploy
+        run: |
+          set -x
+          echo "Deploying with token ${{ secrets.DEPLOY_TOKEN }}"
+          ./scripts/deploy.sh
+      - uses: some-org/ship-it@master
+        with:
+          token: ${{ secrets.DEPLOY_TOKEN }}
+        env:
+          JWT_SECRET: FAKE-JWT-SECRET-0001
+      - name: Notify
+        run: ./scripts/notify.sh
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

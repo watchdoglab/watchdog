@@ -1,0 +1,19 @@
+app: ledgerly-api
+env: production
+tls:
+  min_version: "1.0"
+  hsts: true
+session:
+  cookie_secure: false
+  idle_timeout_minutes: 0
+auth:
+  password_min_length: 6
+  mfa_required_for_admin: false
+  lockout_attempts: 10
+database:
+  host: db.internal.ledgerly.example
+  storage_encrypted: true
+  kms_key_id: alias/ledgerly-db
+payments:
+  provider_key: sk_live_FAKE0000000000000000000000
+  store_pan: true

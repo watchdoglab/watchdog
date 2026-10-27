@@ -1,0 +1,14 @@
+2026-03-12T00:12:03Z INFO  acme-api rid=r-1a01 user=svc-web GET /api/v1/orders 200 12ms
+2026-03-12T01:02:11Z WARN  acme-api rid=r-1b01 anonymous redirect to /login from /admin/
+2026-03-12T01:02:13Z WARN  acme-api rid=r-1b05 rejected malformed id param on /api/v1/users
+2026-03-12T01:55:40Z INFO  acme-api rid=r-1c01 user=svc-web POST /api/v1/orders 201 31ms
+2026-03-12T02:40:18Z WARN  acme-api rid=r-9f30 session accepted without matching login event user=m.okafor role=admin mfa=none
+2026-03-12T02:41:02Z INFO  acme-api rid=r-9f31 user=m.okafor GET /admin/api/customers page=1 200 88ms
+2026-03-12T02:44:09Z INFO  acme-api rid=r-1d01 user=svc-web GET /api/v1/orders 200 14ms
+2026-03-12T02:52:47Z INFO  acme-api rid=r-9f44 user=m.okafor export customers format=csv rows=48210 fields=name,email,phone,address,dob
+2026-03-12T02:53:20Z INFO  acme-api rid=r-9f44 export uploaded s3://acme-prod-exports/customers-full-20260312.csv
+2026-03-12T03:00:01Z INFO  acme-api rid=r-1e01 healthcheck ok
+2026-03-12T03:07:33Z INFO  acme-api rid=r-1e02 user=svc-web GET /api/v1/orders/8812 200 9ms
+2026-03-12T03:20:55Z INFO  acme-api rid=r-9f58 user=m.okafor GET /admin/api/customers page=2 200 91ms
+2026-03-12T03:41:12Z INFO  acme-api rid=r-1f01 user=svc-web GET /api/v1/orders 200 13ms
+2026-03-12T08:58:00Z INFO  acme-api audit m.okafor last real login 2026-03-10T14:03:22Z from 10.0.5.31

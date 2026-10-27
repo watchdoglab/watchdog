@@ -4,7 +4,7 @@
 
 The compliance dog. Maps findings from every Watchdog dog to SOC 2, ISO 27001, PCI DSS and OWASP ASVS, and lists the evidence an auditor will ask for. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -33,6 +33,20 @@ The always-on lens watches SOC 2, ISO 27001, PCI DSS, ASVS, audits, controls, ev
 ## Tools it wraps
 
 reads other dogs' reports; no scanners. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds a SaaS snapshot plus `findings.md` from other dogs: 18 planted compliance gaps, 3 decoys and an answer key.
+
+First run of `/compliance-map` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Gaps / 18 | Critical / 4 | Cross-file (C02, C03) | Control IDs right | Decoys flagged |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 17 | 4 | yes | 17 / 17 | 1 |
+| Sonnet 5.5 | 18 | 4 | yes | 16 / 18 | 0 |
+| Opus 5.5 | 16 | 4 | yes | 16 / 16 | 0 |
+
+Control IDs in the answer key are from memory, not checked against the framework texts; treat that column as indicative.
 
 ## Rules
 

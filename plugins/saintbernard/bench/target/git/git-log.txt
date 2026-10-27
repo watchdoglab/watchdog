@@ -1,0 +1,34 @@
+commit 5d2e8b7c1f0a4e93b6a17d2c88f4e0a9b3c61d55
+Author: Priya N <priya@acme.example>
+Date:   Wed Mar 11 09:12:44 2026 +0000
+
+    bump nginx base image
+
+commit a91c3f2e7b4d4c05a8f1e6d2b9037c4e5a1f8d20
+Author: Ravi K <ravi@acme.example>
+Date:   Wed Mar 11 16:40:12 2026 +0000
+
+    add production env for deploy script
+
+ .env.production | 4 ++++
+ deploy/push.sh  | 2 +-
+
+commit c47b09de3a1f4b6e92d05f7a8c3e1b4d6f290a71
+Author: Ravi K <ravi@acme.example>
+Date:   Wed Mar 11 16:52:31 2026 +0000
+
+    remove env file
+
+ .env.production | 4 ----
+
+commit 0e6f13a9d85c4b2f7a31c9e4d8b05f26a7c3e918
+Author: Priya N <priya@acme.example>
+Date:   Wed Mar 11 17:30:05 2026 +0000
+
+    fix typo in readme
+
+diff excerpt of a91c3f2:
++AWS_ACCESS_KEY_ID=FAKE-AKIA7QX2LMNP
++AWS_SECRET_ACCESS_KEY=FAKE-secret-not-real-0000
++SESSION_SIGNING_KEY=FAKE-session-signing-key
++DB_HOST=db.internal.acme.example

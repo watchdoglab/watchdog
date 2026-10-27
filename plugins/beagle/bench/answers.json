@@ -1,0 +1,29 @@
+{
+ "target": "target/",
+ "note": "Planted privacy issues. Match by file + issue; line +-3 counts. Decoys must NOT be reported.",
+ "vulns": [
+  {"id": "B01", "sev": "critical", "file": "src/logger.js", "line": 16, "title": "Full request bodies (Aadhaar, phone, health data, passwords) written to access log, enabled via config.logFullBodies"},
+  {"id": "B02", "sev": "critical", "file": "src/routes/users.js", "line": 10, "title": "Aadhaar number stored in plaintext in users table"},
+  {"id": "B03", "sev": "critical", "file": "src/analytics.js", "line": 12, "title": "identify() forwards the whole user row (name, phone, Aadhaar, dob) to third-party analytics; caller users.js:13 passes RETURNING * (cross-file)"},
+  {"id": "B04", "sev": "critical", "file": "src/analytics.js", "line": 22, "title": "Health conditions, email and precise lat/lng sent to third-party analytics"},
+  {"id": "B05", "sev": "high", "file": "src/app.js", "line": 8, "title": "Sentry sendDefaultPii: true ships IPs and request data to error tracker"},
+  {"id": "B06", "sev": "high", "file": "src/app.js", "line": 19, "title": "Error handler sends full request body and user email to Sentry"},
+  {"id": "B07", "sev": "high", "file": "src/routes/users.js", "line": 28, "title": "Phone number and OTP logged to console"},
+  {"id": "B08", "sev": "high", "file": "web/index.html", "line": 8, "title": "Mixpanel initialised and tracking before any consent"},
+  {"id": "B09", "sev": "high", "file": "web/index.html", "line": 13, "title": "Ad pixel fires on load before consent"},
+  {"id": "B10", "sev": "high", "file": "web/index.html", "line": 26, "title": "Raw email and phone sent to ad pixel on signup"},
+  {"id": "B11", "sev": "high", "file": "src/routes/users.js", "line": 32, "title": "Email in URL path (lands in access logs, referrers); returns SELECT * row"},
+  {"id": "B12", "sev": "high", "file": "src/routes/users.js", "line": 37, "title": "Endpoint returns every user with every column incl. Aadhaar and health data (no minimisation)"},
+  {"id": "B13", "sev": "high", "file": "src/routes/users.js", "line": 54, "title": "Account deletion is a soft-delete flag; data stays in DB, analytics and logs (GDPR Art.17 / DPDP s.12)"},
+  {"id": "B14", "sev": "medium", "file": "src/routes/users.js", "line": 8, "title": "Marketing opt-in defaults to true (pre-ticked consent)"},
+  {"id": "B15", "sev": "medium", "file": "src/config.js", "line": 5, "title": "Analytics host in US region, no cross-border transfer safeguard"},
+  {"id": "B16", "sev": "medium", "file": "src/config.js", "line": 7, "title": "Access log retention 0 = keep forever; no purge for logs or inactive users"},
+  {"id": "B17", "sev": "medium", "file": "web/index.html", "line": 27, "title": "Full profile including Aadhaar stored in localStorage"},
+  {"id": "B18", "sev": "low", "file": "src/logger.js", "line": 11, "title": "Client IP and user-agent logged on every request without purpose or expiry"}
+ ],
+ "decoys": [
+  {"file": "src/logger.js", "line": 21, "why": "failed-login audit log masks the email before writing"},
+  {"file": "src/analytics.js", "line": 16, "why": "workout event uses salted SHA-256 id and non-personal fields only"},
+  {"file": "src/jobs/retention.js", "line": 6, "why": "session purge is parameterised and runs nightly; correct retention"}
+ ]
+}

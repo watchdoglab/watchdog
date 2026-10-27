@@ -1,0 +1,30 @@
+{
+ "target": "target/",
+ "note": "Planted DB issues. Match by file + issue; line +-3 counts. Decoys must NOT be reported. No hint comments in the target.",
+ "vulns": [
+  {"id": "Q01", "sev": "critical", "file": "supabase/migrations/001_init.sql", "line": 27, "title": "projects table never has RLS enabled; the projects_org policy is created but inert, so every row is readable/writable by anon via PostgREST"},
+  {"id": "Q02", "sev": "critical", "file": "firestore.rules", "line": 23, "title": "Catch-all /{document=**} allows read/write to any signed-in user, overriding every stricter rule above it"},
+  {"id": "Q03", "sev": "critical", "file": "db/roles.sql", "line": 1, "title": "App role app_user created with SUPERUSER (bypasses RLS, can read files / run programs)"},
+  {"id": "Q04", "sev": "critical", "file": "src/client.js", "line": 4, "title": "Service-role key used in client-side Supabase client: bypasses all RLS, shipped to the browser (secret type: service_role key)"},
+  {"id": "Q05", "sev": "critical", "file": "supabase/migrations/001_init.sql", "line": 55, "title": "Policy trusts auth.jwt() user_metadata org_id, which the user sets at signup in src/client.js:12 (cross-file): any user can join any org's data"},
+  {"id": "Q06", "sev": "high", "file": "supabase/migrations/001_init.sql", "line": 46, "title": "profiles update policy has no WITH CHECK / column limit: user can set own role to admin"},
+  {"id": "Q07", "sev": "high", "file": "supabase/migrations/001_init.sql", "line": 44, "title": "profiles select policy using (true): every user can read every profile incl. ssn"},
+  {"id": "Q08", "sev": "high", "file": "supabase/migrations/001_init.sql", "line": 11, "title": "ssn stored as plaintext column"},
+  {"id": "Q09", "sev": "high", "file": "supabase/migrations/001_init.sql", "line": 37, "title": "legacy_logins stores passwords in plaintext, no RLS"},
+  {"id": "Q10", "sev": "high", "file": "supabase/migrations/002_billing.sql", "line": 12, "title": "invoices policy for all to anon, authenticated using (true): RLS enabled but fully open"},
+  {"id": "Q11", "sev": "high", "file": "supabase/migrations/002_billing.sql", "line": 15, "title": "invoice_summary view runs as owner (no security_invoker), bypassing invoices RLS; roles.sql grants it onward"},
+  {"id": "Q12", "sev": "high", "file": "supabase/migrations/002_billing.sql", "line": 20, "title": "SECURITY DEFINER get_invoice_total(uid) with caller-supplied uid and no search_path: reads any user's totals, search_path hijack"},
+  {"id": "Q13", "sev": "high", "file": "supabase/migrations/003_storage.sql", "line": 2, "title": "invoice-pdfs bucket public = true: invoice PDFs fetchable by URL without auth"},
+  {"id": "Q14", "sev": "high", "file": "storage.rules", "line": 9, "title": "uploads/ path allows read and write to anyone (if true)"},
+  {"id": "Q15", "sev": "high", "file": "db/roles.sql", "line": 5, "title": "GRANT ALL on all tables to anon (and authenticated): grants far exceed need and sit under weak RLS"},
+  {"id": "Q16", "sev": "high", "file": "src/db.js", "line": 8, "title": "SQL injection: orgId and term concatenated into query string"},
+  {"id": "Q17", "sev": "high", "file": "docker-compose.yml", "line": 8, "title": "Postgres published on 0.0.0.0:5432 with default postgres/postgres credentials"},
+  {"id": "Q18", "sev": "medium", "file": "firestore.rules", "line": 19, "title": "orders create does not require ownerId == request.auth.uid: forge orders for other users / orphan documents nobody owns"}
+ ],
+ "decoys": [
+  {"file": "supabase/migrations/001_init.sql", "line": 52, "why": "plans is a public price catalog; select using (true) is intended and it has RLS on and no write policy"},
+  {"file": "supabase/migrations/001_init.sql", "line": 49, "why": "org_members policy correctly scoped to auth.uid()"},
+  {"file": "firestore.rules", "line": 5, "why": "config/public read-only for a public flags doc is intended"},
+  {"file": "supabase/migrations/003_storage.sql", "line": 7, "why": "avatars write is scoped to the user's own folder; public avatars bucket is intended"}
+ ]
+}

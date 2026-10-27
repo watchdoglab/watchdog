@@ -1,0 +1,29 @@
+{
+ "target": "target/",
+ "note": "Planted auth issues. Match by file + issue; line +-3 counts. Decoys must NOT be reported. No hint comments in the target.",
+ "vulns": [
+  {"id": "D01", "sev": "critical", "file": "src/jwt.js", "line": 12, "title": "requireAuth uses jwt.decode, never verifies signature: any forged token accepted (any sub, any role)"},
+  {"id": "D02", "sev": "critical", "file": "src/routes/login.js", "line": 28, "title": "Full session token and cookie issued after password alone; MFA never enforced, /mfa/verify in mfa.js is not a gate (cross-file)"},
+  {"id": "D03", "sev": "critical", "file": "src/routes/reset.js", "line": 11, "title": "Password reset token returned in the forgot-password response: account takeover with only the victim's email"},
+  {"id": "D04", "sev": "critical", "file": "src/routes/sso.js", "line": 11, "title": "SSO assertion email trusted without emailVerified check; existing local account auto-linked / created by email"},
+  {"id": "D05", "sev": "high", "file": "src/config.js", "line": 9, "title": "JWT signing secret hardcoded in source (used by jwt.js)"},
+  {"id": "D06", "sev": "high", "file": "src/routes/login.js", "line": 8, "title": "Passwords hashed with unsalted MD5 (same in reset.js:18)"},
+  {"id": "D07", "sev": "high", "file": "src/routes/login.js", "line": 19, "title": "No rate limit or lockout on login (credential stuffing / brute force)"},
+  {"id": "D08", "sev": "high", "file": "src/routes/login.js", "line": 22, "title": "User enumeration: distinct 404 'no such user' vs 401 'wrong password' (also signup 409)"},
+  {"id": "D09", "sev": "high", "file": "src/routes/oauth.js", "line": 18, "title": "OAuth flow has no state parameter and no PKCE: login CSRF / code injection"},
+  {"id": "D10", "sev": "high", "file": "src/routes/oauth.js", "line": 9, "title": "redirect_uri taken from query with no allowlist: authorization code sent to attacker"},
+  {"id": "D11", "sev": "high", "file": "src/routes/reset.js", "line": 9, "title": "Reset token from Math.random: short and predictable"},
+  {"id": "D12", "sev": "medium", "file": "src/routes/reset.js", "line": 15, "title": "Reset token never expires and is not invalidated after use"},
+  {"id": "D13", "sev": "medium", "file": "src/routes/login.js", "line": 27, "title": "Session cookie lacks Secure, HttpOnly, SameSite; 1 year lifetime"},
+  {"id": "D14", "sev": "medium", "file": "src/jwt.js", "line": 6, "title": "JWT valid for 365 days; logout only clears cookie, token stays valid, no revocation or rotation"},
+  {"id": "D15", "sev": "medium", "file": "src/routes/mfa.js", "line": 12, "title": "MFA recovery codes stored and returned in plaintext, TOTP secret stored unencrypted"},
+  {"id": "D16", "sev": "medium", "file": "src/routes/oauth.js", "line": 29, "title": "id_token only decoded: signature, iss, aud, nonce not validated"},
+  {"id": "D17", "sev": "medium", "file": "src/routes/mfa.js", "line": 19, "title": "No attempt limit on MFA code check; plain string compare; no replay protection"},
+  {"id": "D18", "sev": "low", "file": "src/routes/login.js", "line": 12, "title": "Password policy accepts 4 characters"}
+ ],
+ "decoys": [
+  {"file": "src/jwt.js", "line": 19, "why": "verifyServiceToken pins HS256 and checks audience and issuer: correct verification"},
+  {"file": "src/routes/oauth.js", "line": 10, "why": "Math.random only builds a log correlation id, not a security token"},
+  {"file": "src/routes/login.js", "line": 38, "why": "post-logout redirect is checked against the app origin before use"}
+ ]
+}

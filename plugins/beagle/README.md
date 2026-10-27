@@ -4,7 +4,7 @@
 
 The privacy dog. Sniffs out personal data flowing into logs, analytics, third-party SDKs and storage, and maps findings to GDPR and India's DPDP Act. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -34,6 +34,20 @@ The always-on lens watches personal data, PII, logging, analytics, SDKs, consent
 ## Tools it wraps
 
 `semgrep` (custom PII rules), `gitleaks detect`. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds a fitness-app Express API and web page with 18 planted privacy issues, 3 decoys and an answer key.
+
+First run of `/privacy-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Found / 18 | Critical / 4 | Cross-file (B03) | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 17 | 4 | yes | 2 | none |
+| Sonnet 5.5 | 18 | 4 | yes | 2 | none |
+| Opus 5.5 | 18 | 4 | yes | 2 | none |
+
+All three flagged the same two decoys (masked audit log, hashed analytics event), so those rules need sharpening. Haiku missed the cross-border transfer (B15). All three also found real bugs the key missed: no auth, so `req.user` is never set (IDOR).
 
 ## Rules
 

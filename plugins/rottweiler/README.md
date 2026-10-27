@@ -4,7 +4,7 @@
 
 The supply-chain dog. Guards what you pull in: lockfiles, package names, install scripts, pinning, SBOMs, release signing and licences. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -34,6 +34,20 @@ The always-on lens watches dependencies, lockfiles, package.json, requirements, 
 ## Tools it wraps
 
 `osv-scanner -r .`, `syft`, `grype`, `npm audit`/`pip-audit`, `socket` CLI. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds a Node + Python service with lockfiles, `.npmrc`, Dockerfile and a release workflow: 17 planted supply-chain issues, 3 decoys and an answer key.
+
+First run of `/supply-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Found / 17 | Critical / 4 | Cross-file (.npmrc + lockfile) | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 17 | 4 | partial | 2 | none |
+| Sonnet 5.5 | 15 | 3 | no | 2 | none |
+| Opus 5.5 | 17 | 4 | yes | 2 | none |
+
+First bench to separate the models: Sonnet missed the dependency-confusion critical (R02); only Opus traced it to the missing scope in `.npmrc`. All three flagged the esbuild install script and the placeholder base-image digest.
 
 ## Rules
 

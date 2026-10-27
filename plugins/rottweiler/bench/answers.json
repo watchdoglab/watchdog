@@ -1,0 +1,28 @@
+{
+ "target": "target/",
+ "note": "Planted supply-chain issues. Match by file + issue; line +-3 counts. Decoys must NOT be reported.",
+ "vulns": [
+  {"id": "R01", "sev": "critical", "file": "package.json", "line": 9, "title": "postinstall pipes remote script to sh (curl | sh) on every install"},
+  {"id": "R02", "sev": "critical", "file": "package.json", "line": 14, "title": "Unscoped internal package acme-billing-core with no scope/registry mapping in .npmrc: dependency confusion (cross-file)"},
+  {"id": "R03", "sev": "critical", "file": ".github/workflows/release.yml", "line": 3, "title": "pull_request_target checks out PR head, runs npm install with NPM_TOKEN and write token (pwn request)"},
+  {"id": "R04", "sev": "critical", "file": "package-lock.json", "line": 19, "title": "Lockfile resolves acme-billing-core over plain http from non-registry host with no integrity hash"},
+  {"id": "R05", "sev": "high", "file": "package.json", "line": 20, "title": "Typosquat devDependency crossenv (look-alike of cross-env)"},
+  {"id": "R06", "sev": "high", "file": "requirements.txt", "line": 3, "title": "Typosquat reqeusts (look-alike of requests)"},
+  {"id": "R07", "sev": "high", "file": ".npmrc", "line": 2, "title": "Hardcoded npm auth token committed"},
+  {"id": "R08", "sev": "high", "file": "requirements.txt", "line": 1, "title": "--extra-index-url lets public PyPI win for internal acme-reports: dependency confusion"},
+  {"id": "R09", "sev": "high", "file": "package-lock.json", "line": 13, "title": "Lockfile out of sync: express locked at 4.16.0 but package.json requires ^4.19.2 (old, vulnerable) (cross-file)"},
+  {"id": "R10", "sev": "high", "file": "Dockerfile", "line": 3, "title": ".npmrc with auth token copied into build, then whole /app copied into final image"},
+  {"id": "R11", "sev": "medium", "file": "package.json", "line": 16, "title": "Unpinned dependency ranges: dayjs * and helmet latest"},
+  {"id": "R12", "sev": "medium", "file": ".github/workflows/release.yml", "line": 17, "title": "Third-party action pinned to @main, not a SHA"},
+  {"id": "R13", "sev": "medium", "file": "Dockerfile", "line": 1, "title": "Unpinned node:latest build base; ADD of remote tarball with no checksum (line 5)"},
+  {"id": "R14", "sev": "medium", "file": ".github/workflows/release.yml", "line": 19, "title": "npm publish with no provenance, signing, attestation or SBOM"},
+  {"id": "R15", "sev": "medium", "file": "package-lock.json", "line": 25, "title": "AGPL-3.0 dependency (pdf-render-lite) in a UNLICENSED proprietary product"},
+  {"id": "R16", "sev": "medium", "file": "scripts/setup.sh", "line": 3, "title": "Binary downloaded and made executable with no checksum or signature check"},
+  {"id": "R17", "sev": "low", "file": ".github/workflows/release.yml", "line": 18, "title": "npm install instead of npm ci, install scripts not disabled in CI"}
+ ],
+ "decoys": [
+  {"file": "package-lock.json", "line": 32, "why": "esbuild hasInstallScript is the well-known native binary step, exact-pinned with integrity"},
+  {"file": ".github/workflows/release.yml", "line": 14, "why": "actions/checkout pinned to a full commit SHA"},
+  {"file": "Dockerfile", "line": 8, "why": "runtime base image pinned by tag and digest, runs as non-root"}
+ ]
+}

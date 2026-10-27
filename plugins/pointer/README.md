@@ -4,7 +4,7 @@
 
 The frontend dog. Points at browser-side risk in React, Vue, Angular and plain JS: XSS sinks, CSP, postMessage and token storage. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -34,6 +34,20 @@ The always-on lens watches React, Vue, Angular, Svelte, Next.js, HTML templates,
 ## Tools it wraps
 
 `semgrep` (react/javascript rulesets), `eslint-plugin-security`, `npm audit`. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds a Vite + React app with a CSP meta tag: 18 planted issues, 3 decoys and an answer key.
+
+First run of `/frontend-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Found / 18 | Critical / 4 | Source traced to `lib/params.js` | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 18 | 4 | no | 0 | none |
+| Sonnet 5.5 | 18 | 4 | no | 0 | none |
+| Opus 5.5 | 18 | 4 | no | 0 | none |
+
+Full recall, but no model named the URL-param helper as the source of the reflected XSS; the skill should ask for source → sink paths with both files.
 
 ## Rules
 

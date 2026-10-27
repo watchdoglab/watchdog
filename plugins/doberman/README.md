@@ -4,7 +4,7 @@
 
 The auth dog. Guards the front door: login, OAuth/OIDC, sessions, password reset, MFA, JWTs and SSO. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -34,6 +34,20 @@ The always-on lens watches login, signup, OAuth, OIDC, SAML, sessions, cookies, 
 ## Tools it wraps
 
 `semgrep` (auth rulesets), `gitleaks detect`. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds an Express auth service (login, MFA, OAuth, reset, SAML SSO, JWT): 18 planted issues, 3 decoys and an answer key.
+
+First run of `/auth-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Found / 18 | Critical / 4 | MFA bypass traced | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 18 | 4 | yes | 2 | none |
+| Sonnet 5.5 | 18 | 4 | yes | 2 | none |
+| Opus 5.5 | 18 | 4 | yes | 0 | none |
+
+Full recall for all three; only Opus cleared every decoy. Haiku rated the SAML auto-link critical as High.
 
 ## Rules
 

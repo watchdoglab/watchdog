@@ -35,7 +35,7 @@ BRANDS = {
         svg="assets/logo.svg", orbit=436, eye="dot", vignette="#0b1219",
         title="WATCHDOG", title_color="#F4F8FC",
         tagline="SECURITY DOGS FOR YOUR CODE", tagline_color="#8A94A3",
-        pill="MALINOIS  /  VAPT", pill_icon="plugins/malinois/assets/icon.png",
+        pill="14 DOGS  /  ONE PACK", pill_icon=None,
     ),
     "malinois": dict(
         svg="plugins/malinois/assets/icon.svg", orbit=440, eye="ring", vignette="#062320",

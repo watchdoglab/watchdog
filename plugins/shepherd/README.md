@@ -4,7 +4,7 @@
 
 The mobile dog. A deep dive on Android, iOS, Flutter and React Native apps: storage, pinning, deep links, WebViews and native bridges. Part of [Watchdog](../../README.md).
 
-> Status: **0.1.0, new.** No benchmark or logo yet.
+> Status: **0.1.0.** Benchmarked 2026-10-28, see below.
 
 ## Install
 
@@ -34,6 +34,20 @@ The always-on lens watches Android, iOS, Flutter, React Native, AndroidManifest,
 ## Tools it wraps
 
 `mobsfscan`, `apktool`, `jadx`, `semgrep`; `frida` only on in-scope builds the user owns. Missing ones are named in the report's **Not checked** section.
+
+## Benchmark
+
+[`bench/`](bench/) holds a Flutter payments app (Dart, Kotlin bridge, AndroidManifest, Info.plist): 18 planted issues, 3 decoys and an answer key.
+
+First run of `/mobile-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+
+| Model | Found / 18 | Critical / 4 | Deep link → bridge chain | Decoys flagged | Secrets printed |
+|---|---|---|---|---|---|
+| Haiku 5.5 | 18 | 4 | no | 1 | none |
+| Sonnet 5.5 | 18 | 4 | yes | 1 | none |
+| Opus 5.5 | 18 | 4 | yes | 0 | none |
+
+Haiku found both halves but did not join the deep link to the JS bridge as one exploit path. Extras the key missed: `UIFileSharingEnabled` and a browsable custom scheme without App Links.
 
 ## Rules
 

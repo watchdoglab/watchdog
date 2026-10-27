@@ -1,0 +1,13 @@
+Mar 12 00:03:15 bastion-1 sshd[2210]: Failed password for invalid user admin from 198.51.100.200 port 40122 ssh2
+Mar 12 00:03:18 bastion-1 sshd[2210]: Failed password for invalid user oracle from 198.51.100.200 port 40130 ssh2
+Mar 12 00:03:22 bastion-1 sshd[2210]: Failed password for root from 198.51.100.200 port 40144 ssh2
+Mar 12 00:03:30 bastion-1 sshd[2214]: Connection closed by authenticating user root 198.51.100.200 port 40144 [preauth]
+Mar 12 02:19:30 bastion-1 sshd[2877]: Accepted publickey for ubuntu from 203.0.113.77 port 51022 ssh2: RSA SHA256:FAKEfingerprint0001
+Mar 12 02:19:31 bastion-1 systemd-logind[801]: New session 14 of user ubuntu.
+Mar 12 02:22:05 bastion-1 sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/bin/bash
+Mar 12 02:22:05 bastion-1 sudo: pam_unix(sudo:session): session opened for user root by ubuntu(uid=0)
+Mar 12 02:24:48 bastion-1 useradd[2930]: new user: name=sysupd, UID=1002, GID=1002, home=/home/sysupd, shell=/bin/bash
+Mar 12 02:25:10 bastion-1 sudo:     root : TTY=pts/0 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/tee -a /home/sysupd/.ssh/authorized_keys
+Mar 12 03:00:01 bastion-1 CRON[3301]: pam_unix(cron:session): session opened for user backup by (uid=0)
+Mar 12 03:00:09 bastion-1 CRON[3301]: pam_unix(cron:session): session closed for user backup
+Mar 12 03:20:12 bastion-1 sshd[3402]: Accepted publickey for sysupd from 203.0.113.77 port 51987 ssh2: RSA SHA256:FAKEfingerprint0002

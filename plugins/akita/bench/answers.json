@@ -1,0 +1,29 @@
+{
+ "target": "target/",
+ "note": "Planted secrets issues. Match by file + issue; line +-3 counts. Decoys must NOT be reported. All values are labelled fakes; score on where secrets live, not the values.",
+ "vulns": [
+  {"id": "K01", "sev": "critical", "file": ".env", "line": 3, "title": "Production .env with live-style Stripe key committed to the repo"},
+  {"id": "K02", "sev": "critical", "file": "config/settings.js", "line": 18, "title": "Admin API key hardcoded in source"},
+  {"id": "K03", "sev": "critical", "file": "config/settings.js", "line": 12, "title": "Same JWT secret in .env, as code fallback, and in the CI workflow (deploy.yml:24): one forgeable-token key across prod, staging and source (cross-file)"},
+  {"id": "K04", "sev": "critical", "file": ".github/workflows/deploy.yml", "line": 7, "title": "Long-lived AWS access key pair hardcoded in workflow env instead of OIDC/secrets"},
+  {"id": "K05", "sev": "high", "file": ".gitignore", "line": 1, "title": ".gitignore does not exclude .env (or key files), which is why .env got committed"},
+  {"id": "K06", "sev": "high", "file": ".env", "line": 2, "title": "App connects to the database as the postgres superuser; no least-privilege scoping"},
+  {"id": "K07", "sev": "high", "file": "src/app.js", "line": 15, "title": "/debug/env endpoint returns the whole process environment, unauthenticated"},
+  {"id": "K08", "sev": "high", "file": "src/app.js", "line": 20, "title": "Admin API key accepted in the query string, lands in logs and history"},
+  {"id": "K09", "sev": "high", "file": ".github/workflows/deploy.yml", "line": 18, "title": "Deploy token echoed to CI logs (with set -x tracing on)"},
+  {"id": "K10", "sev": "high", "file": ".github/workflows/deploy.yml", "line": 14, "title": "Stripe key passed as docker build-arg, baked into image layers"},
+  {"id": "K11", "sev": "high", "file": "config/settings.js", "line": 16, "title": "Production Stripe key used as the fallback for every environment; no per-env scoped key"},
+  {"id": "K12", "sev": "high", "file": "scripts/rotate-keys.sh", "line": 3, "title": "Rotation only untracks .env; secrets stay in git history, no purge and no revoke of old keys"},
+  {"id": "K13", "sev": "medium", "file": "scripts/rotate-keys.sh", "line": 7, "title": "New key written to a world-readable /tmp file and printed to stdout"},
+  {"id": "K14", "sev": "medium", "file": ".pre-commit-config.yaml", "line": 6, "title": "gitleaks hook set to manual stage, so commits are not blocked"},
+  {"id": "K15", "sev": "medium", "file": ".pre-commit-config.yaml", "line": 11, "title": "Global exclude skips .env and config/, the exact places secrets live"},
+  {"id": "K16", "sev": "medium", "file": ".github/workflows/deploy.yml", "line": 20, "title": "Third-party action pinned to @master receives the deploy token"},
+  {"id": "K17", "sev": "low", "file": "config/settings.js", "line": 13, "title": "JWT lifetime of 3650 days: stolen tokens effectively never expire"},
+  {"id": "K18", "sev": "medium", "file": "src/app.js", "line": 9, "title": "All request headers, including Authorization, logged"}
+ ],
+ "decoys": [
+  {"file": ".env.example", "line": 3, "why": "CHANGE_ME placeholders, no real values"},
+  {"file": "test/fixtures.js", "line": 2, "why": "obviously fake test-only values, used only by tests"},
+  {"file": ".github/workflows/deploy.yml", "line": 28, "why": "correct use of secrets.* via env, not echoed or hardcoded"}
+ ]
+}
