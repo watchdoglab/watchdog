@@ -1,12 +1,14 @@
 {
-  "name": "vaptdog",
+  "name": "malinois",
   "version": "0.1.0",
-  "description": "VAPT dog. A vulnerability-assessment lens for any change, plus on-demand audits of code, web, APK and IPA. Findings-first, scope-gated, authorized testing only.",
+  "description": "Malinois \u2014 the VAPT dog. A vulnerability-assessment lens for any change, plus on-demand audits of code, web, APK and IPA. Findings-first, scope-gated, authorized testing only.",
   "author": {
     "name": "salahu01",
     "url": "https://github.com/salahu01"
   },
-  "hooks": ["./hooks/vaptdog-hooks.json"],
+  "hooks": [
+    "./hooks/malinois-hooks.json"
+  ],
   "userConfig": {
     "authScope": {
       "type": "string",
@@ -18,7 +20,7 @@
       "type": "string",
       "title": "Report directory",
       "description": "Where /vapt-report writes findings.",
-      "default": "./vaptdog-reports"
+      "default": "./malinois-reports"
     }
   }
 }

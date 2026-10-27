@@ -9,9 +9,9 @@
   },
   "plugins": [
     {
-      "name": "vaptdog",
-      "source": "./plugins/vaptdog",
-      "description": "VAPT dog. Sniffs out vulnerabilities in source code, web apps, APKs and IPAs, then writes the report. Authorized testing only."
+      "name": "malinois",
+      "source": "./plugins/malinois",
+      "description": "Malinois \u2014 the VAPT dog. Sniffs out vulnerabilities in source code, web apps, APKs and IPAs, then writes the report. Authorized testing only."
     }
   ]
 }

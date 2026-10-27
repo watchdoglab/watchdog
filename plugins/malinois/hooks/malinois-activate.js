@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Emits the VAPT dog banner at session start so the security lens stays on all session.
 const banner = [
-  "VAPT DOG ON GUARD.",
+  "MALINOIS ON GUARD — the VAPT dog.",
   "",
   "Lens active every turn: as you read or write code, flag security risk inline —",
   "injection, broken authz/authn, secrets, SSRF, path traversal, unsafe deserialization,",
@@ -17,7 +17,7 @@ const banner = [
   "- Never exfiltrate found secrets; redact them in reports.",
   "",
   "Commands: /vapt-code /vapt-web /vapt-apk /vapt-ipa /vapt-report",
-  "Off: 'stop vaptdog'."
+  "Off: 'stop malinois'."
 ].join("\n");
 
 process.stdout.write(JSON.stringify({

@@ -5,7 +5,7 @@ description: Merge findings from this session into one ranked VAPT report. Use f
 
 # vapt-report — write the report
 
-Collect every finding produced this session (code/web/apk/ipa) into one client-ready report. Write to the plugin `reportDir` (default `./vaptdog-reports`) as Markdown, filename `vaptdog-<target>-<date>.md`.
+Collect every finding produced this session (code/web/apk/ipa) into one client-ready report. Write to the plugin `reportDir` (default `./malinois-reports`) as Markdown, filename `malinois-<target>-<date>.md`.
 
 ## Structure
 1. **Executive summary** — 3-5 lines, plain English: what was assessed, overall risk, count by severity.

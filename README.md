@@ -8,7 +8,7 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 
 | Dog | Guards |
 |-----|--------|
-| **vaptdog** | Vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
+| **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
 
 More dogs later (api, cloud, secrets, deps).
 
@@ -16,10 +16,10 @@ More dogs later (api, cloud, secrets, deps).
 
 ```
 /plugin marketplace add salahu01/watchdog
-/plugin install vaptdog@watchdog
+/plugin install malinois@watchdog
 ```
 
-## vaptdog
+## malinois — the VAPT dog
 
 A security-review lens that stays on all session, plus on-demand audits.
 
@@ -32,8 +32,8 @@ A security-review lens that stays on all session, plus on-demand audits.
 
 **Config** (`/plugin`): `authScope` (in-scope targets you're authorized to test), `reportDir`.
 
-Turn the lens off with `stop vaptdog`.
+Turn the lens off with `stop malinois`.
 
 ## ⚖️ Authorized use only
 
-vaptdog is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) requires written authorization and an in-scope target — the dog refuses otherwise. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.
+malinois is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) requires written authorization and an in-scope target — the dog refuses otherwise. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.

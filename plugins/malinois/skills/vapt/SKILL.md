@@ -26,4 +26,4 @@ As you touch code, watch the trust boundaries: anything from a user, a request, 
 - Root cause over symptom: grep every caller before you call something safe.
 - End each review with: what you did **not** check, and the top risk the user must act on.
 
-Off: user says "stop vaptdog" or "normal mode".
+Off: user says "stop malinois" or "normal mode".
