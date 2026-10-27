@@ -8,7 +8,7 @@ A pack of security dogs for Claude Code. Each dog guards one surface. Install th
 
 | | Dog | Guards |
 |---|-----|--------|
-| <img src="plugins/malinois/assets/icon.svg" width="48" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
+| <img src="plugins/malinois/assets/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. |
 
 More dogs later (api, cloud, secrets, deps).
 
@@ -21,7 +21,7 @@ More dogs later (api, cloud, secrets, deps).
 
 ## malinois — the VAPT dog
 
-<p><img src="plugins/malinois/assets/malinois-lockup.png" width="480" alt="Malinois — VAPT by Watchdog"></p>
+<p align="center"><img src="plugins/malinois/assets/banner.gif" width="100%" alt="Malinois — VAPT by Watchdog"></p>
 
 A security-review lens that stays on all session, plus on-demand audits.
 

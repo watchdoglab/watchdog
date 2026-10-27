@@ -1,43 +1,87 @@
-"""Render the animated README banner (assets/banner.gif).
+"""Render the animated README art.
 
     python3 tools/brand/gen_banner.py
 
+Writes:
+  assets/banner.gif                    Watchdog banner (top of README)
+  plugins/malinois/assets/banner.gif   Malinois banner (its README section)
+  plugins/malinois/assets/icon.gif     Malinois icon (Dogs table)
+
 Needs rsvg-convert and ImageMagick (magick) on PATH. Run gen_logos.py first:
-the banner reuses assets/logo.png and plugins/malinois/assets/icon.png.
+the art reuses the logo SVGs it writes.
 """
 import base64
 import math
 import os
+import re
 import subprocess
 import tempfile
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 FONT = "/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf"
-W, H = 1280, 400
 FRAMES = 40
-LOGO = 340                              # logo size on the banner
-LX, LY = 60, (H - LOGO) // 2            # logo top-left
-S = LOGO / 1024                         # logo units -> banner px
-CX, CY = LX + 512 * S, LY + 512 * S     # dial centre
-LENS = 400 * S                          # dial lens radius
-EYE = (LX + (676 - 60) * S, LY + 486 * S)
+EYE = (676 - 60, 486)  # eye in logo units (gen_logos draws the head shifted 60px left)
+
+BRANDS = {
+    "watchdog": dict(
+        svg="assets/logo.svg", orbit=436, eye="dot", vignette="#0b1219",
+        title="WATCHDOG", title_color="#F4F8FC",
+        tagline="SECURITY DOGS FOR YOUR CODE", tagline_color="#8A94A3",
+        pill="MALINOIS  /  VAPT", pill_icon="plugins/malinois/assets/icon.png",
+    ),
+    "malinois": dict(
+        svg="plugins/malinois/assets/icon.svg", orbit=440, eye="ring", vignette="#062320",
+        title="MALINOIS", title_color="#E6FFFB",
+        tagline="VAPT  /  BY WATCHDOG", tagline_color="#4FB3A7",
+        pill="CODE  /  WEB  /  APK  /  IPA", pill_icon=None,
+    ),
+}
 
 
-def frame_svg(i, logo_uri):
+class Layout:
+    def __init__(self, w, h, logo, lx, ly, backdrop):
+        self.w, self.h, self.logo, self.lx, self.ly, self.backdrop = w, h, logo, lx, ly, backdrop
+        self.s = logo / 1024
+        self.cx, self.cy = lx + 512 * self.s, ly + 512 * self.s
+        self.lens = 400 * self.s
+
+    def at(self, x, y):
+        return self.lx + x * self.s, self.ly + y * self.s
+
+
+BANNER = Layout(1280, 400, 340, 60, 30, backdrop=True)
+ICON = Layout(256, 256, 256, 0, 0, backdrop=False)
+
+
+def frame_svg(i, base_uri, brand, L):
     t = i / FRAMES
     a = 2 * math.pi * t - math.pi / 2           # sweep angle, starts at 12 o'clock
     tail = a - math.radians(70)
-    sx, sy = CX + LENS * math.cos(a), CY + LENS * math.sin(a)
-    tx, ty = CX + LENS * math.cos(tail), CY + LENS * math.sin(tail)
-    dot = (CX + 436 * S * math.cos(a), CY + 436 * S * math.sin(a))
-    pulse = 0.35 + 0.65 * (0.5 + 0.5 * math.cos(4 * math.pi * t))
-    scan_x = -200 + (W + 400) * t
-    grid = "".join(f'<path d="M{x} 0V{H}" />' for x in range(0, W, 40)) + \
-           "".join(f'<path d="M0 {y}H{W}" />' for y in range(0, H, 40))
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}">
+    sx, sy = L.cx + L.lens * math.cos(a), L.cy + L.lens * math.sin(a)
+    tx, ty = L.cx + L.lens * math.cos(tail), L.cy + L.lens * math.sin(tail)
+    r_orbit = brand["orbit"] * L.s
+    dot = (L.cx + r_orbit * math.cos(a), L.cy + r_orbit * math.sin(a))
+    beat = 0.5 + 0.5 * math.cos(4 * math.pi * t)          # two beats per loop
+    ex, ey = L.at(*EYE)
+    if brand["eye"] == "dot":
+        eye = f'<circle cx="{ex:.1f}" cy="{ey:.1f}" r="{7 * L.s * 3:.1f}" fill="#fff" opacity="{0.35 + 0.65 * beat:.2f}" filter="url(#glow)"/>'
+    else:  # reticle lock-on: a ring that tightens onto the eye
+        r = (30 + 34 * (1 - beat)) * L.s
+        eye = f'<circle cx="{ex:.1f}" cy="{ey:.1f}" r="{r:.1f}" fill="none" stroke="#fff" stroke-width="{max(1.5, 4 * L.s):.1f}" opacity="{beat:.2f}" filter="url(#glow)"/>'
+    back = ""
+    if L.backdrop:
+        grid = "".join(f'<path d="M{x} 0V{L.h}"/>' for x in range(0, L.w, 40)) + \
+               "".join(f'<path d="M0 {y}H{L.w}"/>' for y in range(0, L.h, 40))
+        scan_x = -200 + (L.w + 400) * t
+        back = f"""<rect width="{L.w}" height="{L.h}" fill="url(#vig)"/>
+  <g stroke="#2DD4BF" stroke-opacity=".06" stroke-width="1">{grid}</g>
+  <rect x="{scan_x:.1f}" y="0" width="200" height="{L.h}" fill="url(#scan)"/>"""
+    # On the banner the dial floats free; as an icon it keeps its own tile.
+    clip = 'clip-path="url(#dial)"' if L.backdrop else ""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{L.w}" height="{L.h}">
   <defs>
     <radialGradient id="vig" cx="30%" cy="50%" r="80%">
-      <stop offset="0" stop-color="#0b1219"/><stop offset="1" stop-color="#000"/>
+      <stop offset="0" stop-color="{brand['vignette']}"/><stop offset="1" stop-color="#000"/>
     </radialGradient>
     <linearGradient id="scan" x1="0" x2="1">
       <stop offset="0" stop-color="#2DD4BF" stop-opacity="0"/>
@@ -48,23 +92,21 @@ def frame_svg(i, logo_uri):
       <stop offset="0" stop-color="#2DD4BF" stop-opacity="0"/>
       <stop offset="1" stop-color="#2DD4BF" stop-opacity=".42"/>
     </linearGradient>
-    <clipPath id="dial"><circle cx="{CX:.1f}" cy="{CY:.1f}" r="{462 * S:.1f}"/></clipPath>
-    <clipPath id="lens"><circle cx="{CX:.1f}" cy="{CY:.1f}" r="{LENS:.1f}"/></clipPath>
+    <clipPath id="dial"><circle cx="{L.cx:.1f}" cy="{L.cy:.1f}" r="{470 * L.s:.1f}"/></clipPath>
+    <clipPath id="lens"><circle cx="{L.cx:.1f}" cy="{L.cy:.1f}" r="{L.lens:.1f}"/></clipPath>
     <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feGaussianBlur stdDeviation="{max(1.5, 12 * L.s):.1f}" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="{W}" height="{H}" fill="url(#vig)"/>
-  <g stroke="#2DD4BF" stroke-opacity=".06" stroke-width="1">{grid}</g>
-  <rect x="{scan_x:.1f}" y="0" width="200" height="{H}" fill="url(#scan)"/>
-  <image clip-path="url(#dial)" x="{LX}" y="{LY}" width="{LOGO}" height="{LOGO}" xlink:href="{logo_uri}"/>
+  {back}
+  <image {clip} x="{L.lx}" y="{L.ly}" width="{L.logo}" height="{L.logo}" xlink:href="{base_uri}"/>
   <g clip-path="url(#lens)">
-    <path d="M{CX:.1f} {CY:.1f} L{tx:.1f} {ty:.1f} A{LENS:.1f} {LENS:.1f} 0 0 1 {sx:.1f} {sy:.1f} Z" fill="url(#sweep)"/>
-    <path d="M{CX:.1f} {CY:.1f} L{sx:.1f} {sy:.1f}" stroke="#99f6e4" stroke-width="2" stroke-opacity=".8" filter="url(#glow)"/>
+    <path d="M{L.cx:.1f} {L.cy:.1f} L{tx:.1f} {ty:.1f} A{L.lens:.1f} {L.lens:.1f} 0 0 1 {sx:.1f} {sy:.1f} Z" fill="url(#sweep)"/>
+    <path d="M{L.cx:.1f} {L.cy:.1f} L{sx:.1f} {sy:.1f}" stroke="#99f6e4" stroke-width="{max(1.2, 6 * L.s):.1f}" stroke-opacity=".8" filter="url(#glow)"/>
   </g>
-  <circle cx="{dot[0]:.1f}" cy="{dot[1]:.1f}" r="5" fill="#2DD4BF" filter="url(#glow)"/>
-  <circle cx="{EYE[0]:.1f}" cy="{EYE[1]:.1f}" r="7" fill="#fff" opacity="{pulse:.2f}" filter="url(#glow)"/>
+  <circle cx="{dot[0]:.1f}" cy="{dot[1]:.1f}" r="{max(3, 15 * L.s):.1f}" fill="#2DD4BF" filter="url(#glow)"/>
+  {eye}
 </svg>"""
 
 
@@ -72,42 +114,64 @@ def run(*cmd):
     subprocess.run(cmd, check=True)
 
 
-def text_layer(path):
-    """Wordmark, tagline and the Malinois pill, drawn once and laid over every frame."""
-    icon = os.path.join(ROOT, "plugins/malinois/assets/icon.png")
-    run("magick", "-size", f"{W}x{H}", "xc:none",
-        "-fill", "#2a3340", "-draw", "rectangle 452,96 454,322",
-        "-font", FONT, "-fill", "#F4F8FC", "-pointsize", "104", "-kerning", "18",
-        "-annotate", "+500+180", "WATCHDOG",
-        "-font", FONT, "-fill", "#8A94A3", "-pointsize", "28", "-kerning", "8",
-        "-annotate", "+505+228", "SECURITY DOGS FOR YOUR CODE",
-        "-fill", "#06201d", "-stroke", "#134E48", "-strokewidth", "2",
-        "-draw", "roundrectangle 503,272 815,320 24,24", "-stroke", "none",
-        "(", icon, "-resize", "38x38", ")", "-geometry", "+511+277", "-composite",
-        "-font", FONT, "-fill", "#5EEAD4", "-pointsize", "22", "-kerning", "5",
-        "-annotate", "+560+304", "MALINOIS  /  VAPT", path)
+def base_png(brand, tmp):
+    """The logo with its painted (static) sweep removed; the live sweep replaces it."""
+    with open(os.path.join(ROOT, brand["svg"])) as f:
+        svg = re.sub(r'\s*<path [^>]*fill="url\(#sweep\)"[^>]*/>', "", f.read())
+    src, png = os.path.join(tmp, "base.svg"), os.path.join(tmp, "base.png")
+    with open(src, "w") as f:
+        f.write(svg)
+    run("rsvg-convert", "-w", "1024", "-h", "1024", "-o", png, src)
+    with open(png, "rb") as f:
+        return "data:image/png;base64," + base64.b64encode(f.read()).decode()
 
 
-def main():
-    out = os.path.join(ROOT, "assets/banner.gif")
+def text_layer(brand, path, L):
+    """Wordmark, tagline and pill, drawn once and laid over every banner frame."""
+    pill_w = 14 * len(brand["pill"]) + (84 if brand["pill_icon"] else 50)
+    cmd = ["magick", "-size", f"{L.w}x{L.h}", "xc:none",
+           "-fill", "#2a3340", "-draw", "rectangle 452,96 454,322",
+           "-font", FONT, "-fill", brand["title_color"], "-pointsize", "104", "-kerning", "18",
+           "-annotate", "+500+180", brand["title"],
+           "-font", FONT, "-fill", brand["tagline_color"], "-pointsize", "28", "-kerning", "8",
+           "-annotate", "+505+228", brand["tagline"],
+           "-fill", "#06201d", "-stroke", "#134E48", "-strokewidth", "2",
+           "-draw", f"roundrectangle 503,272 {503 + pill_w},320 24,24", "-stroke", "none"]
+    text_x = 527
+    if brand["pill_icon"]:
+        cmd += ["(", os.path.join(ROOT, brand["pill_icon"]), "-resize", "38x38", ")",
+                "-geometry", "+511+277", "-composite"]
+        text_x = 560
+    cmd += ["-font", FONT, "-fill", "#5EEAD4", "-pointsize", "22", "-kerning", "5",
+            "-annotate", f"+{text_x}+304", brand["pill"], path]
+    run(*cmd)
+
+
+def render(name, L, out):
+    brand = BRANDS[name]
     with tempfile.TemporaryDirectory() as tmp:
-        text = os.path.join(tmp, "text.png")
-        text_layer(text)
-        # rsvg will not fetch file:// images, so the logo rides inline
-        with open(os.path.join(ROOT, "assets/logo.png"), "rb") as f:
-            logo_uri = "data:image/png;base64," + base64.b64encode(f.read()).decode()
+        base_uri = base_png(brand, tmp)
+        text = None
+        if L.backdrop:
+            text = os.path.join(tmp, "text.png")
+            text_layer(brand, text, L)
         frames = []
         for i in range(FRAMES):
             svg, png = os.path.join(tmp, f"f{i:02}.svg"), os.path.join(tmp, f"f{i:02}.png")
             with open(svg, "w") as f:
-                f.write(frame_svg(i, logo_uri))
+                f.write(frame_svg(i, base_uri, brand, L))
             run("rsvg-convert", "-o", png, svg)
-            run("magick", png, text, "-composite", png)
+            if text:
+                run("magick", png, text, "-composite", png)
             frames.append(png)
-        run("magick", "-delay", "5", "-loop", "0", *frames,
-            "-coalesce", "-colors", "128", "-layers", "Optimize", out)
-    print("wrote assets/banner.gif", os.path.getsize(out) // 1024, "KB")
+        path = os.path.join(ROOT, out)
+        # one shared palette for every frame, so colours do not flicker between frames
+        run("magick", "-delay", "5", "-loop", "0", *frames, "-coalesce",
+            "+remap", "-layers", "Optimize", path)
+    print("wrote", out, os.path.getsize(path) // 1024, "KB")
 
 
 if __name__ == "__main__":
-    main()
+    render("watchdog", BANNER, "assets/banner.gif")
+    render("malinois", BANNER, "plugins/malinois/assets/banner.gif")
+    render("malinois", ICON, "plugins/malinois/assets/icon.gif")
