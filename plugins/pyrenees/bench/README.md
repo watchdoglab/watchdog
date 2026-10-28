@@ -12,7 +12,7 @@ Two criticals are cross-file: C02 (terminated admin in the access-review CSV vs 
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/compliance-map" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/pyrenees --output-format json > haiku-1.json
+claude -p "/go-pyrenees" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/pyrenees --output-format json > haiku-1.json
 ```
 
 Repeat for `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1`.

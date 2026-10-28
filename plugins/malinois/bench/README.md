@@ -11,7 +11,7 @@ Run from a clean copy so model can't read the answer key:
 
 ```bash
 cp -r target /tmp/mal-bench && cd /tmp/mal-bench
-claude -p "/vapt-code" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/malinois --output-format json > haiku-1.json
+claude -p "/go-malinois code" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/malinois --output-format json > haiku-1.json
 ```
 
 Repeat for `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1`.

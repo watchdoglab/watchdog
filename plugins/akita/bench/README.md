@@ -12,7 +12,7 @@ One issue is cross-file (the same JWT secret in `.env`, `config/settings.js` and
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/secrets-audit" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/akita --output-format json > haiku-1.json
+claude -p "/go-akita" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/akita --output-format json > haiku-1.json
 ```
 
 Repeat for `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1`.

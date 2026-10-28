@@ -15,7 +15,7 @@ A misconfiguration lens for infrastructure-as-code that stays on all session, pl
 
 | Command | Does |
 |---|---|
-| `/cloud-audit` | Static audit of Terraform, CloudFormation, Kubernetes, Helm, Dockerfiles and CI pipelines |
+| `/go-husky` | Static audit of Terraform, CloudFormation, Kubernetes, Helm, Dockerfiles and CI pipelines |
 
 The always-on lens flags public exposure, wildcard IAM, secrets in config, privileged containers, missing encryption/logging and CI supply-chain risks as you work. Turn it off with `stop husky`.
 
@@ -25,7 +25,7 @@ husky wraps tools you have installed: `checkov`, `trivy config`, `tfsec`, `kube-
 
 ## Benchmark
 
-[`bench/`](bench/) holds an insecure Terraform + Kubernetes + Dockerfile + GitHub Actions setup (17 planted misconfigs, 3 decoys) and an answer key. First run of `/cloud-audit` (2026-10-27, one run per model, skill text given to a subagent):
+[`bench/`](bench/) holds an insecure Terraform + Kubernetes + Dockerfile + GitHub Actions setup (17 planted misconfigs, 3 decoys) and an answer key. First run of `/go-husky` (2026-10-27, one run per model, skill text given to a subagent):
 
 | Model | Found / 17 | Critical / 4 | Cross-file SSH | Decoys flagged | Secrets redacted | Tokens |
 |---|---|---|---|---|---|---|

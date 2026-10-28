@@ -9,6 +9,11 @@
   },
   "plugins": [
     {
+      "name": "watchdog",
+      "source": "./plugins/watchdog",
+      "description": "The pack leader: /go-pack runs every installed dog and merges the findings."
+    },
+    {
       "name": "malinois",
       "source": "./plugins/malinois",
       "description": "Malinois \u2014 the VAPT dog. Sniffs out vulnerabilities in source code, web apps, APKs and IPAs, then writes the report. Authorized testing only."

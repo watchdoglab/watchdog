@@ -17,7 +17,7 @@ The mobile dog. A deep dive on Android, iOS, Flutter and React Native apps: stor
 
 | Command | Does |
 |---|---|
-| `/mobile-audit` | Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges |
+| `/go-shepherd` | Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges |
 
 The always-on lens watches Android, iOS, Flutter, React Native, AndroidManifest, Info.plist, WebView, deep links, mobile storage. Turn it off with `stop shepherd`.
 
@@ -39,7 +39,7 @@ The always-on lens watches Android, iOS, Flutter, React Native, AndroidManifest,
 
 [`bench/`](bench/) holds a Flutter payments app (Dart, Kotlin bridge, AndroidManifest, Info.plist): 18 planted issues, 3 decoys and an answer key.
 
-First run of `/mobile-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/go-shepherd` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 4 | Deep link → bridge chain | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

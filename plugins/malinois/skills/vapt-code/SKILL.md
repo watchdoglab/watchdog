@@ -1,6 +1,6 @@
 ---
 name: vapt-code
-description: Static security audit (SAST) of a source repo. Use for /vapt-code, "audit this code for security", "find vulnerabilities in the codebase". Authorized/defensive only.
+description: Static security audit (SAST) of a source repo. Use for /go-malinois code, "audit this code for security", "find vulnerabilities in the codebase". Authorized/defensive only.
 ---
 
 # vapt-code — source audit

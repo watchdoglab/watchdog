@@ -12,7 +12,7 @@ One misconfig is cross-file (SSH rule in `main.tf`, world-open default in `varia
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/cloud-audit" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/husky --output-format json > haiku-1.json
+claude -p "/go-husky" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/husky --output-format json > haiku-1.json
 ```
 
 Repeat for `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1`.

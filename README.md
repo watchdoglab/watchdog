@@ -9,7 +9,7 @@ You ship features fast. Security review usually comes late, costs a lot, or neve
 ## What it does for you
 
 - **Catches security bugs while you code, not after launch.** Each dog's lens stays on all session. When you or Claude write a login handler, a SQL query, a Terraform file or an agent tool, the dog flags the risk on the spot: the line, why it's exploitable, and the smallest fix.
-- **Gives you a full audit in one command.** `/vapt-code`, `/api-audit`, `/cloud-audit`, `/ai-audit` and the others review the whole repo and return a ranked report: Critical → Low, each with `file:line`, a concrete exploit and a fix.
+- **Gives you a full audit in one command.** `/go-malinois code`, `/go-bloodhound`, `/go-husky`, `/go-collie` and the others review the whole repo and return a ranked report: Critical → Low, each with `file:line`, a concrete exploit and a fix.
 - **Speaks plain English.** Every finding says what it is, how someone would abuse it, how to fix it, and what happens if you don't. It's useful to a junior dev or a client, not just a security expert.
 - **Is honest about its limits.** Every report ends with **Not checked**, so you know what still needs a human.
 - **Never leaks what it finds.** Secrets are reported by location and type only; the value is never printed.
@@ -36,6 +36,7 @@ malinois and akita are useful in almost every product.
 
 ```
 /plugin marketplace add salahu01/watchdog
+/plugin install watchdog@watchdog
 /plugin install malinois@watchdog
 /plugin install husky@watchdog
 /plugin install collie@watchdog
@@ -54,22 +55,23 @@ malinois and akita are useful in almost every product.
 
 Or install only the dogs from your pack above.
 
-Then work as usual. Run an audit any time:
+Then work as usual. Send a dog out any time:
 
 ```
-/vapt-code        # whole-repo security audit
-/api-audit        # REST / GraphQL: spec + handlers together
-/ai-audit         # LLM apps and agents
-/cloud-audit      # Terraform, Kubernetes, Docker, CI
+/go-pack             # every installed dog, one merged report
+/go-malinois code    # whole-repo security audit (also: web, apk, ipa, report)
+/go-bloodhound       # REST / GraphQL: spec + handlers together
+/go-collie           # LLM apps and agents
+/go-husky            # Terraform, Kubernetes, Docker, CI
 ```
 
-Turn a dog's lens off with `stop <dog>`.
+Every dog follows the same pattern: `/go-<dog>`. Turn a dog's live lens off with `stop <dog>`.
 
 ## How it fits your workflow
 
 1. **While coding:** dogs flag risky code inline as it's written.
 2. **Before a PR or release:** run the audit command for your stack and fix the Criticals and Highs.
-3. **Before a client handover:** `/vapt-report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
+3. **Before a client handover:** `/go-malinois report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
 4. **After an incident:** saintbernard reads the logs and gives you a timeline, blast radius and containment steps.
 
 ## The pack
@@ -126,4 +128,4 @@ Use Watchdog to catch the common, high-impact mistakes early and cheaply, and ke
 
 ## ⚖️ Authorized use only
 
-Every dog is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) (malinois `/vapt-web`) requires written authorization and an in-scope target — the dog refuses otherwise. shepherd runs dynamic tools only on builds you own and put in scope; every other dog is static only. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.
+Every dog is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) (malinois `/go-malinois web`) requires written authorization and an in-scope target — the dog refuses otherwise. shepherd runs dynamic tools only on builds you own and put in scope; every other dog is static only. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.

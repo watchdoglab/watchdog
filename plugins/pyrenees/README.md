@@ -17,7 +17,7 @@ The compliance dog. Maps findings from every Watchdog dog to SOC 2, ISO 27001, P
 
 | Command | Does |
 |---|---|
-| `/compliance-map` | Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS |
+| `/go-pyrenees` | Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS |
 
 The always-on lens watches SOC 2, ISO 27001, PCI DSS, ASVS, audits, controls, evidence, security questionnaires. Turn it off with `stop pyrenees`.
 
@@ -38,7 +38,7 @@ reads other dogs' reports; no scanners. Missing ones are named in the report's *
 
 [`bench/`](bench/) holds a SaaS snapshot plus `findings.md` from other dogs: 18 planted compliance gaps, 3 decoys and an answer key.
 
-First run of `/compliance-map` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/go-pyrenees` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Gaps / 18 | Critical / 4 | Cross-file (C02, C03) | Control IDs right | Decoys flagged |
 |---|---|---|---|---|---|

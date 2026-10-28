@@ -19,7 +19,7 @@
     "reportDir": {
       "type": "string",
       "title": "Report directory",
-      "description": "Where /vapt-report writes findings.",
+      "description": "Where /go-malinois report writes findings.",
       "default": "./malinois-reports"
     }
   }

@@ -12,7 +12,7 @@ The criticals are chains, not single lines: web content reaches the model (indir
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/ai-audit" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/collie --output-format json > haiku-1.json
+claude -p "/go-collie" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/collie --output-format json > haiku-1.json
 ```
 
 ## Score

@@ -1,0 +1,7 @@
+{
+  "name": "watchdog",
+  "version": "0.1.0",
+  "description": "The pack leader. /go-pack runs every installed Watchdog dog on the repo and merges their findings into one report.",
+  "author": { "name": "salahu01" },
+  "license": "MIT"
+}

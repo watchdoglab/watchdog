@@ -12,7 +12,7 @@ Harder than earlier benches: the compromised account (`m.okafor`) appears only i
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/incident-triage" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/saintbernard --output-format json > haiku-1.json
+claude -p "/go-saintbernard" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/saintbernard --output-format json > haiku-1.json
 ```
 
 Repeat for `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1`.

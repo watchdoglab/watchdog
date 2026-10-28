@@ -17,7 +17,7 @@ The incident-response dog. Comes to the rescue after something went wrong: reads
 
 | Command | Does |
 |---|---|
-| `/incident-triage` | Read logs after a breach: timeline, blast radius, containment steps |
+| `/go-saintbernard` | Read logs after a breach: timeline, blast radius, containment steps |
 
 The always-on lens watches incidents, breaches, suspicious logs, alerts, compromised keys, post-mortems. Turn it off with `stop saintbernard`.
 
@@ -38,7 +38,7 @@ The always-on lens watches incidents, breaches, suspicious logs, alerts, comprom
 
 [`bench/`](bench/) holds an evidence folder (nginx, app, auth logs, CloudTrail-style events, git log, ticket) with one planted intrusion as 17 facts, 3 decoys and an answer key.
 
-First run of `/incident-triage` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/go-saintbernard` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Facts / 17 | Critical / 5 | First compromise right | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

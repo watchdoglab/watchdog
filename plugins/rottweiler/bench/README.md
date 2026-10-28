@@ -12,7 +12,7 @@ Two issues are cross-file: R02 (unscoped internal package in `package.json`, no 
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/supply-audit" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/rottweiler --output-format json > haiku-1.json
+claude -p "/go-rottweiler" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/rottweiler --output-format json > haiku-1.json
 ```
 
 Repeat for `claude-sonnet-5-5`, `claude-opus-5-5`, `claude-fable-5-1`.

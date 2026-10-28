@@ -1,6 +1,6 @@
 ---
 name: vapt-ipa
-description: Static security assessment of an iOS IPA. Use for /vapt-ipa, "audit this ipa", "ios app security". Assess apps the user owns or is authorized to test.
+description: Static security assessment of an iOS IPA. Use for /go-malinois ipa, "audit this ipa", "ios app security". Assess apps the user owns or is authorized to test.
 ---
 
 # vapt-ipa — iOS IPA audit

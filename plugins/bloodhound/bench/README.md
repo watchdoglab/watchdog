@@ -12,7 +12,7 @@ Harder than earlier benches: no hint comments, and several criticals only show u
 Copy `target/` outside the repo so the model can't read the answer key, then:
 
 ```bash
-claude -p "/api-audit" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/bloodhound --output-format json > haiku-1.json
+claude -p "/go-bloodhound" --model claude-haiku-5-5 --plugin-dir <path-to>/plugins/bloodhound --output-format json > haiku-1.json
 ```
 
 ## Score

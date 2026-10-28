@@ -15,7 +15,7 @@ A security lens for REST and GraphQL APIs that stays on all session, plus an on-
 
 | Command | Does |
 |---|---|
-| `/api-audit` | Static audit of a REST or GraphQL API: inventories spec vs. routes, then checks every operation |
+| `/go-bloodhound` | Static audit of a REST or GraphQL API: inventories spec vs. routes, then checks every operation |
 
 The always-on lens follows the OWASP API Top 10: object- and function-level authorization, broken authentication, mass assignment and over-shared fields, missing rate/size/depth limits, unbounded business flows, SSRF, misconfiguration, and shadow or zombie endpoints. Turn it off with `stop bloodhound`.
 
@@ -27,7 +27,7 @@ bloodhound wraps tools you have installed: `spectral` (OWASP ruleset), `semgrep`
 
 [`bench/`](bench/) holds an Express + Apollo GraphQL ledger API with an OpenAPI spec: 18 planted issues, 2 decoys, an answer key, and no hint comments. Several criticals only show up by reading the router mount order in `app.js` against the spec.
 
-First run of `/api-audit` (2026-10-27, one run per model, skill text given to a subagent):
+First run of `/go-bloodhound` (2026-10-27, one run per model, skill text given to a subagent):
 
 | Model | Found / 18 | Critical / 5 | Mount-order bugs (H02, H04) | Decoys flagged | Tokens |
 |---|---|---|---|---|---|
@@ -39,4 +39,4 @@ Removing hint comments and hiding bugs in mount order still did not separate the
 
 ## Static only
 
-bloodhound never sends requests to a live API; active testing is malinois `/vapt-web`, scope-gated. It never prints a found secret's value.
+bloodhound never sends requests to a live API; active testing is malinois `/go-malinois web`, scope-gated. It never prints a found secret's value.

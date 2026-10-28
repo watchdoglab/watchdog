@@ -17,7 +17,7 @@ The frontend dog. Points at browser-side risk in React, Vue, Angular and plain J
 
 | Command | Does |
 |---|---|
-| `/frontend-audit` | XSS sinks, CSP, postMessage, token storage, third-party scripts |
+| `/go-pointer` | XSS sinks, CSP, postMessage, token storage, third-party scripts |
 
 The always-on lens watches React, Vue, Angular, Svelte, Next.js, HTML templates, browser JavaScript. Turn it off with `stop pointer`.
 
@@ -39,7 +39,7 @@ The always-on lens watches React, Vue, Angular, Svelte, Next.js, HTML templates,
 
 [`bench/`](bench/) holds a Vite + React app with a CSP meta tag: 18 planted issues, 3 decoys and an answer key.
 
-First run of `/frontend-audit` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/go-pointer` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 4 | Source traced to `lib/params.js` | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|
