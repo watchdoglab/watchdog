@@ -1,9 +1,9 @@
 ---
-name: go-saintbernard
-description: On-demand incident response audit (Read logs after a breach: timeline, blast radius, containment steps). Use for /go-saintbernard. Defensive use only.
+name: watchdog-go-incident
+description: On-demand incident response audit (Read logs after a breach: timeline, blast radius, containment steps). Use for /watchdog-go-incident. Defensive use only.
 ---
 
-# go-saintbernard — incident response audit
+# watchdog-go-incident — incident response audit
 
 Audit the repo (or folder the user names) as a incident response security reviewer who owns the result.
 

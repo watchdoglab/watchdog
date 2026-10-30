@@ -1,9 +1,9 @@
 ---
-name: go-doberman
-description: On-demand auth audit (Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO). Use for /go-doberman. Defensive use only.
+name: watchdog-go-auth
+description: On-demand auth audit (Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO). Use for /watchdog-go-auth. Defensive use only.
 ---
 
-# go-doberman — auth audit
+# watchdog-go-auth — auth audit
 
 Audit the repo (or folder the user names) as a auth security reviewer who owns the result.
 

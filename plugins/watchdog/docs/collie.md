@@ -15,7 +15,7 @@ A security lens for LLM apps and agents that stays on all session, plus an on-de
 
 | Command | Does |
 |---|---|
-| `/go-collie` | Static audit of an LLM app or agent: prompts, tools, RAG, MCP config and model-output handling |
+| `/watchdog-go-ai` | Static audit of an LLM app or agent: prompts, tools, RAG, MCP config and model-output handling |
 
 The always-on lens treats the model as untrusted and flags prompt injection (direct and indirect), over-powered tools, model output reaching shell/SQL/`eval`/HTML, cross-tenant retrieval, secrets and PII in prompts or logs, risky MCP config, and unbounded agent loops. Turn it off with `stop collie`.
 
@@ -27,7 +27,7 @@ collie wraps tools you have installed: `semgrep`, `bandit`, `gitleaks`. Most AI 
 
 [`bench/`](../bench/collie/) holds a Python support agent (Anthropic SDK, Flask, RAG, MCP config) with 18 planted issues, 2 decoys and an answer key.
 
-First run of `/go-collie` (2026-10-27, one run per model, skill text given to a subagent):
+First run of `/watchdog-go-ai` (2026-10-27, one run per model, skill text given to a subagent):
 
 | Model | Found / 18 | Critical / 4 | Injection → RCE chain | Decoys flagged | Secrets printed | Tokens |
 |---|---|---|---|---|---|---|

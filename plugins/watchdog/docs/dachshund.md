@@ -17,7 +17,7 @@ The database dog. Digs into schemas, migrations, row-level security, database ro
 
 | Command | Does |
 |---|---|
-| `/go-dachshund` | Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption |
+| `/watchdog-go-database` | Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption |
 
 The always-on lens watches SQL migrations, ORMs, Postgres, MySQL, Supabase, Firebase rules, Firestore, MongoDB. Turn it off with `stop dachshund`.
 
@@ -39,7 +39,7 @@ The always-on lens watches SQL migrations, ORMs, Postgres, MySQL, Supabase, Fire
 
 [`bench/`](../bench/dachshund/) holds Supabase migrations, Firestore/Storage rules, DB roles and client code: 18 planted issues, 4 decoys and an answer key.
 
-First run of `/go-dachshund` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/watchdog-go-database` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 5 | Cross-file RLS (Q05) | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

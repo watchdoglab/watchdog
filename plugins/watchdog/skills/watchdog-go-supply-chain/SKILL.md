@@ -1,9 +1,9 @@
 ---
-name: go-rottweiler
-description: On-demand supply chain audit (Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences). Use for /go-rottweiler. Defensive use only.
+name: watchdog-go-supply-chain
+description: On-demand supply chain audit (Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences). Use for /watchdog-go-supply-chain. Defensive use only.
 ---
 
-# go-rottweiler — supply chain audit
+# watchdog-go-supply-chain — supply chain audit
 
 Audit the repo (or folder the user names) as a supply chain security reviewer who owns the result.
 

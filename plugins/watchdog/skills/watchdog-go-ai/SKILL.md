@@ -1,9 +1,9 @@
 ---
-name: go-collie
-description: Static audit of an LLM app or agent (prompts, tools, RAG, MCP config, output handling). Use for /go-collie, "audit our agent", "check for prompt injection". Static, defensive only.
+name: watchdog-go-ai
+description: Static audit of an LLM app or agent (prompts, tools, RAG, MCP config, output handling). Use for /watchdog-go-ai, "audit our agent", "check for prompt injection". Static, defensive only.
 ---
 
-# go-collie — LLM app audit
+# watchdog-go-ai — LLM app audit
 
 Audit the repo (or folder the user names) as an AI-security reviewer who owns the result.
 

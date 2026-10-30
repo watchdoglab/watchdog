@@ -1,9 +1,9 @@
 ---
-name: go-pyrenees
-description: On-demand compliance audit (Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS). Use for /go-pyrenees. Defensive use only.
+name: watchdog-go-compliance
+description: On-demand compliance audit (Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS). Use for /watchdog-go-compliance. Defensive use only.
 ---
 
-# go-pyrenees — compliance audit
+# watchdog-go-compliance — compliance audit
 
 Audit the repo (or folder the user names) as a compliance security reviewer who owns the result.
 

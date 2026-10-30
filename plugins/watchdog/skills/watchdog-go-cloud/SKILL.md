@@ -1,9 +1,9 @@
 ---
-name: go-husky
-description: Static audit of infrastructure-as-code and pipelines (Terraform, CloudFormation, Kubernetes, Helm, Dockerfile, GitHub Actions/GitLab CI). Use for /go-husky, "audit our infra", "check terraform/k8s for misconfig". Static, defensive only.
+name: watchdog-go-cloud
+description: Static audit of infrastructure-as-code and pipelines (Terraform, CloudFormation, Kubernetes, Helm, Dockerfile, GitHub Actions/GitLab CI). Use for /watchdog-go-cloud, "audit our infra", "check terraform/k8s for misconfig". Static, defensive only.
 ---
 
-# go-husky — infrastructure audit
+# watchdog-go-cloud — infrastructure audit
 
 Audit the repo (or folder the user names) as a cloud-security reviewer who owns the result.
 

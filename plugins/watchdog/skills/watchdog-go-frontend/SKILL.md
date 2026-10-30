@@ -1,9 +1,9 @@
 ---
-name: go-pointer
-description: On-demand frontend audit (XSS sinks, CSP, postMessage, token storage, third-party scripts). Use for /go-pointer. Defensive use only.
+name: watchdog-go-frontend
+description: On-demand frontend audit (XSS sinks, CSP, postMessage, token storage, third-party scripts). Use for /watchdog-go-frontend. Defensive use only.
 ---
 
-# go-pointer — frontend audit
+# watchdog-go-frontend — frontend audit
 
 Audit the repo (or folder the user names) as a frontend security reviewer who owns the result.
 

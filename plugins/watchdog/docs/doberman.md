@@ -17,7 +17,7 @@ The auth dog. Guards the front door: login, OAuth/OIDC, sessions, password reset
 
 | Command | Does |
 |---|---|
-| `/go-doberman` | Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO |
+| `/watchdog-go-auth` | Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO |
 
 The always-on lens watches login, signup, OAuth, OIDC, SAML, sessions, cookies, JWT, password reset, MFA. Turn it off with `stop doberman`.
 
@@ -39,7 +39,7 @@ The always-on lens watches login, signup, OAuth, OIDC, SAML, sessions, cookies, 
 
 [`bench/`](../bench/doberman/) holds an Express auth service (login, MFA, OAuth, reset, SAML SSO, JWT): 18 planted issues, 3 decoys and an answer key.
 
-First run of `/go-doberman` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/watchdog-go-auth` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 4 | MFA bypass traced | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

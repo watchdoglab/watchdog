@@ -17,7 +17,7 @@ The privacy dog. Sniffs out personal data flowing into logs, analytics, third-pa
 
 | Command | Does |
 |---|---|
-| `/go-beagle` | Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping |
+| `/watchdog-go-privacy` | Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping |
 
 The always-on lens watches personal data, PII, logging, analytics, SDKs, consent, data retention, GDPR, DPDP. Turn it off with `stop beagle`.
 
@@ -39,7 +39,7 @@ The always-on lens watches personal data, PII, logging, analytics, SDKs, consent
 
 [`bench/`](../bench/beagle/) holds a fitness-app Express API and web page with 18 planted privacy issues, 3 decoys and an answer key.
 
-First run of `/go-beagle` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/watchdog-go-privacy` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 4 | Cross-file (B03) | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

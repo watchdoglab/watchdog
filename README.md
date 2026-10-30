@@ -4,60 +4,61 @@
 
 **Security review that runs while you build, inside Claude Code.**
 
-You ship features fast. Security review usually comes late, costs a lot, or never happens. Watchdog is a pack of security "dogs": Claude Code plugins that each guard one part of your product. Install the dogs that match what you're building, and they watch every change you make and audit the whole repo on demand.
+You ship features fast. Security review usually comes late, costs a lot, or never happens. Watchdog is a pack of security "dogs": Claude Code plugins that each guard one part of your product. Install it once and the dogs watch every change you make and audit the whole repo on demand.
 
 ## What it does for you
 
 - **Catches security bugs while you code, not after launch.** Each dog's lens stays on all session. When you or Claude write a login handler, a SQL query, a Terraform file or an agent tool, the dog flags the risk on the spot: the line, why it's exploitable, and the smallest fix.
-- **Gives you a full audit in one command.** `/go-malinois code`, `/go-bloodhound`, `/go-husky`, `/go-collie` and the others review the whole repo and return a ranked report: Critical → Low, each with `file:line`, a concrete exploit and a fix.
+- **Gives you a full audit in one command.** `/watchdog-go-vapt code`, `/watchdog-go-api`, `/watchdog-go-cloud`, `/watchdog-go-ai` and the others review the whole repo and return a ranked report: Critical → Low, each with `file:line`, a concrete exploit and a fix.
 - **Speaks plain English.** Every finding says what it is, how someone would abuse it, how to fix it, and what happens if you don't. It's useful to a junior dev or a client, not just a security expert.
 - **Is honest about its limits.** Every report ends with **Not checked**, so you know what still needs a human.
 - **Never leaks what it finds.** Secrets are reported by location and type only; the value is never printed.
 - **Uses the tools you already have.** Dogs run installed scanners (semgrep, gitleaks, trivy, checkov, osv-scanner, …) and read the code those scanners can't understand.
 
-## Pick your pack
+## Pick your commands
 
-You don't need all 14. Install the dogs that match what you're building:
+One install gives you every dog. Run the ones that match what you're building, or `/watchdog-go-all` for everything:
 
-| You're building… | Install |
+| You're building… | Commands |
 |---|---|
-| Web app + API (SaaS) | malinois, bloodhound, doberman, pointer, dachshund, akita, rottweiler |
-| Mobile app (Flutter / React Native) + backend | shepherd, bloodhound, doberman, dachshund, akita |
-| AI product, chatbot or agent | collie, bloodhound, beagle, akita |
-| Cloud- or infra-heavy system | husky, akita, rottweiler |
-| Marketplace with payments | malinois, bloodhound, doberman, dachshund, shepherd, beagle |
-| Web3 / DeFi | shiba, pointer, akita |
-| Getting ready for a client audit or security questionnaire | add **pyrenees** to your pack |
-| Something already went wrong | **saintbernard** |
+| Web app + API (SaaS) | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-frontend`, `/watchdog-go-database`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
+| Mobile app (Flutter / React Native) + backend | `/watchdog-go-mobile`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-secrets` |
+| AI product, chatbot or agent | `/watchdog-go-ai`, `/watchdog-go-api`, `/watchdog-go-privacy`, `/watchdog-go-secrets` |
+| Cloud- or infra-heavy system | `/watchdog-go-cloud`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
+| Marketplace with payments | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-mobile`, `/watchdog-go-privacy` |
+| Web3 / DeFi | `/watchdog-go-web3`, `/watchdog-go-frontend`, `/watchdog-go-secrets` |
+| Getting ready for a client audit or security questionnaire | add `/watchdog-go-compliance` |
+| Something already went wrong | `/watchdog-go-incident` |
+| Everything at once | `/watchdog-go-all` |
 
-malinois and akita are useful in almost every product.
+`/watchdog-go-vapt` and `/watchdog-go-secrets` are useful in almost every product.
 
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add salahu01/watchdog-lab
 /plugin install watchdog@watchdog
 ```
 
-That one plugin brings the whole pack: every dog and every `/go-<dog>` command.
+That one plugin brings the whole pack: every dog and every `/watchdog-go-<area>` command.
 
 Then work as usual. Send a dog out any time:
 
 ```
-/go-pack             # every installed dog, one merged report
-/go-malinois code    # whole-repo security audit (also: web, apk, ipa, report)
-/go-bloodhound       # REST / GraphQL: spec + handlers together
-/go-collie           # LLM apps and agents
-/go-husky            # Terraform, Kubernetes, Docker, CI
+/watchdog-go-all             # every installed dog, one merged report
+/watchdog-go-vapt code    # whole-repo security audit (also: web, apk, ipa, report)
+/watchdog-go-api       # REST / GraphQL: spec + handlers together
+/watchdog-go-ai           # LLM apps and agents
+/watchdog-go-cloud            # Terraform, Kubernetes, Docker, CI
 ```
 
-Every dog follows the same pattern: `/go-<dog>`. Turn a dog's live lens off with `stop <dog>`.
+Every dog follows the same pattern: `/watchdog-go-<area>`. Turn a dog's live lens off with `stop <dog>`.
 
 ## How it fits your workflow
 
 1. **While coding:** dogs flag risky code inline as it's written.
 2. **Before a PR or release:** run the audit command for your stack and fix the Criticals and Highs.
-3. **Before a client handover:** `/go-malinois report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
+3. **Before a client handover:** `/watchdog-go-vapt report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
 4. **After an incident:** saintbernard reads the logs and gives you a timeline, blast radius and containment steps.
 
 ## The pack
@@ -114,4 +115,4 @@ Use Watchdog to catch the common, high-impact mistakes early and cheaply, and ke
 
 ## ⚖️ Authorized use only
 
-Every dog is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) (malinois `/go-malinois web`) requires written authorization and an in-scope target — the dog refuses otherwise. shepherd runs dynamic tools only on builds you own and put in scope; every other dog is static only. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.
+Every dog is for **defensive security and authorized testing**. Static analysis of code and apps you own or are authorized to assess is always fine. **Active testing of a live system** (requests, scanning, fuzzing) (malinois `/watchdog-go-vapt web`) requires written authorization and an in-scope target — the dog refuses otherwise. shepherd runs dynamic tools only on builds you own and put in scope; every other dog is static only. Findings and fixes first; exploit/PoC code only on request and in scope. You are responsible for having permission to test any target.

@@ -1,9 +1,9 @@
 ---
-name: go-beagle
-description: On-demand privacy audit (Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping). Use for /go-beagle. Defensive use only.
+name: watchdog-go-privacy
+description: On-demand privacy audit (Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping). Use for /watchdog-go-privacy. Defensive use only.
 ---
 
-# go-beagle — privacy audit
+# watchdog-go-privacy — privacy audit
 
 Audit the repo (or folder the user names) as a privacy security reviewer who owns the result.
 

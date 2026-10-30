@@ -17,7 +17,7 @@ The Web3 dog. Audits smart contracts in Solidity and Rust: reentrancy, access co
 
 | Command | Does |
 |---|---|
-| `/go-shiba` | Solidity/Rust contracts: reentrancy, access control, oracles, upgrades |
+| `/watchdog-go-web3` | Solidity/Rust contracts: reentrancy, access control, oracles, upgrades |
 
 The always-on lens watches Solidity, Vyper, Rust (Anchor/Solana), Foundry, Hardhat, DeFi, NFTs. Turn it off with `stop shiba`.
 
@@ -39,7 +39,7 @@ The always-on lens watches Solidity, Vyper, Rust (Anchor/Solana), Foundry, Hardh
 
 [`bench/`](../bench/shiba/) holds a Foundry DeFi project (vault, oracle, proxy, token, deploy script): 18 planted issues, 3 decoys and an answer key.
 
-First run of `/go-shiba` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/watchdog-go-web3` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 5 | Cross-contract (W03 + W05) | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

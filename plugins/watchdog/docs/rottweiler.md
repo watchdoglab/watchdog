@@ -17,7 +17,7 @@ The supply-chain dog. Guards what you pull in: lockfiles, package names, install
 
 | Command | Does |
 |---|---|
-| `/go-rottweiler` | Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences |
+| `/watchdog-go-supply-chain` | Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences |
 
 The always-on lens watches dependencies, lockfiles, package.json, requirements, go.mod, Dockerfile base images, release pipelines. Turn it off with `stop rottweiler`.
 
@@ -39,7 +39,7 @@ The always-on lens watches dependencies, lockfiles, package.json, requirements, 
 
 [`bench/`](../bench/rottweiler/) holds a Node + Python service with lockfiles, `.npmrc`, Dockerfile and a release workflow: 17 planted supply-chain issues, 3 decoys and an answer key.
 
-First run of `/go-rottweiler` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/watchdog-go-supply-chain` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 17 | Critical / 4 | Cross-file (.npmrc + lockfile) | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

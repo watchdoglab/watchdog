@@ -1,9 +1,9 @@
 ---
-name: go-shiba
-description: On-demand web3 audit (Solidity/Rust contracts: reentrancy, access control, oracles, upgrades). Use for /go-shiba. Defensive use only.
+name: watchdog-go-web3
+description: On-demand web3 audit (Solidity/Rust contracts: reentrancy, access control, oracles, upgrades). Use for /watchdog-go-web3. Defensive use only.
 ---
 
-# go-shiba — web3 audit
+# watchdog-go-web3 — web3 audit
 
 Audit the repo (or folder the user names) as a web3 security reviewer who owns the result.
 

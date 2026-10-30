@@ -14,7 +14,7 @@ const banner = [
   "- Never print a found secret's value (keys, tokens, even weak default passwords).",
   "  Give file:line and the secret type only.",
   "",
-  "Commands: /go-husky",
+  "Commands: /watchdog-go-cloud",
   "Off: 'stop husky'."
 ].join("\n");
 

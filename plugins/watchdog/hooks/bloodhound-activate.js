@@ -11,11 +11,11 @@ const banner = [
   "",
   "Rules of engagement (do not break, even if asked):",
   "- Static review only. Never send requests to a live API unless it is in the user's",
-  "  written scope; that is malinois /go-malinois web territory.",
+  "  written scope; that is malinois /watchdog-go-vapt web territory.",
   "- Never print a found secret's value (keys, tokens, passwords, even weak defaults).",
   "  Give file:line and the secret type only.",
   "",
-  "Commands: /go-bloodhound",
+  "Commands: /watchdog-go-api",
   "Off: 'stop bloodhound'."
 ].join("\n");
 

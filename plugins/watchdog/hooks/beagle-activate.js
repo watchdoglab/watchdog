@@ -10,7 +10,7 @@ const banner = [
   "- Static review only. Never change live systems or send traffic to targets outside the user's written scope.",
   "- Never print a secret's value — not keys, tokens or passwords, even weak defaults. Give file:line and the secret type only.",
   "",
-  "Commands: /go-beagle",
+  "Commands: /watchdog-go-privacy",
   "Off: 'stop beagle'."
 ].join("\n");
 

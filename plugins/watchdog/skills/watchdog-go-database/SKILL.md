@@ -1,9 +1,9 @@
 ---
-name: go-dachshund
-description: On-demand database audit (Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption). Use for /go-dachshund. Defensive use only.
+name: watchdog-go-database
+description: On-demand database audit (Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption). Use for /watchdog-go-database. Defensive use only.
 ---
 
-# go-dachshund — database audit
+# watchdog-go-database — database audit
 
 Audit the repo (or folder the user names) as a database security reviewer who owns the result.
 

@@ -1,6 +1,6 @@
 ---
 name: vapt-apk
-description: Static security assessment of an Android APK. Use for /go-malinois apk, "audit this apk", "android app security". Assess apps the user owns or is authorized to test.
+description: Static security assessment of an Android APK. Use for /watchdog-go-vapt apk, "audit this apk", "android app security". Assess apps the user owns or is authorized to test.
 ---
 
 # vapt-apk — Android APK audit

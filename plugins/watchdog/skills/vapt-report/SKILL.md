@@ -1,6 +1,6 @@
 ---
 name: vapt-report
-description: Merge findings from this session into one ranked VAPT report. Use for /go-malinois report, "write up the findings", "generate the pentest report".
+description: Merge findings from this session into one ranked VAPT report. Use for /watchdog-go-vapt report, "write up the findings", "generate the pentest report".
 ---
 
 # vapt-report — write the report

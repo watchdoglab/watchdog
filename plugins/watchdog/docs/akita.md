@@ -17,7 +17,7 @@ The secrets dog. Goes past finding keys: rotation, storage, .env handling, git h
 
 | Command | Does |
 |---|---|
-| `/go-akita` | Find, rotate and properly store secrets; git history; pre-commit blocking |
+| `/watchdog-go-secrets` | Find, rotate and properly store secrets; git history; pre-commit blocking |
 
 The always-on lens watches .env files, config, CI secrets, vaults, key rotation, git history. Turn it off with `stop akita`.
 
@@ -38,7 +38,7 @@ The always-on lens watches .env files, config, CI secrets, vaults, key rotation,
 
 [`bench/`](../bench/akita/) holds a small service with `.env`, config, CI workflow, weak `.gitignore` and pre-commit config: 18 planted issues, 3 decoys and an answer key. All values are labelled `FAKE-...`.
 
-First run of `/go-akita` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
+First run of `/watchdog-go-secrets` (2026-10-28, one run per model, skill text given to a subagent against a copy of `target/` without the answer key):
 
 | Model | Found / 18 | Critical / 4 | Cross-file (K03) | Decoys flagged | Secrets printed |
 |---|---|---|---|---|---|

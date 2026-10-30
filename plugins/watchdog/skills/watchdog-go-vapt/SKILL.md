@@ -1,9 +1,9 @@
 ---
-name: go-malinois
-description: Run Malinois, the VAPT dog. Use for /go-malinois [code|web|apk|ipa|report], "go malinois", "pen-test this". Target defaults to code. Authorized/defensive only.
+name: watchdog-go-vapt
+description: Run Malinois, the VAPT dog. Use for /watchdog-go-vapt [code|web|apk|ipa|report], "go malinois", "pen-test this". Target defaults to code. Authorized/defensive only.
 ---
 
-# go-malinois — VAPT
+# watchdog-go-vapt — VAPT
 
 Read the first word of the arguments as the target and follow that skill exactly:
 

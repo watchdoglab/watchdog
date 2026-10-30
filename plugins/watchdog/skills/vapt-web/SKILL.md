@@ -1,6 +1,6 @@
 ---
 name: vapt-web
-description: Security assessment of a running web app. Use for /go-malinois web, "test this website for vulnerabilities", "web pentest". Active testing needs in-scope written authorization.
+description: Security assessment of a running web app. Use for /watchdog-go-vapt web, "test this website for vulnerabilities", "web pentest". Active testing needs in-scope written authorization.
 ---
 
 # vapt-web — web app assessment

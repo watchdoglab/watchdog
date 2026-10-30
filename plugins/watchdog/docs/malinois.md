@@ -15,11 +15,11 @@ A security-review lens that stays on all session, plus on-demand audits. Part of
 
 | Command | Does |
 |---|---|
-| `/go-malinois code` | Static audit of a source repo (SAST + dependency CVEs + secrets) |
-| `/go-malinois web` | Assessment of a running web app (scope-gated) |
-| `/go-malinois apk` | Static Android APK audit (OWASP MASVS) |
-| `/go-malinois ipa` | Static iOS IPA audit (OWASP MASVS) |
-| `/go-malinois report` | Merge the session's findings into one ranked report |
+| `/watchdog-go-vapt code` | Static audit of a source repo (SAST + dependency CVEs + secrets) |
+| `/watchdog-go-vapt web` | Assessment of a running web app (scope-gated) |
+| `/watchdog-go-vapt apk` | Static Android APK audit (OWASP MASVS) |
+| `/watchdog-go-vapt ipa` | Static iOS IPA audit (OWASP MASVS) |
+| `/watchdog-go-vapt report` | Merge the session's findings into one ranked report |
 
 The always-on lens flags injection, broken authz/authn, secrets, SSRF, path traversal, unsafe deserialization, weak crypto and insecure defaults as you work. Turn it off with `stop malinois`.
 
@@ -27,7 +27,7 @@ The always-on lens flags injection, broken authz/authn, secrets, SSRF, path trav
 
 Set in `/plugin`:
 - `authScope` — targets you have written permission to actively test. Active testing outside it is refused.
-- `reportDir` — where `/go-malinois report` writes (default `./malinois-reports`).
+- `reportDir` — where `/watchdog-go-vapt report` writes (default `./malinois-reports`).
 
 ## Scanners
 
@@ -35,7 +35,7 @@ malinois wraps tools you have installed instead of reinventing them: `npm audit`
 
 ## Benchmark
 
-[`bench/`](../bench/malinois/) holds a deliberately vulnerable Express API (18 planted vulns, 2 decoys) and an answer key. First run of `/go-malinois code` (2026-10-27, one run per model, skill text given to a subagent):
+[`bench/`](../bench/malinois/) holds a deliberately vulnerable Express API (18 planted vulns, 2 decoys) and an answer key. First run of `/watchdog-go-vapt code` (2026-10-27, one run per model, skill text given to a subagent):
 
 | Model | Found / 18 | Critical / 4 | False positives | Secret redacted | Tokens |
 |---|---|---|---|---|---|

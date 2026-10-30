@@ -16,7 +16,7 @@ const banner = [
   "- Static analysis of code/APK/IPA the user owns or is authorized to assess is always fine.",
   "- Never exfiltrate found secrets; redact them in reports.",
   "",
-  "Commands: /go-malinois code /go-malinois web /go-malinois apk /go-malinois ipa /go-malinois report",
+  "Commands: /watchdog-go-vapt code /watchdog-go-vapt web /watchdog-go-vapt apk /watchdog-go-vapt ipa /watchdog-go-vapt report",
   "Off: 'stop malinois'."
 ].join("\n");
 

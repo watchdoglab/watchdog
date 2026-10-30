@@ -1,9 +1,9 @@
 ---
-name: go-shepherd
-description: On-demand mobile audit (Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges). Use for /go-shepherd. Defensive use only.
+name: watchdog-go-mobile
+description: On-demand mobile audit (Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges). Use for /watchdog-go-mobile. Defensive use only.
 ---
 
-# go-shepherd — mobile audit
+# watchdog-go-mobile — mobile audit
 
 Audit the repo (or folder the user names) as a mobile security reviewer who owns the result.
 

@@ -1,7 +1,7 @@
 {
   "name": "watchdog",
   "version": "0.2.0",
-  "description": "The whole Watchdog pack in one plugin: 14 security dogs (VAPT, cloud, AI, API, privacy, supply chain, auth, mobile, database and more). /go-<dog> runs one dog, /go-pack runs them all.",
+  "description": "The whole Watchdog pack in one plugin: 14 security dogs (VAPT, cloud, AI, API, privacy, supply chain, auth, mobile, database and more). /watchdog-go-<area> runs one dog, /watchdog-go-all runs them all.",
   "author": {
     "name": "salahu01",
     "url": "https://github.com/salahu01"
@@ -20,7 +20,7 @@
     "reportDir": {
       "type": "string",
       "title": "Report directory",
-      "description": "Where /go-malinois report writes findings.",
+      "description": "Where /watchdog-go-vapt report writes findings.",
       "default": "./malinois-reports"
     }
   }

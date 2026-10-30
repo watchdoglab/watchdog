@@ -1,9 +1,9 @@
 ---
-name: go-bloodhound
-description: Static audit of a REST or GraphQL API by reading the spec and the handlers together. Use for /go-bloodhound, "audit our API", "check the OpenAPI spec", "find IDOR/BOLA". Static, defensive only.
+name: watchdog-go-api
+description: Static audit of a REST or GraphQL API by reading the spec and the handlers together. Use for /watchdog-go-api, "audit our API", "check the OpenAPI spec", "find IDOR/BOLA". Static, defensive only.
 ---
 
-# go-bloodhound — API audit
+# watchdog-go-api — API audit
 
 Audit the repo (or folder the user names) as an API-security reviewer who owns the result.
 

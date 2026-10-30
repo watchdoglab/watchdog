@@ -1,9 +1,9 @@
 ---
-name: go-akita
-description: On-demand secrets audit (Find, rotate and properly store secrets; git history; pre-commit blocking). Use for /go-akita. Defensive use only.
+name: watchdog-go-secrets
+description: On-demand secrets audit (Find, rotate and properly store secrets; git history; pre-commit blocking). Use for /watchdog-go-secrets. Defensive use only.
 ---
 
-# go-akita — secrets audit
+# watchdog-go-secrets — secrets audit
 
 Audit the repo (or folder the user names) as a secrets security reviewer who owns the result.
 
