@@ -19,17 +19,17 @@ You ship features fast. Security review usually comes late, costs a lot, or neve
 
 One install gives you every dog. Run the one command for what you're building, or any single dog on its own:
 
-| You're building… | One command | Runs |
-|---|---|---|
-| Web app + API (SaaS) | `/watchdog-go-web` | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-frontend`, `/watchdog-go-database`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
-| Mobile app (Flutter / React Native) + backend | `/watchdog-go-mobile` | `/watchdog-go-mobile-app`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-secrets` |
-| AI product, chatbot or agent | `/watchdog-go-ai-app` | `/watchdog-go-ai`, `/watchdog-go-api`, `/watchdog-go-privacy`, `/watchdog-go-secrets` |
-| Cloud- or infra-heavy system | `/watchdog-go-infra` | `/watchdog-go-cloud`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
-| Marketplace with payments | `/watchdog-go-marketplace` | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-mobile-app`, `/watchdog-go-privacy` |
-| Web3 / DeFi | `/watchdog-go-defi` | `/watchdog-go-web3`, `/watchdog-go-frontend`, `/watchdog-go-secrets` |
-| Getting ready for a client audit or security questionnaire | `/watchdog-go-compliance` | maps findings to SOC 2, ISO 27001, PCI DSS, ASVS |
-| Something already went wrong | `/watchdog-go-incident` | timeline, blast radius, containment |
-| Everything at once | `/watchdog-go-all` | every dog |
+| You're building… | Dogs | One command | Runs |
+|---|---|---|---|
+| Web app + API (SaaS) | malinois, bloodhound, doberman, pointer, dachshund, akita, rottweiler | `/watchdog-go-web` | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-frontend`, `/watchdog-go-database`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
+| Mobile app (Flutter / React Native) + backend | shepherd, bloodhound, doberman, dachshund, akita | `/watchdog-go-mobile` | `/watchdog-go-mobile-app`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-secrets` |
+| AI product, chatbot or agent | collie, bloodhound, beagle, akita | `/watchdog-go-ai-app` | `/watchdog-go-ai`, `/watchdog-go-api`, `/watchdog-go-privacy`, `/watchdog-go-secrets` |
+| Cloud- or infra-heavy system | husky, akita, rottweiler | `/watchdog-go-infra` | `/watchdog-go-cloud`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
+| Marketplace with payments | malinois, bloodhound, doberman, dachshund, shepherd, beagle | `/watchdog-go-marketplace` | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-mobile-app`, `/watchdog-go-privacy` |
+| Web3 / DeFi | shiba, pointer, akita | `/watchdog-go-defi` | `/watchdog-go-web3`, `/watchdog-go-frontend`, `/watchdog-go-secrets` |
+| Getting ready for a client audit or security questionnaire | pyrenees | `/watchdog-go-compliance` | maps findings to SOC 2, ISO 27001, PCI DSS, ASVS |
+| Something already went wrong | saintbernard | `/watchdog-go-incident` | timeline, blast radius, containment |
+| Everything at once | all 14 | `/watchdog-go-all` | every dog |
 
 `/watchdog-go-vapt` and `/watchdog-go-secrets` are useful in almost every product.
 
