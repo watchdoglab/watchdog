@@ -1,17 +1,13 @@
 ---
 name: watchdog-go-mobile
-description: On-demand mobile audit (Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges). Use for /watchdog-go-mobile. Defensive use only.
+description: Run the Watchdog bundle for a mobile app (flutter / react native) + backend. Use for /watchdog-go-mobile. Static, authorized/defensive only.
 ---
 
-# watchdog-go-mobile — mobile audit
+# watchdog-go-mobile — bundle for: Mobile app (Flutter / React Native) + backend
 
-Audit the repo (or folder the user names) as a mobile security reviewer who owns the result.
+1. Run these dogs' skills in static mode: `watchdog-go-mobile-app`, `watchdog-go-api`, `watchdog-go-auth`, `watchdog-go-database`, `watchdog-go-secrets` (`watchdog-go-vapt`: `code`). Never run active tests here.
+2. Skip a dog whose surface isn't in the repo and say which and why.
+3. Merge into one report: Critical → Low, deduplicate findings several dogs raised (keep the clearest, name every dog that saw it), each with `file:line`, why it is exploitable, the smallest fix.
+4. Never print a secret value. End with **Not checked** and the one thing to fix first.
 
-## Steps
-1. **Map.** Find everything in scope: Android, iOS, Flutter, React Native, AndroidManifest, Info.plist, WebView, deep links, mobile storage. Note what is internet-facing or holds sensitive data.
-2. **Scanners.** Run what's installed, read-only: `mobsfscan`, `apktool`, `jadx`, `semgrep`; `frida` only on in-scope builds the user owns. Report rule ids. If a tool is missing, say which to install; don't hand-roll it.
-3. **Read.** Scanners miss context. Cover the mobile skill checklist end to end.
-4. **Chain.** Note when two findings combine into something worse.
-
-## Output
-Start with stack + what you assumed in scope. Then findings, most severe first, grouped **Critical / High / Medium / Low**. Each: bold title with `file:line`, then — What it is / Why exploitable (concrete case) / Fix (smallest) / If ignored. Never print a secret's value — not keys, tokens or passwords, even weak defaults. Give file:line and the secret type only. End with **Not checked:** and the one thing to fix first. Change no code unless the user asks.
+For every dog at once, use `/watchdog-go-all`.

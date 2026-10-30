@@ -10,7 +10,7 @@ const banner = [
   "- Static review by default. Dynamic tooling only on builds the user owns and has put in written scope.",
   "- Never print a secret's value — not keys, tokens or passwords, even weak defaults. Give file:line and the secret type only.",
   "",
-  "Commands: /watchdog-go-mobile",
+  "Commands: /watchdog-go-mobile-app",
   "Off: 'stop shepherd'."
 ].join("\n");
 

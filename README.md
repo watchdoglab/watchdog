@@ -17,19 +17,19 @@ You ship features fast. Security review usually comes late, costs a lot, or neve
 
 ## Pick your commands
 
-One install gives you every dog. Run the ones that match what you're building, or `/watchdog-go-all` for everything:
+One install gives you every dog. Run the one command for what you're building, or any single dog on its own:
 
-| You're building… | Commands |
-|---|---|
-| Web app + API (SaaS) | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-frontend`, `/watchdog-go-database`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
-| Mobile app (Flutter / React Native) + backend | `/watchdog-go-mobile`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-secrets` |
-| AI product, chatbot or agent | `/watchdog-go-ai`, `/watchdog-go-api`, `/watchdog-go-privacy`, `/watchdog-go-secrets` |
-| Cloud- or infra-heavy system | `/watchdog-go-cloud`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
-| Marketplace with payments | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-mobile`, `/watchdog-go-privacy` |
-| Web3 / DeFi | `/watchdog-go-web3`, `/watchdog-go-frontend`, `/watchdog-go-secrets` |
-| Getting ready for a client audit or security questionnaire | add `/watchdog-go-compliance` |
-| Something already went wrong | `/watchdog-go-incident` |
-| Everything at once | `/watchdog-go-all` |
+| You're building… | One command | Runs |
+|---|---|---|
+| Web app + API (SaaS) | `/watchdog-go-web` | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-frontend`, `/watchdog-go-database`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
+| Mobile app (Flutter / React Native) + backend | `/watchdog-go-mobile` | `/watchdog-go-mobile-app`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-secrets` |
+| AI product, chatbot or agent | `/watchdog-go-ai-app` | `/watchdog-go-ai`, `/watchdog-go-api`, `/watchdog-go-privacy`, `/watchdog-go-secrets` |
+| Cloud- or infra-heavy system | `/watchdog-go-infra` | `/watchdog-go-cloud`, `/watchdog-go-secrets`, `/watchdog-go-supply-chain` |
+| Marketplace with payments | `/watchdog-go-marketplace` | `/watchdog-go-vapt`, `/watchdog-go-api`, `/watchdog-go-auth`, `/watchdog-go-database`, `/watchdog-go-mobile-app`, `/watchdog-go-privacy` |
+| Web3 / DeFi | `/watchdog-go-defi` | `/watchdog-go-web3`, `/watchdog-go-frontend`, `/watchdog-go-secrets` |
+| Getting ready for a client audit or security questionnaire | `/watchdog-go-compliance` | maps findings to SOC 2, ISO 27001, PCI DSS, ASVS |
+| Something already went wrong | `/watchdog-go-incident` | timeline, blast radius, containment |
+| Everything at once | `/watchdog-go-all` | every dog |
 
 `/watchdog-go-vapt` and `/watchdog-go-secrets` are useful in almost every product.
 
