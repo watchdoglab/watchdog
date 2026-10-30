@@ -1,7 +1,27 @@
 {
   "name": "watchdog",
-  "version": "0.1.0",
-  "description": "The pack leader. /go-pack runs every installed Watchdog dog on the repo and merges their findings into one report.",
-  "author": { "name": "salahu01" },
-  "license": "MIT"
+  "version": "0.2.0",
+  "description": "The whole Watchdog pack in one plugin: 14 security dogs (VAPT, cloud, AI, API, privacy, supply chain, auth, mobile, database and more). /go-<dog> runs one dog, /go-pack runs them all.",
+  "author": {
+    "name": "salahu01",
+    "url": "https://github.com/salahu01"
+  },
+  "license": "MIT",
+  "hooks": [
+    "./hooks/hooks.json"
+  ],
+  "userConfig": {
+    "authScope": {
+      "type": "string",
+      "title": "Authorized scope",
+      "description": "In-scope targets you have written permission to test (hosts, packages, bundle ids). The dog refuses active testing outside this.",
+      "default": ""
+    },
+    "reportDir": {
+      "type": "string",
+      "title": "Report directory",
+      "description": "Where /go-malinois report writes findings.",
+      "default": "./malinois-reports"
+    }
+  }
 }
