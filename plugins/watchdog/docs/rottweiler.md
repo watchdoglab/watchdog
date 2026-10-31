@@ -9,7 +9,7 @@ The supply-chain dog. Guards what you pull in: lockfiles, package names, install
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

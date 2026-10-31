@@ -9,7 +9,7 @@ The auth dog. Guards the front door: login, OAuth/OIDC, sessions, password reset
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

@@ -3,3 +3,6 @@ malinois-reports/
 *.ipa
 out/
 .DS_Store
+# kept in their own repos
+site/
+tools/

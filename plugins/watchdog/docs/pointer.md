@@ -9,7 +9,7 @@ The frontend dog. Points at browser-side risk in React, Vue, Angular and plain J
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

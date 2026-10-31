@@ -7,7 +7,7 @@ A security lens for REST and GraphQL APIs that stays on all session, plus an on-
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

@@ -9,7 +9,7 @@ The Web3 dog. Audits smart contracts in Solidity and Rust: reentrancy, access co
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

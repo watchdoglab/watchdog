@@ -9,7 +9,7 @@ The compliance dog. Maps findings from every Watchdog dog to SOC 2, ISO 27001, P
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

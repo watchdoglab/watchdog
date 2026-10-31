@@ -36,7 +36,7 @@ One install gives you every dog. Run the one command for what you're building, o
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog-lab
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

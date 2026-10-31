@@ -9,7 +9,7 @@ The mobile dog. A deep dive on Android, iOS, Flutter and React Native apps: stor
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

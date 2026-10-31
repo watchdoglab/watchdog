@@ -9,7 +9,7 @@ The privacy dog. Sniffs out personal data flowing into logs, analytics, third-pa
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

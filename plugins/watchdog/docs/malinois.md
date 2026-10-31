@@ -7,7 +7,7 @@ A security-review lens that stays on all session, plus on-demand audits. Part of
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

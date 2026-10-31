@@ -9,7 +9,7 @@ The incident-response dog. Comes to the rescue after something went wrong: reads
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

@@ -9,7 +9,7 @@ The database dog. Digs into schemas, migrations, row-level security, database ro
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

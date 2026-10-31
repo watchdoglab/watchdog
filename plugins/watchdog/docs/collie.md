@@ -7,7 +7,7 @@ A security lens for LLM apps and agents that stays on all session, plus an on-de
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 

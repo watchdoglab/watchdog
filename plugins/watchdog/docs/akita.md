@@ -9,7 +9,7 @@ The secrets dog. Goes past finding keys: rotation, storage, .env handling, git h
 ## Install
 
 ```
-/plugin marketplace add salahu01/watchdog
+/plugin marketplace add watchdoglab/watchdog
 /plugin install watchdog@watchdog
 ```
 
