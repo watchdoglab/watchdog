@@ -65,20 +65,20 @@ Every dog follows the same pattern: `/watchdog-go-<area>`. Turn a dog's live len
 
 | | Dog | Guards |
 |---|-----|--------|
-| <img src="plugins/watchdog/assets/malinois/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. Active tests are scope-gated. See [docs/malinois](docs/malinois.md). |
-| <img src="plugins/watchdog/assets/husky/icon.gif" width="96" alt="Husky"> | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [docs/husky](docs/husky.md). |
-| <img src="plugins/watchdog/assets/collie/icon.gif" width="96" alt="Collie"> | **collie** | AI — security lens for LLM apps and agents: prompt injection, agent tools, RAG, MCP, model-output handling. Static only. See [docs/collie](docs/collie.md). |
-| <img src="plugins/watchdog/assets/bloodhound/icon.gif" width="96" alt="Bloodhound"> | **bloodhound** | API — security lens for REST and GraphQL: reads the OpenAPI spec and handlers together for BOLA, mass assignment, broken auth, SSRF and shadow routes. Static only. See [docs/bloodhound](docs/bloodhound.md). |
-| <img src="plugins/watchdog/assets/beagle/icon.gif" width="96" alt="Beagle"> | **beagle** | Privacy — Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping. See [docs/beagle](docs/beagle.md). |
-| <img src="plugins/watchdog/assets/rottweiler/icon.gif" width="96" alt="Rottweiler"> | **rottweiler** | Supply chain — Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences. See [docs/rottweiler](docs/rottweiler.md). |
-| <img src="plugins/watchdog/assets/doberman/icon.gif" width="96" alt="Doberman"> | **doberman** | Auth & identity — Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO. See [docs/doberman](docs/doberman.md). |
-| <img src="plugins/watchdog/assets/shepherd/icon.gif" width="96" alt="Shepherd"> | **shepherd** | Mobile deep dive — Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges. See [docs/shepherd](docs/shepherd.md). |
-| <img src="plugins/watchdog/assets/dachshund/icon.gif" width="96" alt="Dachshund"> | **dachshund** | Database — Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption. See [docs/dachshund](docs/dachshund.md). |
-| <img src="plugins/watchdog/assets/akita/icon.gif" width="96" alt="Akita"> | **akita** | Secrets lifecycle — Find, rotate and properly store secrets; git history; pre-commit blocking. See [docs/akita](docs/akita.md). |
-| <img src="plugins/watchdog/assets/pointer/icon.gif" width="96" alt="Pointer"> | **pointer** | Frontend — XSS sinks, CSP, postMessage, token storage, third-party scripts. See [docs/pointer](docs/pointer.md). |
-| <img src="plugins/watchdog/assets/saintbernard/icon.gif" width="96" alt="Saint Bernard"> | **saintbernard** | Incident response — Read logs after a breach: timeline, blast radius, containment steps. See [docs/saintbernard](docs/saintbernard.md). |
-| <img src="plugins/watchdog/assets/shiba/icon.gif" width="96" alt="Shiba"> | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. See [docs/shiba](docs/shiba.md). |
-| <img src="plugins/watchdog/assets/pyrenees/icon.gif" width="96" alt="Pyrenees"> | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. See [docs/pyrenees](docs/pyrenees.md). |
+| <img src="assets/dogs/malinois/icon.gif" width="96" alt="Malinois"> | **malinois** | VAPT — vulnerability assessment & pen-test lens: source code, web apps, Android APKs, iOS IPAs, plus the report. Active tests are scope-gated. See [docs/malinois](docs/malinois.md). |
+| <img src="assets/dogs/husky/icon.gif" width="96" alt="Husky"> | **husky** | Cloud — misconfiguration lens for Terraform, Kubernetes, Dockerfiles and CI pipelines. Static only. See [docs/husky](docs/husky.md). |
+| <img src="assets/dogs/collie/icon.gif" width="96" alt="Collie"> | **collie** | AI — security lens for LLM apps and agents: prompt injection, agent tools, RAG, MCP, model-output handling. Static only. See [docs/collie](docs/collie.md). |
+| <img src="assets/dogs/bloodhound/icon.gif" width="96" alt="Bloodhound"> | **bloodhound** | API — security lens for REST and GraphQL: reads the OpenAPI spec and handlers together for BOLA, mass assignment, broken auth, SSRF and shadow routes. Static only. See [docs/bloodhound](docs/bloodhound.md). |
+| <img src="assets/dogs/beagle/icon.gif" width="96" alt="Beagle"> | **beagle** | Privacy — Personal data in code, logs, analytics and SDKs; retention; consent; GDPR/DPDP mapping. See [docs/beagle](docs/beagle.md). |
+| <img src="assets/dogs/rottweiler/icon.gif" width="96" alt="Rottweiler"> | **rottweiler** | Supply chain — Lockfiles, typosquats, install scripts, pinning, SBOM, signed releases, licences. See [docs/rottweiler](docs/rottweiler.md). |
+| <img src="assets/dogs/doberman/icon.gif" width="96" alt="Doberman"> | **doberman** | Auth & identity — Login, OAuth/OIDC, sessions, password reset, MFA, JWT, SSO. See [docs/doberman](docs/doberman.md). |
+| <img src="assets/dogs/shepherd/icon.gif" width="96" alt="Shepherd"> | **shepherd** | Mobile deep dive — Android/iOS/Flutter/React Native: pinning, storage, deep links, WebViews, bridges. See [docs/shepherd](docs/shepherd.md). |
+| <img src="assets/dogs/dachshund/icon.gif" width="96" alt="Dachshund"> | **dachshund** | Database — Migrations, row-level security, DB roles, Firebase/Supabase rules, encryption. See [docs/dachshund](docs/dachshund.md). |
+| <img src="assets/dogs/akita/icon.gif" width="96" alt="Akita"> | **akita** | Secrets lifecycle — Find, rotate and properly store secrets; git history; pre-commit blocking. See [docs/akita](docs/akita.md). |
+| <img src="assets/dogs/pointer/icon.gif" width="96" alt="Pointer"> | **pointer** | Frontend — XSS sinks, CSP, postMessage, token storage, third-party scripts. See [docs/pointer](docs/pointer.md). |
+| <img src="assets/dogs/saintbernard/icon.gif" width="96" alt="Saint Bernard"> | **saintbernard** | Incident response — Read logs after a breach: timeline, blast radius, containment steps. See [docs/saintbernard](docs/saintbernard.md). |
+| <img src="assets/dogs/shiba/icon.gif" width="96" alt="Shiba"> | **shiba** | Web3 / smart contracts — Solidity/Rust contracts: reentrancy, access control, oracles, upgrades. See [docs/shiba](docs/shiba.md). |
+| <img src="assets/dogs/pyrenees/icon.gif" width="96" alt="Pyrenees"> | **pyrenees** | Compliance — Map the pack's findings to SOC 2, ISO 27001, PCI DSS, OWASP ASVS. See [docs/pyrenees](docs/pyrenees.md). |
 
 ## Does it work?
 
