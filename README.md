@@ -4,6 +4,8 @@
 
 **Security review that runs while you build, inside Claude Code.**
 
+**Website:** [watchdoglab.github.io](https://watchdoglab.github.io) · [Meet the dogs](https://watchdoglab.github.io/#pack)
+
 You ship features fast. Security review usually comes late, costs a lot, or never happens. Watchdog is a pack of security "dogs": Claude Code plugins that each guard one part of your product. Install it once and the dogs watch every change you make and audit the whole repo on demand.
 
 ## What it does for you
