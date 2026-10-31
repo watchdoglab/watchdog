@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "watchdog",
-      "source": "./plugins/watchdog",
+      "source": "./plugin",
       "description": "The whole Watchdog pack in one install: 14 security dogs. /watchdog-go-<area> runs one, /watchdog-go-all runs them all."
     }
   ]
