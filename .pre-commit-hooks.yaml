@@ -1,0 +1,18 @@
+- id: watchdog-secrets
+  name: Watchdog secrets check
+  description: Blocks commits that add API keys, tokens or private keys. Reports location and type only.
+  entry: git-hooks/watchdog-secrets.sh
+  language: script
+  pass_filenames: false
+  always_run: true
+  stages: [pre-commit]
+
+- id: watchdog-review
+  name: Watchdog security review
+  description: AI security review of the commits being pushed (Claude Code, Codex or Gemini CLI). Blocks on high or critical findings.
+  entry: git-hooks/watchdog-review.sh
+  language: script
+  pass_filenames: false
+  always_run: true
+  verbose: true
+  stages: [pre-push]

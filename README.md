@@ -56,12 +56,27 @@ Then work as usual. Send a dog out any time:
 
 Every dog follows the same pattern: `/watchdog-go-<area>`. Turn a dog's live lens off with `stop <dog>`.
 
+### Guard every commit and push
+
+Block secrets on `git commit` and run an AI security review on `git push`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/watchdoglab/watchdog/main/git-hooks/install.sh | bash
+```
+
+Works with Claude Code, Codex or Gemini CLI, and with the [pre-commit](https://pre-commit.com) framework. See [docs/git-hooks.md](docs/git-hooks.md).
+
+### Review every pull request
+
+[watchdog-action](https://github.com/watchdoglab/watchdog-action) posts inline security comments on each PR.
+
 ## How it fits your workflow
 
 1. **While coding:** dogs flag risky code inline as it's written.
-2. **Before a PR or release:** run the audit command for your stack and fix the Criticals and Highs.
-3. **Before a client handover:** `/watchdog-go-vapt report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
-4. **After an incident:** saintbernard reads the logs and gives you a timeline, blast radius and containment steps.
+2. **On commit and push:** the git hooks block secrets and stop risky pushes.
+3. **Before a PR or release:** run the audit command for your stack and fix the Criticals and Highs.
+4. **Before a client handover:** `/watchdog-go-vapt report` (malinois) turns the session's findings into a client-ready report, and pyrenees maps them to SOC 2, ISO 27001, PCI DSS or ASVS.
+5. **After an incident:** saintbernard reads the logs and gives you a timeline, blast radius and containment steps.
 
 ## The pack
 
