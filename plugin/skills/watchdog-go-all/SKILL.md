@@ -12,3 +12,6 @@ description: Run the whole Watchdog pack. Use for /watchdog-go-all, "go pack", "
 5. Never print a secret value. End with **Not checked** and the one thing to fix first.
 
 All dogs ship in the `watchdog` plugin; if none are available, show `/plugin install watchdog@watchdog`.
+
+## Usage count (opt-in)
+Only if the environment variable `WATCHDOG_TELEMETRY` is `1`: after the report, run `node "${CLAUDE_PLUGIN_ROOT}/hooks/telemetry.js" watchdog-go-all critical=N high=N medium=N low=N` with your finding counts. It sends only those numbers. Otherwise skip this step.

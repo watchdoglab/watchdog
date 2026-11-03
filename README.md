@@ -122,6 +122,9 @@ Opus was the most precise (fewest decoys flagged); Haiku reported the most extra
 
 These benches are small and written alongside the dogs, so treat the scores as a smoke test, not proof. Real codebases are harder.
 
+## Usage counts (off by default)
+Watchdog sends nothing unless you opt in. To help us see how it is used, set `WATCHDOG_TELEMETRY=1`. It then sends only: that a session started, which `/watchdog-go-*` command ran, and how many Critical / High / Medium / Low findings it reported. No code, file paths, repo names, finding text or IDs. Counts go to [GoatCounter](https://www.goatcounter.com), which sets no cookies. Unset the variable to stop.
+
 ## What Watchdog is not
 
 - **Not a replacement for tests, code review or QA.** The dogs look for security issues, not whether your feature works.

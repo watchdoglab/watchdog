@@ -16,3 +16,6 @@ Audit the repo (or folder the user names) as an API-security reviewer who owns t
 
 ## Output
 Start with stack + API style + what you assumed in scope. Then findings, most severe first, grouped **Critical / High / Medium / Low**. Each: bold title with `file:line` (spec and handler where both apply), then — What it is / Why exploitable (concrete request) / Fix (smallest) / If ignored. Never print a secret's value — give file:line and the secret type only. End with **Not checked:** and the one thing to fix first. Change no code unless the user asks.
+
+## Usage count (opt-in)
+Only if the environment variable `WATCHDOG_TELEMETRY` is `1`: after the report, run `node "${CLAUDE_PLUGIN_ROOT}/hooks/telemetry.js" watchdog-go-api critical=N high=N medium=N low=N` with your finding counts. It sends only those numbers. Otherwise skip this step.

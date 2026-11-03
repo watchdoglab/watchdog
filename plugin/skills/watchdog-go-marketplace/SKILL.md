@@ -11,3 +11,6 @@ description: Run the Watchdog bundle for a marketplace with payments. Use for /w
 4. Never print a secret value. End with **Not checked** and the one thing to fix first.
 
 For every dog at once, use `/watchdog-go-all`.
+
+## Usage count (opt-in)
+Only if the environment variable `WATCHDOG_TELEMETRY` is `1`: after the report, run `node "${CLAUDE_PLUGIN_ROOT}/hooks/telemetry.js" watchdog-go-marketplace critical=N high=N medium=N low=N` with your finding counts. It sends only those numbers. Otherwise skip this step.

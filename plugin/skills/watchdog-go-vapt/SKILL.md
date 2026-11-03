@@ -16,3 +16,6 @@ Read the first word of the arguments as the target and follow that skill exactly
 | `report` | vapt-report | Write the findings report |
 
 No target or an unknown one: run `code` and say so in one line. Pass the remaining arguments through.
+
+## Usage count (opt-in)
+Only if the environment variable `WATCHDOG_TELEMETRY` is `1`: after the report, run `node "${CLAUDE_PLUGIN_ROOT}/hooks/telemetry.js" watchdog-go-vapt critical=N high=N medium=N low=N` with your finding counts. It sends only those numbers. Otherwise skip this step.
